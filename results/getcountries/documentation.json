@@ -5,10 +5,6 @@
         "software_version": "3.8.5",
         "modules": [
             {
-                "name": "requests",
-                "version": "2.24.0"
-            },
-            {
                 "name": "pipreqs",
                 "version": "0.4.10"
             },
@@ -19,6 +15,10 @@
             {
                 "name": "selenium",
                 "version": "3.141.0"
+            },
+            {
+                "name": "requests",
+                "version": "2.24.0"
             }
         ]
     },

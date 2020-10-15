@@ -28,7 +28,7 @@ def getURL(objet, filename, original_url):
             # ~~~~~~~~~~~~ Récupération de l'URL ~~~~~~~~~~~~~ #
             url = original_url + country.xpath('.//a/@href')[0]
             # ~~~~~~~~~~~~ Récupération du nom associé ~~~~~~~~~~~~~ #
-            name = country.xpath('.//a')[0]
+            name = country.xpath('.//a/text()')[0]
             # ~~ Ecriture des résultats dans un fichier CSV ~~ #
             writer.writerow([url, name])
 
