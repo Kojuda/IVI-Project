@@ -1,0 +1,33 @@
+{
+    "ip": "188.154.182.9",
+    "programm": {
+        "software": "Python",
+        "software_version": "3.8.5",
+        "modules": [
+            {
+                "name": "requests",
+                "version": "2.24.0"
+            },
+            {
+                "name": "pipreqs",
+                "version": "0.4.10"
+            },
+            {
+                "name": "dns",
+                "version": "0.0.1"
+            },
+            {
+                "name": "selenium",
+                "version": "3.141.0"
+            }
+        ]
+    },
+    "system": {
+        "os_name": "Darwin",
+        "computer_name": "MBP-de-Luisa-2",
+        "os_release": "18.7.0",
+        "os_version": "Darwin Kernel Version 18.7.0: Mon Feb 10 21:08:45 PST 2020; root:xnu-4903.278.28~1/RELEASE_X86_64",
+        "processor": "i386"
+    },
+    "info": {}
+}
