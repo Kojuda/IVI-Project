@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
-# author: T. Pineau
-# creation: 19.09.2020
+# author: D. Kohler, L. Rodrigues
+# creation: 15.10.2020
 
 #On importe nos deux scripts de documentation et de webdriver
 import time, json, sys, os, subprocess, re, csv

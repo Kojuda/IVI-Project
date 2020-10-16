@@ -5,20 +5,20 @@
         "software_version": "3.8.5",
         "modules": [
             {
-                "name": "pipreqs",
-                "version": "0.4.10"
-            },
-            {
                 "name": "dns",
                 "version": "0.0.1"
             },
             {
-                "name": "selenium",
-                "version": "3.141.0"
+                "name": "pipreqs",
+                "version": "0.4.10"
             },
             {
                 "name": "requests",
                 "version": "2.24.0"
+            },
+            {
+                "name": "selenium",
+                "version": "3.141.0"
             }
         ]
     },
