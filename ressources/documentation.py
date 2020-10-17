@@ -3,14 +3,16 @@
 # author: T. Pineau
 # creation: 19.09.2020
 
-import os, platform, json, datetime
+import os, platform, json
 from pipreqs import pipreqs # pip install pipreqs
 import requests # pip install requests requests[socks] pysocks
+import datetime
 
 class Documentation():
-    def __init__(self, tor=False, info={}, driver=False, log={}):
+    def __init__(self, tor=False, info={}, driver=False, log = {}):
         self.path = os.path.dirname(os.path.realpath(__file__)) #le chemin du dossier où est exécuté le fichier
         self.info = info
+        self.tor = tor
         self.log = log
         self.programm = {
             'software': "Python",
@@ -32,26 +34,26 @@ class Documentation():
                 self.ip = json.loads(content)['origin']
             except: print('Documentation - erreur à retrouvé l\'adresse IP publique.')
         else:
-            if tor: proxies = {'http': 'socks5h://127.0.0.1:9150', 'https': 'socks5h://127.0.0.1:9150'} #port 9050 si Tor est configuré comme un service
-            else: proxies = {"http": None, "https": None}
+            if self.tor: proxies = {'http': 'socks5h://127.0.0.1:9050', 'https': 'socks5h://127.0.0.1:9050'}
+            else: proxies = {}
             try: self.ip = requests.get('http://httpbin.org/ip', proxies=proxies).json()['origin'] #utilisation du service ipinfo.io
             except: print('Documentation - erreur à retrouvé l\'adresse IP publique.')
-
 
     def toJSON(self):
         """Retourne l'objet dans le format JSON"""
         return {
             'ip': self.ip,
+            'tor': self.tor,
             'programm': self.programm,
             'system': self.system,
             'info': self.info
         }
-    #Personal adding : add a action's log to a list of strings
-    def addLog(self, string="") :
-        pass
-        #TODO : faire en sorte d'utiliser en compteur (singleton) pour ajouter une entrée dans le dictionnaire log avec le timestamp par le module datetime
-#          currentTime=datetime.datetime.now()
-#                 time="{}:{}:{}.{}\t {}.{}.{}".format(str(currentTime.hour), str(currentTime.minute), str(currentTime.second), str(currentTime.microsecond), str(currentTime.day), str(currentTime.month), str(currentTime.year))
+     def addlog(self, string="") :
+        cT=datetime.datetime.now() #cT=current time
+        time=f"{str(cT.day)}.{str(cT.month)}.{str(cT.year)} {str(cT.hour)}:{str(cT.minute)}:{ str(cT.second)}.{str(cT.microsecond)}"
+        self.log[time]=string 
+        #time="{}:{}:{}.{}\t {}.{}.{}".format(str(cT.hour), str(cT.minute), str(cT.second), str(cT.microsecond), str(cT.day), str(cT.month), str(cT.year))
+
     def __str__(self):
         """Pour afficher l'objet avec la fonction print(objet)"""
         return json.dumps(self.toJSON(), indent=4)
