@@ -46,11 +46,12 @@ class Documentation():
             'tor': self.tor,
             'programm': self.programm,
             'system': self.system,
-            'info': self.info
+            'info': self.info,
+            'log' : self.log
         }
-     def addlog(self, string="") :
+    def addlog(self, string="") :
         cT=datetime.datetime.now() #cT=current time
-        time=f"{str(cT.day)}.{str(cT.month)}.{str(cT.year)} {str(cT.hour)}:{str(cT.minute)}:{ str(cT.second)}.{str(cT.microsecond)}"
+        time=f"{str(cT.day)}.{str(cT.month)}.{str(cT.year)} {str(cT.hour)}:{str(cT.minute)}:{str(cT.second)}.{str(cT.microsecond)}"
         self.log[time]=string 
         #time="{}:{}:{}.{}\t {}.{}.{}".format(str(cT.hour), str(cT.minute), str(cT.second), str(cT.microsecond), str(cT.day), str(cT.month), str(cT.year))
 
