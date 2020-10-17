@@ -27,7 +27,7 @@ def getURL(objet, session, original_url):
             # ~~~~~~~~~~~~ Récupération du nom associé ~~~~~~~~~~~~~ #
             name = country.xpath('.//a/text()')[0]
             # ~~ Ecriture des résultats dans un fichier CSV ~~ #
-            # Country(name=name, url=url).insertCountry(session)
+            Country(name=name, url=url).insertCountry(session)
 
 
 # ~~~~~~~~~~~~ Corps du programme ~~~~~~~~~~~~~ #

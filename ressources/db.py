@@ -42,10 +42,10 @@ class Urls_ads(Base):
     status = Column(Integer, default=0)
     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
-    # country_id= Column(String, ForeignKey("coutries.id"))
+    country_id= Column(Integer, ForeignKey("countries.id"))
     ad_number=Column(String, nullable=False)
     
-    # country=relationship("Country", back_populates="urls_ads")
+    country=relationship("Country", backref="urls_ads")
     def insertURL(self, session):
         session.add(self)
         session.commit()
@@ -56,7 +56,7 @@ class Urls_ads(Base):
 
 class Country(Base) :
     __tablename__ = 'countries'
-    id=Column(Integer, primary_key=True)
+    id=Column(Integer, primary_key=True, unique=True, autoincrement=True)
     name = Column(String, nullable=False)
     url = Column(String, nullable=False)
     #urls_ads = country=relationship("Urls_ads", order_by=Urls_ads.id, back_populates="countries")
