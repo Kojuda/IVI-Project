@@ -8,23 +8,19 @@ from lxml import html #pip install lxml cssselect
 import time
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException   
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 from ressources.webdriver import Chrome, Firefox # fichier selenium_driver.py à placer dans le même dossier que votre script
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressource
 from ressources.db import *
+from ressources.project_utils import mapping_countries, map_country
 
 
-
-
-#Ouverture de adpost_parsing.csv
-# with open('./results/getcountries/adpost_parsing.csv', 'rb') as csvfile:
-#     csv_reader = csv.reader(csvfile, delimiter=';')
-#     for row in csv_reader:
-#         driver.get(str(raw[0])
-
-def check_exists_by_xpath(browser, xpath):
+def check_exists_by_xpath(webelement, xpath): 
+    """Check whether exist"""
     try:
-        browser.driver.find_element_by_xpath(xpath)
+        webelement.find_element_by_xpath(xpath)
     except NoSuchElementException:
         return False
     return True
@@ -45,15 +41,19 @@ def getbirds(browser, url) :
 
 def getads(browser, session) :
     """Go through all pages to collect articles' urls"""
-    #When the next button disappears at the end 
-    counter=0
-    while check_exists_by_xpath(browser, "//input[@name=\"button_hits_seen\"]") or counter!=1 :
-        for ad in browser.driver.find_elements_by_xpath('//div[@class="row clearfix"]') :
-            ad_number = ad.find_element_by_xpath(".//input[@type=\"checkbox\"]/@name")
-            url = ad.find_element_by_xpath(".//a/@href")
+
+    #No need to wait between requests, it is on the same page, just javascript
+    while check_exists_by_xpath(browser.driver, "//input[@name=\"button_hits_seen\"]")  :
+        for ad in browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]') :
+            #The website is inconsistent, there is tag without ad
+            ad_number = ad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
+            url = ad.find_element_by_xpath(".//a").get_attribute("href") 
             #Add the entry in the database
-            Urls_ads(url=url, ad_number=ad_number).insertURL(session)
-        counter+=1
+            country= map_country(browser.driver.current_url)
+            entry=Urls_ads(url=url, ad_number=int(ad_number), country_id=country)
+            entry.insertURL(session)
+            entry.update(session)
+        #When the next button disappears at the end 
         browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click()
 
 
@@ -68,23 +68,26 @@ if __name__ == '__main__':
     browser = Firefox(tor=False, headless=True)
     doc = Documentation(driver=browser.driver)
 
-    #~~~~~~~~~~~~~~~ First page of ads ~~~~~~~~~~~~~~~#
-
-
-    info = getbirds(browser, url)
-    doc.info['selenium'] = []
-    doc.info['selenium'].append(info)
-    doc.addlog("info = getbirds(browser, url)")
-    browser.driver.find_element_by_xpath('//option[contains(text(), "FOR SALE / ADOPTION:")]').click()
-    doc.addlog("browser.driver.find_element_by_xpath(\'//button[@name=\"login\"]\').click())")
-    browser.driver.find_element_by_xpath('//option[contains(text(), "Birds")]').click()
-    doc.addlog("browser.driver.find_element_by_xpath(\'//option[contains(text(), \"Birds\")]\').click()")
-
-    saveData(browser, path+filename_prefix)
-
-    getads(browser, session)
     #~~~~~~~~~~~~~~~ Catch'em all ~~~~~~~~~~~~~~~#
+    for row in session.query(Country).all():
+        url = row.url
 
+        info = getbirds(browser, url)
+        doc.info['selenium'] = []
+        doc.info['selenium'].append(info)
+        doc.addlog("info = getbirds(browser, url)")
+        
+        browser.driver.find_element_by_xpath('//option[contains(text(), "FOR SALE / ADOPTION:")]').click()
+        doc.addlog("browser.driver.find_element_by_xpath(\'//button[@name=\"login\"]\').click())")
+        
+        browser.driver.find_element_by_xpath('//option[contains(text(), "Birds")]').click()
+        doc.addlog("browser.driver.find_element_by_xpath(\'//option[contains(text(), \"Birds\")]\').click()")
+
+        saveData(browser, path+filename_prefix)
+        doc.addlog("saveData(browser, path+filename_prefix)")
+
+        getads(browser, session)
+        doc.addlog("getads(browser, session)")
 
     # ~~~~~~~~~~~~~~~ Documentation - enregistrement ~~~~~~~~~~~~~~~ #
     with open('./results/getArticles/'+filename_prefix+'_documentation.json', 'wb') as f:
@@ -93,6 +96,16 @@ if __name__ == '__main__':
     # ~~~~~~~~~~~~~~~ Shut down the webdriver ~~~~~~~~~~~~~~~ #
 
     browser.driver.quit()
+
+
+
+
+
+#Ouverture de adpost_parsing.csv
+# with open('./results/getcountries/adpost_parsing.csv', 'rb') as csvfile:
+#     csv_reader = csv.reader(csvfile, delimiter=';')
+#     for row in csv_reader:
+#         driver.get(str(raw[0])
 
 #countryButton = driver.findElement(str(raw[1])).click();
 #countryButton.click();

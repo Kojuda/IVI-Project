@@ -51,7 +51,7 @@ class Documentation():
         }
     def addlog(self, string="") :
         cT=datetime.datetime.now() #cT=current time
-        time=f"{str(cT.day)}.{str(cT.month)}.{str(cT.year)} {str(cT.hour)}:{str(cT.minute)}:{str(cT.second)}.{str(cT.microsecond)}"
+        time=f"{str(cT.year)}.{str(cT.month)}.{str(cT.day)} {str(cT.hour)}:{str(cT.minute)}:{str(cT.second)}.{str(cT.microsecond)}"
         self.log[time]=string 
         #time="{}:{}:{}.{}\t {}.{}.{}".format(str(cT.hour), str(cT.minute), str(cT.second), str(cT.microsecond), str(cT.day), str(cT.month), str(cT.year))
 
