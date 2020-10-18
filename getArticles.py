@@ -30,7 +30,13 @@ def saveData(browser, path):
     '''Fonction pour l'exemple qui enregistre le code client, la capture d'écran et code serveur'''
     browser.clientCode(path+'_clientCode.html')
     browser.screenshot(path+'_screenshot.png', width=1080) #on fixe la largeur de la fenêtre avec width
+    
+    #TODO : Trouver un moyen de prendre le code serveur et retourner en arrière sinon le script marche pas
     #browser.serverCode(path+'_serverCode.html')
+    
+    #Possibles solutions
+
+    #browser.driver.back()
     #browser.driver.execute_script("window.history.go(-1)")
 
 def getbirds(browser, url) :   
@@ -46,6 +52,9 @@ def getads(browser, session) :
     #No need to wait between requests, it is on the same page, just javascript
     while check_exists_by_xpath(browser.driver, "//input[@name=\"button_hits_seen\"]")  :
         for ad in browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]') :
+
+            time.sleep(random.uniform(2, 2.5))
+
             #The website is inconsistent, there is tag without ad
             ad_number = ad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
             url = ad.find_element_by_xpath(".//a").get_attribute("href") 
@@ -59,7 +68,7 @@ def getads(browser, session) :
                 entry.insertURL(session)
                 entry.update(session)
         #When the next button disappears at the end 
-        time.sleep(random.uniform(1, 2.5))
+        time.sleep(random.uniform(2, 2.5))
         browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click()
 
 
@@ -67,11 +76,11 @@ def getads(browser, session) :
 if __name__ == '__main__':
 
      #~~~~~~~~~~~~~~~ Configuration ~~~~~~~~~~~~~~~#
-    url = "https://www.adpost.com/us/"
     filename_prefix = 'urlArticles'
     path = './results/getArticles/'
 
     browser = Firefox(tor=False, headless=True)
+    #switchImageFirefox(browser, False)
     doc = Documentation(driver=browser.driver)
 
     #~~~~~~~~~~~~~~~ Catch'em all ~~~~~~~~~~~~~~~#

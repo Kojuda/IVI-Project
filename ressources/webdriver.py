@@ -110,3 +110,7 @@ class Firefox(Browser):
 
         #Instanciation du webdriver
         self.driver = webdriver.Firefox(firefox_profile=profile, executable_path=driverFile, options=options)
+
+
+
+#TODO : Mettre code de Rossy
