@@ -37,7 +37,7 @@ Base = declarative_base()
 
 class Urls_ads(Base):
     __tablename__ = 'urls_ads'
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     url = Column(String, nullable=False)
     status = Column(Integer, default=0)
     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)

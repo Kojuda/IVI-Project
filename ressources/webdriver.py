@@ -5,6 +5,8 @@
 
 import sys, os, datetime, pickle
 from selenium import webdriver #pip install selenium
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 
 class Browser:
     def get(self, url):
@@ -60,6 +62,9 @@ class Browser:
         server_code = self.driver.find_element_by_xpath("//*").text
         with open(outputPath, 'wb') as f:
             f.write(server_code.encode(encoding))
+
+    def wait(self, time=30) :
+        WebDriverWait(self.driver, timeout=time).until(lambda x : x==1) #Condition always true
 
     def __del__(self):
         try: self.driver.quit()
