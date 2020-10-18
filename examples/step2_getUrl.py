@@ -27,4 +27,4 @@ if __name__ == '__main__':
         with open('./results/documentation/'+str(i.id)+'_documentation.json', 'wb') as f:
             f.write(str(doc).encode('utf-8'))
         updateURL(session, i) #met à jour le status de l'URL
-        time.sleep(random.uniform(1.5, 2.5)) #attente entre 1.5 et 2.5 sec
+        time.sleep(random.uniform(0.1, 0.2)) #attente entre 1.5 et 2.5 sec

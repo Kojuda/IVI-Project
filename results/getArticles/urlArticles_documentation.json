@@ -10,12 +10,12 @@
                 "version": "0.4.10"
             },
             {
-                "name": "selenium",
-                "version": "3.141.0"
-            },
-            {
                 "name": "dns",
                 "version": "0.0.1"
+            },
+            {
+                "name": "selenium",
+                "version": "3.141.0"
             },
             {
                 "name": "sqlalchemy",
@@ -38,7 +38,7 @@
         "selenium": [
             {
                 "request": {
-                    "date": "2020-10-18T02:38:28.092244+02:00",
+                    "date": "2020-10-18T18:09:41.120218+02:00",
                     "url": "https://www.adpost.com/us/pets/Birds/",
                     "headers": {
                         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0",
@@ -47,7 +47,8 @@
                     }
                 },
                 "response": {
-                    "url": "https://www.adpost.com/us/pets/Birds/"
+                    "url": "https://www.adpost.com/us/pets/Birds/",
+                    "ip_server": null
                 },
                 "actions": [
                     "info = browser.get(url)"
@@ -56,8 +57,6 @@
         ]
     },
     "log": {
-        "18.10.2020 2:38:31.624626": "info = getbirds(browser, url)",
-        "18.10.2020 2:38:34.915006": "browser.driver.find_element_by_xpath('//button[@name=\"login\"]').click())",
-        "18.10.2020 2:38:36.515524": "browser.driver.find_element_by_xpath('//option[contains(text(), \"Birds\")]').click()"
+        "2020.10.18 18:9:48.967083": "info = getbirds(browser, url)"
     }
 }

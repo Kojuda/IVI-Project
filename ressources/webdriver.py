@@ -7,6 +7,7 @@ import sys, os, datetime, pickle
 from selenium import webdriver #pip install selenium
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+from ressources.outil_dns import url_to_hostname, getIPv4
 
 class Browser:
     def get(self, url):
@@ -26,6 +27,8 @@ class Browser:
                 },
                 'response': {
                     'url': self.driver.current_url, #peut être différente de request_url s'il y a eu une redirection
+                    #PROJET ADD
+                    'ip_server' : getIPv4(self.driver.current_url)
                 },
                 'actions': []
             }

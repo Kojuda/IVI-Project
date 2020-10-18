@@ -3,13 +3,14 @@
 # author: L. Rodrigues
 # creation: 15.10.2020
 
-import time, json, sys, os, subprocess, re, csv
+import time, json, sys, os, subprocess, re, csv, random
 from lxml import html #pip install lxml cssselect
 import time
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException   
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from sqlalchemy.sql import exists, and_
 
 from ressources.webdriver import Chrome, Firefox # fichier selenium_driver.py à placer dans le même dossier que votre script
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressource
@@ -50,10 +51,15 @@ def getads(browser, session) :
             url = ad.find_element_by_xpath(".//a").get_attribute("href") 
             #Add the entry in the database
             country= map_country(browser.driver.current_url)
-            entry=Urls_ads(url=url, ad_number=int(ad_number), country_id=country)
-            entry.insertURL(session)
-            entry.update(session)
+            #Check if the entry already exists and do nothing in case according to the ad_number and country
+            if session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar() :
+                pass
+            else :
+                entry=Urls_ads(url=url, ad_number=int(ad_number), country_id=country)
+                entry.insertURL(session)
+                entry.update(session)
         #When the next button disappears at the end 
+        time.sleep(random.uniform(1, 2.5))
         browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click()
 
 
@@ -76,16 +82,21 @@ if __name__ == '__main__':
         doc.info['selenium'] = []
         doc.info['selenium'].append(info)
         doc.addlog("info = getbirds(browser, url)")
-        
+
+        # Pre-record if error 
+        with open('./results/getArticles/'+filename_prefix+'_documentation.json', 'wb') as f:
+            f.write(str(doc).encode('utf-8'))
+        #Click on sale
         browser.driver.find_element_by_xpath('//option[contains(text(), "FOR SALE / ADOPTION:")]').click()
         doc.addlog("browser.driver.find_element_by_xpath(\'//button[@name=\"login\"]\').click())")
-        
+        #Reclick on "Birds"
         browser.driver.find_element_by_xpath('//option[contains(text(), "Birds")]').click()
         doc.addlog("browser.driver.find_element_by_xpath(\'//option[contains(text(), \"Birds\")]\').click()")
 
         saveData(browser, path+filename_prefix)
         doc.addlog("saveData(browser, path+filename_prefix)")
 
+        #Gather all ads
         getads(browser, session)
         doc.addlog("getads(browser, session)")
 
