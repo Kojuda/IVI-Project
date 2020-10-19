@@ -5,6 +5,9 @@
 
 import sys, os, datetime, pickle
 from selenium import webdriver #pip install selenium
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from ressources.outil_dns import url_to_hostname, getIPv4
 
 class Browser:
     def get(self, url):
@@ -24,6 +27,8 @@ class Browser:
                 },
                 'response': {
                     'url': self.driver.current_url, #peut être différente de request_url s'il y a eu une redirection
+                    #PROJET ADD
+                    'ip_server' : getIPv4(self.driver.current_url)
                 },
                 'actions': []
             }
@@ -60,6 +65,9 @@ class Browser:
         server_code = self.driver.find_element_by_xpath("//*").text
         with open(outputPath, 'wb') as f:
             f.write(server_code.encode(encoding))
+
+    def wait(self, time=30) :
+        WebDriverWait(self.driver, timeout=time).until(lambda x : x==1) #Condition always true
 
     def __del__(self):
         try: self.driver.quit()
@@ -102,3 +110,7 @@ class Firefox(Browser):
 
         #Instanciation du webdriver
         self.driver = webdriver.Firefox(firefox_profile=profile, executable_path=driverFile, options=options)
+
+
+
+#TODO : Mettre code de Rossy
