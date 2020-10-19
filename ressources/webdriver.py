@@ -2,17 +2,20 @@
 # coding=utf-8
 # author: T. Pineau
 # creation: 06.10.2020
-
+# modifications: Fonctions mis à disposition par Q.Rossy
+# modification: 19.10.2020
 import sys, os, datetime, pickle
 from selenium import webdriver #pip install selenium
+from selenium import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from ressources.outil_dns import url_to_hostname, getIPv4
+import time
 
 class Browser:
     def get(self, url):
         """Demande l'accès à l'URL et retourne les infos pour la documentation"""
-        dateRequest = datetime.datetime.now().astimezone().isoformat()
+        dateRequest = datetime.datetime.now().astimezone().isoformat() #mets le timestamp de la demande
         headers = {
             'user-agent': self.driver.execute_script("return navigator.userAgent"),
             'referer': self.driver.current_url,
@@ -111,6 +114,36 @@ class Firefox(Browser):
         #Instanciation du webdriver
         self.driver = webdriver.Firefox(firefox_profile=profile, executable_path=driverFile, options=options)
 
+def switchJavascriptChrome(driver):
+    #Affichage de la page des paramètres de Chrome
+    driver.get('chrome://settings/content/javascript?search=javascript')
+    time.sleep(1)
+#Le bouton radio est dans un zone cachée de l’HTML (ShadowRoot), il faut lancer un script
+    toggle = driver.execute_script('return document.querySelector("body > settings-ui").shadowRoot.querySelector("#main").shadowRoot.querySelector("settings-basic-page").shadowRoot.querySelector("#basicPage > settings-section.expanded > settings-privacy-page").shadowRoot.querySelector("#pages > settings-subpage.iron-selected > category-default-setting").shadowRoot.querySelector("#toggle").shadowRoot.querySelector("#control")')
+    time.sleep(1)
+    try:
+        toggle.click()
+        time.sleep(0.2)
+        driver.refresh()
+    except: #En cas de problème on recommence
+        switchJavascriptChrome(driver)
 
 
-#TODO : Mettre code de Rossy
+def switchJavascriptFirefox(driver):
+#Affichage de la page des paramètres de Chrome
+    driver.get('about:config')
+#Clic du bouton de Warning
+    button = driver.find_element_by_xpath('//button[contains(@id, "warningButton")]')
+    button.click()
+#Saisie de la recherche du parametre
+    search = driver.find_element_by_xpath('//input[contains(@id,"about-config-search")]')
+    search.send_keys("javascript.enabled")
+    time.sleep(1)
+#Clic pour désactiver
+    span = driver.find_element_by_xpath('//html/body/table/tr[1]/td[1]/span')
+    actionChains = ActionChains(driver)
+    actionChains.double_click(span).perform()
+    time.sleep(0.2)
+    driver.back()
+    driver.refresh()
+
