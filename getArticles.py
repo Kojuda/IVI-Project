@@ -89,7 +89,7 @@ def resume_extraction(browser, session, pages) :
                     browser.driver.back()
             counter-=1
     doc.addlog(f"To resume the extraction : {counter} have been passed per {pages} pages interval")
-    print("SUCCESS : Resume")
+    print(f"SUCCESS : Resume {country}")
 
 def getbirds(browser, url) :   
     """Go to bird section"""
@@ -102,10 +102,11 @@ def getads(browser, session, pages=20, update=True) :
     """Go through all pages to collect articles' urls, number of pages to search the last stop. Whether there are
     new recent articles, the function updates the database rather than resume the extraction"""
 
-    #Check we are updating
-    print("Updating the database...") if not check_update(browser, session) else None
     #Get the current country
     country= map_country(browser.driver.current_url)
+    #Check we are updating
+    print(f"Updating the ads for {country}") if not check_update(browser, session) else None
+    doc.addlog(f"Updating the ads for {country}")
     #If the country has not yet been extracted, no resume. If number of entries < the pages interval, no resume.
     nbr_entries_country=len(session.query(Urls_ads).filter(Urls_ads.country_id==country).all())
     if nbr_entries_country ==0 or nbr_entries_country < pages :
@@ -149,6 +150,8 @@ def getads(browser, session, pages=20, update=True) :
             #We have updated the country
             print(f"Ads for {country} has been updated")
             break
+    print(f"{country} : No more ads\n")
+    doc.addlog(f"{country} : No more ads\n")
 
 def check_update(browser, session) :
     """Give TRUE whether the database is up to date"""
@@ -166,7 +169,7 @@ if __name__ == '__main__':
     date_extraction = f"{str(cT.year)}-{str(cT.month)}-{str(cT.day)}_{str(cT.hour)}-{str(cT.minute)}"
      #~~~~~~~~~~~~~~~ Configuration ~~~~~~~~~~~~~~~#
     filename_prefix = 'urlArticles'
-    path = './results/getArticles/'
+    path = f'./results/getArticles/{date_extraction}_'
 
     browser = Firefox(tor=False, headless=True)
     #switchImageFirefox(browser, False)
@@ -174,29 +177,30 @@ if __name__ == '__main__':
 
     #~~~~~~~~~~~~~~~ Catch'em all ~~~~~~~~~~~~~~~#
     for row in session.query(Country).all():
+        country= map_country(browser.driver.current_url)
         url = row.url
 
         info = getbirds(browser, url)
         doc.info['selenium'] = []
         doc.info['selenium'].append(info)
-        doc.addlog("info = getbirds(browser, url)")
+        doc.addlog(f"{country} : info = getbirds(browser, url)")
 
         # Pre-record if error 
         with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
             f.write(str(doc).encode('utf-8'))
         #Click on sale
         browser.driver.find_element_by_xpath('//option[contains(text(), "FOR SALE / ADOPTION:")]').click()
-        doc.addlog("browser.driver.find_element_by_xpath(\'//button[@name=\"login\"]\').click())")
+        doc.addlog(f"{country} : browser.driver.find_element_by_xpath(\'//button[@name=\"login\"]\').click())")
         #Reclick on "Birds"
         browser.driver.find_element_by_xpath('//option[contains(text(), "Birds")]').click()
-        doc.addlog("browser.driver.find_element_by_xpath(\'//option[contains(text(), \"Birds\")]\').click()")
+        doc.addlog(f"{country} : browser.driver.find_element_by_xpath(\'//option[contains(text(), \"Birds\")]\').click()")
 
         saveData(browser, path+filename_prefix)
-        doc.addlog("saveData(browser, path+filename_prefix)")
+        doc.addlog(f"{country} : saveData(browser, path+filename_prefix)")
 
         #Gather all ads
         getads(browser, session)
-        doc.addlog("getads(browser, session)")
+        doc.addlog(f"{country} : getads(browser, session)")
 
         # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
         with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:

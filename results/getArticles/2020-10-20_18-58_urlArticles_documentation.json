@@ -38,16 +38,125 @@
         "selenium": [
             {
                 "request": {
-                    "date": "2020-10-20T18:58:58.564608+02:00",
-                    "url": "https://www.adpost.com/us/pets/Birds/",
+                    "date": "2020-10-20T19:21:59.423368+02:00",
+                    "url": "https://www.adpost.com/ca/pets/Birds/",
                     "headers": {
                         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0",
-                        "referer": "http://httpbin.org/ip",
-                        "cookie": []
+                        "referer": "https://www.adpost.com/us/",
+                        "cookie": [
+                            {
+                                "name": "visid_incap_574814",
+                                "value": "xdPZZ5QiQkuovY2JV71Rl1IXj18AAAAAQUIPAAAAAACx6PnYczY6lVuUMb23Xr7R",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": true,
+                                "httpOnly": true,
+                                "expiry": 1634715387,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "nlbi_574814",
+                                "value": "1SyjFyblY2srzs54puXjegAAAADGJfrD3AOn2lALdLiFalrW",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": true,
+                                "httpOnly": false,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "incap_ses_448_574814",
+                                "value": "A3opSHb26gmP3ZM82J03BlIXj18AAAAACPCtqfRW5YvvvP2TSX12ew==",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": true,
+                                "httpOnly": false,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "__gads",
+                                "value": "ID=aadfbc49735d0751-22092d9af9b80055:T=1603213140:RT=1603213140:S=ALNI_MYconquInUSD2jfsDO40lR0OuxC4Q",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1636909140,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_gat",
+                                "value": "1",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1603214519,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "us_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634750508,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "us_pets_caption_header",
+                                "value": "FOR SALE / ADOPTION:",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634750508,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_ga",
+                                "value": "GA1.2.838918004.1603213141",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1666286508,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_gid",
+                                "value": "GA1.2.1436892762.1603213141",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1603300908,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "__smVID",
+                                "value": "b8bc0c3ef1eea1ef3cdda2ae538fb89e50a1180e4e1269ade533f5b9cb1f6a1c",
+                                "path": "/us",
+                                "domain": "www.adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1605810112,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "__smToken",
+                                "value": "QAhxLHCMvC2v045hxFRvNm6s",
+                                "path": "/",
+                                "domain": "www.adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634750518,
+                                "sameSite": "None"
+                            }
+                        ]
                     }
                 },
                 "response": {
-                    "url": "https://www.adpost.com/us/pets/Birds/",
+                    "url": "https://www.adpost.com/ca/pets/Birds/",
                     "ip_server": null
                 },
                 "actions": [
@@ -57,7 +166,17 @@
         ]
     },
     "log": {
-        "2020.10.20 18:59:2.383831": "info = getbirds(browser, url)"
+        "2020.10.20 18:59:2.383831": "info = getbirds(browser, url)",
+        "2020.10.20 18:59:4.900111": "browser.driver.find_element_by_xpath('//button[@name=\"login\"]').click())",
+        "2020.10.20 18:59:6.840599": "browser.driver.find_element_by_xpath('//option[contains(text(), \"Birds\")]').click()",
+        "2020.10.20 18:59:7.215684": "saveData(browser, path+filename_prefix)",
+        "2020.10.20 18:59:7.268695": "To resume the extraction : 0 have been passed per 20 pages interval",
+        "2020.10.20 19:21:59.421368": "getads(browser, session)",
+        "2020.10.20 19:22:2.509024": "info = getbirds(browser, url)"
     },
-    "errorlog": {}
+    "errorlog": {
+        "2020.10.20 19:0:28.402627": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/us/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
+        "2020.10.20 19:1:12.8752": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/us/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
+        "2020.10.20 19:3:26.477639": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/us/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n"
+    }
 }
