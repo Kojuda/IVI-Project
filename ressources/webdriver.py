@@ -8,7 +8,7 @@ import sys, os, datetime, pickle
 from selenium import webdriver #pip install selenium
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from outil_dns import url_to_hostname, getIPv4
+from ressources.outil_dns import url_to_hostname, getIPv4
 import time
 
 class Browser:

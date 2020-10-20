@@ -5,9 +5,9 @@
 
 import time, json, sys, os, subprocess, re, csv, random
 from lxml import html #pip install lxml cssselect
-import time
+import time, datetime
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException   
+from selenium.common.exceptions import NoSuchElementException, WebDriverException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from sqlalchemy.sql import exists, and_
@@ -17,9 +17,12 @@ from ressources.documentation import Documentation # fichier documentation.py qu
 from ressources.db import *
 from ressources.project_utils import mapping_countries, map_country
 
+ADS_PER_PAGE=20
+
 
 def check_exists_by_xpath(webelement, xpath): 
     """Check whether exist"""
+
     try:
         webelement.find_element_by_xpath(xpath)
     except NoSuchElementException:
@@ -27,6 +30,7 @@ def check_exists_by_xpath(webelement, xpath):
     return True
 
 def saveData(browser, path):
+
     '''Fonction pour l'exemple qui enregistre le code client, la capture d'écran et code serveur'''
     browser.clientCode(path+'_clientCode.html')
     browser.screenshot(path+'_screenshot.png', width=1080) #on fixe la largeur de la fenêtre avec width
@@ -39,6 +43,40 @@ def saveData(browser, path):
     #browser.driver.back()
     #browser.driver.execute_script("window.history.go(-1)")
 
+def resume_extraction(browser, session, pages) :
+    """Check if the first ad of the page is in the database. Otherwise pass n pages per n pages until the first new ad
+    and then go back n pages further. The purpose is to locate the interval of n pages where the script has stopped.    
+    This function has been made because there is no way to select a specific page on the website or go n pages further"""
+
+    #Extract the first ad before the loop
+    firstad = browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]')[0]
+    ad_number = firstad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
+    country= map_country(browser.driver.current_url)
+
+    #Counter that counts the number of pages that have been passed
+    counter=0
+    while session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar() :
+        for n in range(pages) :
+            time.sleep(random.uniform(0.01, 0.1))
+            try :
+                browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click() 
+                tries = 20
+            except WebDriverException as e:
+                print(f"{e}\n")
+                doc.adderrorlog(f"{e}\n")
+                browser.driver.back()
+            counter+=1
+        print(f"Skip {pages} pages\n")
+        firstad = browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]')[0]
+        ad_number = firstad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
+    #Go back n pages whether we are not at the first page. We check with the presence of the previous button
+    if check_exists_by_xpath(browser.driver, "//input[@name=\"previous_hits_button\"]") :
+        for n in range(pages) :
+            time.sleep(random.uniform(0.01, 0.1))
+            browser.driver.find_element_by_xpath("//input[@name=\"previous_hits_button\"]").click()
+            counter-=1
+    doc.addlog(f"To resume the extraction : {counter} have been passed per {pages} pages interval")
+
 def getbirds(browser, url) :   
     """Go to bird section"""
     url = url.strip("/") + "/pets/Birds/"
@@ -46,35 +84,72 @@ def getbirds(browser, url) :
     info['actions'].append("info = browser.get(url)")
     return info
 
-def getads(browser, session) :
-    """Go through all pages to collect articles' urls"""
+def getads(browser, session, pages=20, update=True) :
+    """Go through all pages to collect articles' urls, number of pages to search the last stop. Whether there are
+    new recent articles, the function updates the database rather than resume the extraction"""
+
+    #Check we are updating
+    print("Updating the database...") if not check_update(browser, session) else None
+    #Get the current country
+    country= map_country(browser.driver.current_url)
+    #If the country has not yet been extracted, no resume. If number of entries < the pages interval, no resume.
+    nbr_entries_country=len(session.query(Urls_ads).filter(Urls_ads.country_id==country).all())
+    if nbr_entries_country ==0 or nbr_entries_country < pages :
+        pass
+    else :
+        #Resume the extraction
+        resume_extraction(browser, session, pages)
+    #Just to avoid passing the first page
+    counter=0
+    #Allow to break whether we have updated the start of the ads and there is no more new ads
+    counter_not_new=0
 
     #No need to wait between requests, it is on the same page, just javascript
+    #When the next button disappears at the end 
     while check_exists_by_xpath(browser.driver, "//input[@name=\"button_hits_seen\"]")  :
-        for ad in browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]') :
+        #Click on the "next button" / Except the first page
+        time.sleep(random.uniform(2, 2.5))
+        #Try 20 times before passing
+        tries = 0
+        while tries < 20 :
+            try :
+                browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click() if counter==1 else None
+                counter=1
+                tries = 20
+            except WebDriverException as e:
+                print(f"{e}\n")
+                doc.adderrorlog(f"{e}\n")
+                tries +=1
 
-            time.sleep(random.uniform(2, 2.5))
+        for ad in browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]') :
 
             #The website is inconsistent, there is tag without ad
             ad_number = ad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
             url = ad.find_element_by_xpath(".//a").get_attribute("href") 
-            #Add the entry in the database
-            country= map_country(browser.driver.current_url)
             #Check if the entry already exists and do nothing in case according to the ad_number and country
             if session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar() :
-                pass
+                counter_not_new+=1
             else :
                 entry=Urls_ads(url=url, ad_number=int(ad_number), country_id=country)
                 entry.insertURL(session)
-                entry.update(session)
-        #When the next button disappears at the end 
-        time.sleep(random.uniform(2, 2.5))
-        browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click()
+        if counter_not_new > (pages*ADS_PER_PAGE) :
+            #We have updated the country
+            print(f"Ads for {country} has been updated")
+            break
 
+def check_update(browser, session) :
+    """Give TRUE whether the database is up to date"""
+    firstad = browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]')[0]
+    ad_number = firstad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
+    country= map_country(browser.driver.current_url)
+    resp = session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar()
+    return resp
 
+ 
 
 if __name__ == '__main__':
-
+    cT = datetime.datetime.now()
+    date_extraction = f"{str(cT.year)}-{str(cT.month)}-{str(cT.day)}_{str(cT.hour)}-{str(cT.minute)}"
      #~~~~~~~~~~~~~~~ Configuration ~~~~~~~~~~~~~~~#
     filename_prefix = 'urlArticles'
     path = './results/getArticles/'
@@ -93,7 +168,7 @@ if __name__ == '__main__':
         doc.addlog("info = getbirds(browser, url)")
 
         # Pre-record if error 
-        with open('./results/getArticles/'+filename_prefix+'_documentation.json', 'wb') as f:
+        with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
             f.write(str(doc).encode('utf-8'))
         #Click on sale
         browser.driver.find_element_by_xpath('//option[contains(text(), "FOR SALE / ADOPTION:")]').click()
@@ -110,7 +185,7 @@ if __name__ == '__main__':
         doc.addlog("getads(browser, session)")
 
     # ~~~~~~~~~~~~~~~ Documentation - enregistrement ~~~~~~~~~~~~~~~ #
-    with open('./results/getArticles/'+filename_prefix+'_documentation.json', 'wb') as f:
+    with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
         f.write(str(doc).encode('utf-8'))
 
     # ~~~~~~~~~~~~~~~ Shut down the webdriver ~~~~~~~~~~~~~~~ #

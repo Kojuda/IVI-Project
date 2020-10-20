@@ -3,11 +3,11 @@ from sqlalchemy import and_, exists
 import os
 os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 
-for row in session.query(Country).all():
-    print(row.url)
+# for row in session.query(Country).all():
+#     print(row.url)
 
 
-stmt = session.query(exists().where(and_(Urls_ads.ad_number=="42342", Urls_ads.country_id=="LoL"))).scalar()
+stmt = session.query(Urls_ads).filter(Urls_ads.country_id==country).all()
 print(stmt)
 
 

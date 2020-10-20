@@ -9,11 +9,12 @@ import requests # pip install requests requests[socks] pysocks
 import datetime
 
 class Documentation():
-    def __init__(self, tor=False, info={}, driver=False, log = {}):
+    def __init__(self, tor=False, info={}, driver=False, log = {}, errorlog={}):
         self.path = os.path.dirname(os.path.realpath(__file__)) #le chemin du dossier où est exécuté le fichier
         self.info = info
         self.tor = tor
         self.log = log
+        self.errorlog = errorlog
         self.programm = {
             'software': "Python",
             'software_version': platform.python_version(),
@@ -53,7 +54,11 @@ class Documentation():
         cT=datetime.datetime.now() #cT=current time
         time=f"{str(cT.year)}.{str(cT.month)}.{str(cT.day)} {str(cT.hour)}:{str(cT.minute)}:{str(cT.second)}.{str(cT.microsecond)}"
         self.log[time]=string 
-        #time="{}:{}:{}.{}\t {}.{}.{}".format(str(cT.hour), str(cT.minute), str(cT.second), str(cT.microsecond), str(cT.day), str(cT.month), str(cT.year))
+        
+    def adderrorlog(self, string="") :
+        cT=datetime.datetime.now() #cT=current time
+        time=f"{str(cT.year)}.{str(cT.month)}.{str(cT.day)} {str(cT.hour)}:{str(cT.minute)}:{str(cT.second)}.{str(cT.microsecond)}"
+        self.errorlog[time]=string 
 
     def __str__(self):
         """Pour afficher l'objet avec la fonction print(objet)"""
