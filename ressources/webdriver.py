@@ -6,10 +6,9 @@
 # modification: 19.10.2020
 import sys, os, datetime, pickle
 from selenium import webdriver #pip install selenium
-from selenium import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from ressources.outil_dns import url_to_hostname, getIPv4
+from outil_dns import url_to_hostname, getIPv4
 import time
 
 class Browser:
@@ -141,7 +140,7 @@ def switchJavascriptFirefox(driver):
     time.sleep(1)
 #Clic pour désactiver
     span = driver.find_element_by_xpath('//html/body/table/tr[1]/td[1]/span')
-    actionChains = ActionChains(driver)
+    actionChains = webdriver.common.action_chains.ActionChains(driver)
     actionChains.double_click(span).perform()
     time.sleep(0.2)
     driver.back()
