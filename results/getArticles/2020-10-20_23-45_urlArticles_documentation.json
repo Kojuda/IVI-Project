@@ -1,0 +1,173 @@
+{
+    "ip": "178.211.236.96",
+    "tor": false,
+    "programm": {
+        "software": "Python",
+        "software_version": "3.8.5",
+        "modules": [
+            {
+                "name": "requests",
+                "version": "2.24.0"
+            },
+            {
+                "name": "selenium",
+                "version": "3.141.0"
+            },
+            {
+                "name": "sqlalchemy",
+                "version": "1.3.20"
+            },
+            {
+                "name": "dns",
+                "version": "0.0.1"
+            },
+            {
+                "name": "pipreqs",
+                "version": "0.4.10"
+            }
+        ]
+    },
+    "system": {
+        "os_name": "Windows",
+        "computer_name": "DESKTOP-0OJPOU4",
+        "os_release": "10",
+        "os_version": "10.0.19041",
+        "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD"
+    },
+    "info": {
+        "selenium": [
+            {
+                "request": {
+                    "date": "2020-10-20T23:45:48.627968+02:00",
+                    "url": "https://www.adpost.com/uk/pets/Birds/",
+                    "headers": {
+                        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0",
+                        "referer": "https://www.adpost.com/ca/pets/Birds/",
+                        "cookie": [
+                            {
+                                "name": "visid_incap_574814",
+                                "value": "/sr4jVvXSGetL9rLs8d9xIVaj18AAAAAQUIPAAAAAADzZMX6tFQNcDz2bFu3Iyxr",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": true,
+                                "httpOnly": true,
+                                "expiry": 1634715370,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "nlbi_574814",
+                                "value": "zHUTeEljMH2Qz2FCpuXjegAAAAA6gYgVTnboUY3US6kI4nBy",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": true,
+                                "httpOnly": false,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "incap_ses_448_574814",
+                                "value": "zBs+Ge2iAwBPn5082J03BoZaj18AAAAACrIV/a3nOihlH0AtQWb8SQ==",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": true,
+                                "httpOnly": false,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "us_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634766342,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_gat",
+                                "value": "1",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1603230403,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "__gads",
+                                "value": "ID=631f425ddc6ad34f-22d2fbb400b9004d:T=1603230344:RT=1603230344:S=ALNI_MZ2Ockie_W_5mS3q7IfWyuWwVAkkA",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1636926344,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "ca_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634766346,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "__smVID",
+                                "value": "00587d4898c75314b435cbfc82730d67cc18149c6b40cdb12ca20f9b68ce8e93",
+                                "path": "/ca/pets/Birds",
+                                "domain": "www.adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1605825946,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_ga",
+                                "value": "GA1.2.605245061.1603230344",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1666302347,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_gid",
+                                "value": "GA1.2.316361317.1603230344",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1603316747,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "__smToken",
+                                "value": "a5LVyJ944pGmI3v3ysLTEkZ6",
+                                "path": "/",
+                                "domain": "www.adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634766347,
+                                "sameSite": "None"
+                            }
+                        ]
+                    }
+                },
+                "response": {
+                    "url": "https://www.adpost.com/uk/pets/Birds/",
+                    "ip_server": null
+                },
+                "actions": []
+            }
+        ]
+    },
+    "log": {
+        "2020.10.20 23:45:46.108451": "UNITED STATES : info = getbirds(browser, url)",
+        "2020.10.20 23:45:46.109451": "UNITED STATES : Passed",
+        "2020.10.20 23:45:48.627968": "CANADA : Passed",
+        "2020.10.20 23:45:52.220513": "UNITED KINGDOM : info = getbirds(browser, url)"
+    },
+    "errorlog": {}
+}
