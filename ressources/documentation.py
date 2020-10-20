@@ -48,13 +48,14 @@ class Documentation():
             'programm': self.programm,
             'system': self.system,
             'info': self.info,
-            'log' : self.log
+            'log' : self.log,
+            'errorlog' : self.errorlog
         }
     def addlog(self, string="") :
         cT=datetime.datetime.now() #cT=current time
         time=f"{str(cT.year)}.{str(cT.month)}.{str(cT.day)} {str(cT.hour)}:{str(cT.minute)}:{str(cT.second)}.{str(cT.microsecond)}"
         self.log[time]=string 
-        
+
     def adderrorlog(self, string="") :
         cT=datetime.datetime.now() #cT=current time
         time=f"{str(cT.year)}.{str(cT.month)}.{str(cT.day)} {str(cT.hour)}:{str(cT.minute)}:{str(cT.second)}.{str(cT.microsecond)}"

@@ -30,8 +30,8 @@ def check_exists_by_xpath(webelement, xpath):
     return True
 
 def saveData(browser, path):
-
     '''Fonction pour l'exemple qui enregistre le code client, la capture d'écran et code serveur'''
+
     browser.clientCode(path+'_clientCode.html')
     browser.screenshot(path+'_screenshot.png', width=1080) #on fixe la largeur de la fenêtre avec width
     
@@ -58,13 +58,16 @@ def resume_extraction(browser, session, pages) :
     while session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar() :
         for n in range(pages) :
             time.sleep(random.uniform(0.01, 0.1))
-            try :
-                browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click() 
-                tries = 20
-            except WebDriverException as e:
-                print(f"{e}\n")
-                doc.adderrorlog(f"{e}\n")
-                browser.driver.back()
+            test = 0
+            while not test :
+                try :
+                    browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click() 
+                    test=1
+                except WebDriverException as e:
+                    print(f"{e}\n")
+                    doc.adderrorlog(f"{e}\n")
+                    #The webdriver is on a error page, go back
+                    browser.driver.back()
             counter+=1
         print(f"Skip {pages} pages\n")
         firstad = browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]')[0]
@@ -73,9 +76,20 @@ def resume_extraction(browser, session, pages) :
     if check_exists_by_xpath(browser.driver, "//input[@name=\"previous_hits_button\"]") :
         for n in range(pages) :
             time.sleep(random.uniform(0.01, 0.1))
-            browser.driver.find_element_by_xpath("//input[@name=\"previous_hits_button\"]").click()
+            test = 0
+            while not test :
+                try :
+                    browser.driver.find_element_by_xpath("//input[@name=\"previous_hits_button\"]").click() if counter==1 else None
+                    counter=1
+                    test =1
+                except WebDriverException as e:
+                    print(f"{e}\n")
+                    doc.adderrorlog(f"{e}\n")
+                    #The webdriver is on a error page, go back
+                    browser.driver.back()
             counter-=1
     doc.addlog(f"To resume the extraction : {counter} have been passed per {pages} pages interval")
+    print("SUCCESS : Resume")
 
 def getbirds(browser, url) :   
     """Go to bird section"""
@@ -103,26 +117,24 @@ def getads(browser, session, pages=20, update=True) :
     counter=0
     #Allow to break whether we have updated the start of the ads and there is no more new ads
     counter_not_new=0
-
     #No need to wait between requests, it is on the same page, just javascript
     #When the next button disappears at the end 
     while check_exists_by_xpath(browser.driver, "//input[@name=\"button_hits_seen\"]")  :
         #Click on the "next button" / Except the first page
         time.sleep(random.uniform(2, 2.5))
-        #Try 20 times before passing
-        tries = 0
-        while tries < 20 :
+        #Try until it works or CTRL-C
+        test = 0
+        while not test :
             try :
                 browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click() if counter==1 else None
                 counter=1
-                tries = 20
+                test =1
             except WebDriverException as e:
                 print(f"{e}\n")
                 doc.adderrorlog(f"{e}\n")
-                tries +=1
-
+                #The webdriver is on a error page, go back
+                browser.driver.back()
         for ad in browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]') :
-
             #The website is inconsistent, there is tag without ad
             ad_number = ad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
             url = ad.find_element_by_xpath(".//a").get_attribute("href") 
@@ -132,6 +144,7 @@ def getads(browser, session, pages=20, update=True) :
             else :
                 entry=Urls_ads(url=url, ad_number=int(ad_number), country_id=country)
                 entry.insertURL(session)
+                print(f"Ad added for {country}\n")
         if counter_not_new > (pages*ADS_PER_PAGE) :
             #We have updated the country
             print(f"Ads for {country} has been updated")
@@ -145,7 +158,8 @@ def check_update(browser, session) :
     resp = session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar()
     return resp
 
- 
+
+
 
 if __name__ == '__main__':
     cT = datetime.datetime.now()
@@ -184,9 +198,9 @@ if __name__ == '__main__':
         getads(browser, session)
         doc.addlog("getads(browser, session)")
 
-    # ~~~~~~~~~~~~~~~ Documentation - enregistrement ~~~~~~~~~~~~~~~ #
-    with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
-        f.write(str(doc).encode('utf-8'))
+        # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+        with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+            f.write(str(doc).encode('utf-8'))
 
     # ~~~~~~~~~~~~~~~ Shut down the webdriver ~~~~~~~~~~~~~~~ #
 
