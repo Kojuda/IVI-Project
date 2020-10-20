@@ -176,35 +176,43 @@ if __name__ == '__main__':
     doc = Documentation(driver=browser.driver)
 
     #~~~~~~~~~~~~~~~ Catch'em all ~~~~~~~~~~~~~~~#
+    """REMOVE TO UPDATE THE COUNTRY => That's the only solution you can't go to the end of the ads' list
+    and you can't select a specific page AND you can't sort by age (Advanced search doesn't work at the moment)"""
+
+    completed_countries=["UNITED STATES"] #REMOVE TO UPDATE
     for row in session.query(Country).all():
         country= map_country(browser.driver.current_url)
-        url = row.url
+        if country in completed_countries :
+            doc.addlog(f"{country} : Passed")
+            pass
+        else :
+            url = row.url
 
-        info = getbirds(browser, url)
-        doc.info['selenium'] = []
-        doc.info['selenium'].append(info)
-        doc.addlog(f"{country} : info = getbirds(browser, url)")
+            info = getbirds(browser, url)
+            doc.info['selenium'] = []
+            doc.info['selenium'].append(info)
+            doc.addlog(f"{country} : info = getbirds(browser, url)")
 
-        # Pre-record if error 
-        with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
-            f.write(str(doc).encode('utf-8'))
-        #Click on sale
-        browser.driver.find_element_by_xpath('//option[contains(text(), "FOR SALE / ADOPTION:")]').click()
-        doc.addlog(f"{country} : browser.driver.find_element_by_xpath(\'//button[@name=\"login\"]\').click())")
-        #Reclick on "Birds"
-        browser.driver.find_element_by_xpath('//option[contains(text(), "Birds")]').click()
-        doc.addlog(f"{country} : browser.driver.find_element_by_xpath(\'//option[contains(text(), \"Birds\")]\').click()")
+            # Pre-record if error 
+            with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+                f.write(str(doc).encode('utf-8'))
+            #Click on sale
+            browser.driver.find_element_by_xpath('//option[contains(text(), "FOR SALE / ADOPTION:")]').click()
+            doc.addlog(f"{country} : browser.driver.find_element_by_xpath(\'//button[@name=\"login\"]\').click())")
+            #Reclick on "Birds"
+            browser.driver.find_element_by_xpath('//option[contains(text(), "Birds")]').click()
+            doc.addlog(f"{country} : browser.driver.find_element_by_xpath(\'//option[contains(text(), \"Birds\")]\').click()")
 
-        saveData(browser, path+filename_prefix)
-        doc.addlog(f"{country} : saveData(browser, path+filename_prefix)")
+            saveData(browser, path+filename_prefix)
+            doc.addlog(f"{country} : saveData(browser, path+filename_prefix)")
 
-        #Gather all ads
-        getads(browser, session)
-        doc.addlog(f"{country} : getads(browser, session)")
+            #Gather all ads
+            getads(browser, session)
+            doc.addlog(f"{country} : getads(browser, session)")
 
-        # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
-        with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
-            f.write(str(doc).encode('utf-8'))
+            # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+            with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+                f.write(str(doc).encode('utf-8'))
 
     # ~~~~~~~~~~~~~~~ Shut down the webdriver ~~~~~~~~~~~~~~~ #
 
