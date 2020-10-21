@@ -7,7 +7,7 @@ import time, json, sys, os, subprocess, re, csv, random
 from lxml import html #pip install lxml cssselect
 import time, datetime
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, WebDriverException
+from selenium.common.exceptions import NoSuchElementException, WebDriverException, StaleElementReferenceException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from sqlalchemy.sql import exists, and_
@@ -61,7 +61,7 @@ def resume_extraction(browser, session, pages) :
     counter=0
     while session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar() and not counter==total_pages-1 :
         for n in range(pages) :
-            time.sleep(random.uniform(0.2, 1))
+            time.sleep(random.uniform(3, 3.2))
             test = 0
             while not test :
                 try :
@@ -70,6 +70,9 @@ def resume_extraction(browser, session, pages) :
                 except WebDriverException as e:
                     print(f"{e}\n")
                     doc.adderrorlog(f"{e}\n")
+                    # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+                    with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+                        f.write(str(doc).encode('utf-8'))
                     #The webdriver is on a error page, go back
                     browser.driver.back()
             counter+=1
@@ -95,6 +98,9 @@ def resume_extraction(browser, session, pages) :
                 except WebDriverException as e:
                     print(f"{e}\n")
                     doc.adderrorlog(f"{e}\n")
+                    # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+                    with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+                        f.write(str(doc).encode('utf-8'))
                     #The webdriver is on a error page, go back
                     browser.driver.back()
             counter-=1
@@ -112,7 +118,7 @@ def getbirds(browser, url) :
 def getads(browser, session, pages=20, update=True) :
     """Go through all pages to collect articles' urls, number of pages to search the last stop. Whether there are
     new recent articles, the function updates the database rather than resume the extraction"""
-
+    added_ad=0
     #Get the current country
     country= map_country(browser.driver.current_url)
     #Check we are updating
@@ -146,22 +152,39 @@ def getads(browser, session, pages=20, update=True) :
             except WebDriverException as e:
                 print(f"{e}\n")
                 doc.adderrorlog(f"{e}\n")
+                # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+                with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+                    f.write(str(doc).encode('utf-8'))
                 #The webdriver is on a error page, go back
                 browser.driver.back()
-        for ad in browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]') :
-            #The website is inconsistent, there is tag without ad
-            ad_number = ad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
-            url = ad.find_element_by_xpath(".//a").get_attribute("href") 
-            #Check if the entry already exists and do nothing in case according to the ad_number and country
-            if session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar() :
-                counter_not_new+=1
-            else :
-                #Refresh the counter since an entry has been added
-                counter_not_new=0
-                entry=Urls_ads(url=url, ad_number=int(ad_number), country_id=country)
-                entry.insertURL(session)
-                print(f"{country} : Ad added\n")
-                doc.addlog(f"{country} : Ad added\n")
+        test = 0
+        while not test :
+            try :
+                for ad in browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]') :
+                    #The website is inconsistent, there is tag without ad
+                    ad_number = ad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
+                    url = ad.find_element_by_xpath(".//a").get_attribute("href") 
+                    #Avoid the stale element error
+                    test+=1
+                    #Check if the entry already exists and do nothing in case according to the ad_number and country
+                    if session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar() :
+                        counter_not_new+=1
+                    else :
+                        #Refresh the counter since an entry has been added
+                        counter_not_new=0
+                        entry=Urls_ads(url=url, ad_number=int(ad_number), country_id=country)
+                        entry.insertURL(session)
+                        added_ad+=1
+                        print(f"{country} : Ad added (Tot : {added_ad})\n")
+                        doc.addlog(f"{country} : Ad added (Tot : {added_ad})\n")
+            except StaleElementReferenceException as e:
+                print(f"{e}\n")
+                doc.adderrorlog(f"{e}\n")
+                # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+                with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+                    f.write(str(doc).encode('utf-8'))
+                #The webdriver is on a error page, go back
+                browser.driver.back()
         print(f"{country} :\n\tNext page\n\tNo new entry since {counter_not_new} entries\n")
         doc.addlog(f"{country} :\n\tNext page\n\tNo new entry since {counter_not_new} entries\n")
         if counter_not_new > (pages*ADS_PER_PAGE) :
@@ -196,7 +219,7 @@ if __name__ == '__main__':
     """REMOVE TO UPDATE THE COUNTRY => That's the only solution you can't go to the end of the ads' list
     and you can't select a specific page AND you can't sort by age (Advanced search doesn't work at the moment)"""
 
-    completed_countries=["UNITED KINGDOM"] #REMOVE TO UPDATE
+    completed_countries=["UNITED STATES", "CANADA", "UNITED KINGDOM", "IRELAND", "AUSTRALIA", "NEW ZEALAND", "MALAYSIA"] #REMOVE TO UPDATE
     for row in session.query(Country).all():
         url = row.url
 
