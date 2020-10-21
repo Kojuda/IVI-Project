@@ -7,9 +7,11 @@ import time, json, sys, os, subprocess, re, csv, random
 from lxml import html #pip install lxml cssselect
 import time, datetime
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, WebDriverException, StaleElementReferenceException, NoSuchWindowException
+from selenium.common.exceptions import NoSuchElementException, WebDriverException, StaleElementReferenceException, NoSuchWindowException, TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from sqlalchemy.sql import exists, and_
 from math import ceil
 
@@ -25,7 +27,17 @@ def check_exists_by_xpath(webelement, xpath):
     """Check whether exist"""
 
     try:
+        # wait =WebDriverWait(browser.driver, 20)
+        # wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
         webelement.find_element_by_xpath(xpath)
+    # except TimeoutException as e:
+    #     print(f"{e}\n")
+    #     doc.adderrorlog(f"{e}\n")
+    #     # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+    #     with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+    #         f.write(str(doc).encode('utf-8'))
+    #     #Timeout because there is no more next button, break the loop
+    #     return False
     except NoSuchElementException:
         return False
     return True
@@ -50,9 +62,13 @@ def resume_extraction(browser, session, pages) :
     This function has been made because there is no way to select a specific page on the website or go n pages further"""
 
     #Obtain the total number of pages for this country at this moment, the purpose is to avoid reaching the last page
+    wait =WebDriverWait(browser.driver, 90)
+    wait.until(EC.presence_of_element_located((By.XPATH, "//div[@style][contains(text(),\"Number of ads: \")]")))
     raw_string=browser.driver.find_element_by_xpath("//div[@style][contains(text(),\"Number of ads: \")]").text
     total_pages=ceil(int(re.findall("Number of ads: (\d*)\. .*", raw_string)[0])/ADS_PER_PAGE)
     #Extract the first ad before the loop
+    wait =WebDriverWait(browser.driver, 90)
+    wait.until(EC.presence_of_element_located((By.XPATH, '//div[@class="row clearfix"][@style]')))
     firstad = browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]')[0]
     ad_number = firstad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
     country= map_country(browser.driver.current_url)
@@ -65,6 +81,8 @@ def resume_extraction(browser, session, pages) :
             test = 0
             while not test :
                 try :
+                    wait =WebDriverWait(browser.driver, 90)
+                    wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name=\"button_hits_seen\"]")))
                     browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click() 
                     test=1
                 except WebDriverException as e:
@@ -84,6 +102,8 @@ def resume_extraction(browser, session, pages) :
         test = 0
         while test :
             try :
+                    wait =WebDriverWait(browser.driver, 90)
+                    wait.until(EC.presence_of_element_located((By.XPATH, '//div[@class="row clearfix"][@style]')))
                     firstad = browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]')[0]
                     ad_number = firstad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
                     test=1
@@ -107,11 +127,13 @@ def resume_extraction(browser, session, pages) :
     if check_exists_by_xpath(browser.driver, "//input[@name=\"previous_hits_button\"]") :
         #Number of pages to go back according to the number we have really skip
         back_pages = counter%pages if pages!=counter else pages
-        for n in range(back_pages) :
+        for n in range(back_pages+1) :
             time.sleep(random.uniform(0.2, 1))
             test = 0
             while not test :
                 try :
+                    wait =WebDriverWait(browser.driver, 90)
+                    wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name=\"previous_hits_button\"]")))
                     browser.driver.find_element_by_xpath("//input[@name=\"previous_hits_button\"]").click() 
                     test =1
                 except WebDriverException as e:
@@ -151,7 +173,7 @@ def getads(browser, session, pages=20, update=True) :
         #Resume the extraction
         print(f"{country} : Resuming extraction...")
         doc.addlog(f"{country} : Resuming extraction...")
-        resume_extraction(browser, session, pages)
+        #resume_extraction(browser, session, pages)
     #Just to avoid passing the first page
     counter=0
     #Allow to break whether we have updated the start of the ads and there is no more new ads
@@ -165,9 +187,19 @@ def getads(browser, session, pages=20, update=True) :
         test = 0
         while not test :
             try :
+                wait =WebDriverWait(browser.driver, 90)
+                wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name=\"button_hits_seen\"]")))
                 browser.driver.find_element_by_xpath("//input[@name=\"button_hits_seen\"]").click() if counter==1 else None
                 counter=1
                 test =1
+            except TimeoutException as e:
+                print(f"{e}\n")
+                doc.adderrorlog(f"{e}\n")
+                # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+                with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+                    f.write(str(doc).encode('utf-8'))
+                #Timeout because there is no more next button, break the loop
+                pass
             except WebDriverException as e:
                 print(f"{e}\n")
                 doc.adderrorlog(f"{e}\n")
@@ -179,6 +211,8 @@ def getads(browser, session, pages=20, update=True) :
         test = 0
         while not test :
             try :
+                wait =WebDriverWait(browser.driver, 90)
+                wait.until(EC.presence_of_element_located((By.XPATH, '//div[@class="row clearfix"][@style]')))
                 for ad in browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]') :
                     #The website is inconsistent, there is tag without ad
                     ad_number = ad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
@@ -210,8 +244,9 @@ def getads(browser, session, pages=20, update=True) :
         doc.addlog(f"{country} :\n\tNext page\n\tNo new entry since {counter_not_new} entries\n")
         if counter_not_new > (pages*ADS_PER_PAGE) :
             #We have updated the country
-            print(f"{country} : Ads have been updated")
-            break
+            # print(f"{country} : Ads have been updated")
+            # break
+            pass
     print(f"{country} : No more ads\n")
     doc.addlog(f"{country} : No more ads\n")
 
@@ -242,7 +277,7 @@ if __name__ == '__main__':
     For this reason, the code contains a great amount of try/except since we need to go across all pages manually, 
     this increases the chance of a bug and we need to handle them"""
 
-    completed_countries=["UNITED STATES", "CANADA", "UNITED KINGDOM", "IRELAND", "AUSTRALIA", "NEW ZEALAND", "MALAYSIA", "INDONESIA", "HONG KONG", "INDIA"] #REMOVE TO UPDATE
+    completed_countries=["UNITED STATES", "CANADA", "UNITED KINGDOM", "IRELAND", "AUSTRALIA", "NEW ZEALAND", "MALAYSIA", "INDONESIA", "HONG KONG", "INDIA", "SINGAPORE"] #REMOVE TO UPDATE
     for row in session.query(Country).all():
         url = row.url
 
