@@ -7,7 +7,7 @@ import time, json, sys, os, subprocess, re, csv, random
 from lxml import html #pip install lxml cssselect
 import time, datetime
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, WebDriverException, StaleElementReferenceException
+from selenium.common.exceptions import NoSuchElementException, WebDriverException, StaleElementReferenceException, NoSuchWindowException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from sqlalchemy.sql import exists, and_
@@ -81,9 +81,28 @@ def resume_extraction(browser, session, pages) :
             doc.addlog(f"{country} - Skipped pages : {counter} / Total pages : {total_pages}\n")
             if counter==total_pages-1 :
                 break
-        #print(f"{country} : Skip {pages} pages\n")
-        firstad = browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]')[0]
-        ad_number = firstad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
+        test = 0
+        while test :
+            try :
+                    firstad = browser.driver.find_elements_by_xpath('//div[@class="row clearfix"][@style]')[0]
+                    ad_number = firstad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
+                    test=1
+            except NoSuchWindowException as e:
+                print(f"{e}\n")
+                doc.adderrorlog(f"{e}\n")
+                # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+                with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+                    f.write(str(doc).encode('utf-8'))
+                #The webdriver is on a error page, go back
+                browser.driver.back() 
+            except WebDriverException as e:
+                print(f"{e}\n")
+                doc.adderrorlog(f"{e}\n")
+                # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+                with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+                    f.write(str(doc).encode('utf-8'))
+                #The webdriver is on a error page, go back
+                browser.driver.back() 
     #Go back n pages whether we are not at the first page. We check with the presence of the previous button
     if check_exists_by_xpath(browser.driver, "//input[@name=\"previous_hits_button\"]") :
         #Number of pages to go back according to the number we have really skip
@@ -165,7 +184,7 @@ def getads(browser, session, pages=20, update=True) :
                     ad_number = ad.find_element_by_xpath(".//input[@type=\"checkbox\"]").get_attribute("name") 
                     url = ad.find_element_by_xpath(".//a").get_attribute("href") 
                     #Avoid the stale element error
-                    test+=1
+                    test=1
                     #Check if the entry already exists and do nothing in case according to the ad_number and country
                     if session.query(exists().where(and_(Urls_ads.ad_number==ad_number,Urls_ads.country_id==country ))).scalar() :
                         counter_not_new+=1
@@ -184,7 +203,9 @@ def getads(browser, session, pages=20, update=True) :
                 with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
                     f.write(str(doc).encode('utf-8'))
                 #The webdriver is on a error page, go back
-                browser.driver.back()
+                print(f"{country} : Refreshing...\n")
+                doc.addlog(f"{country} : Refreshing...")
+                browser.driver.refresh()
         print(f"{country} :\n\tNext page\n\tNo new entry since {counter_not_new} entries\n")
         doc.addlog(f"{country} :\n\tNext page\n\tNo new entry since {counter_not_new} entries\n")
         if counter_not_new > (pages*ADS_PER_PAGE) :
@@ -212,14 +233,16 @@ if __name__ == '__main__':
     filename_prefix = 'urlArticles'
     path = f'./results/getArticles/{date_extraction}_'
 
-    browser = Firefox(tor=False, headless=True)
+    browser = Firefox(tor=False, headless=False)
     doc = Documentation(driver=browser.driver)
 
     #~~~~~~~~~~~~~~~ Catch'em all ~~~~~~~~~~~~~~~#
     """REMOVE TO UPDATE THE COUNTRY => That's the only solution you can't go to the end of the ads' list
-    and you can't select a specific page AND you can't sort by age (Advanced search doesn't work at the moment)"""
+    and you can't select a specific page AND you can't sort by age (Advanced search doesn't work at the moment)
+    For this reason, the code contains a great amount of try/except since we need to go across all pages manually, 
+    this increases the chance of a bug and we need to handle them"""
 
-    completed_countries=["UNITED STATES", "CANADA", "UNITED KINGDOM", "IRELAND", "AUSTRALIA", "NEW ZEALAND", "MALAYSIA"] #REMOVE TO UPDATE
+    completed_countries=["UNITED STATES", "CANADA", "UNITED KINGDOM", "IRELAND", "AUSTRALIA", "NEW ZEALAND", "MALAYSIA", "INDONESIA", "HONG KONG", "INDIA"] #REMOVE TO UPDATE
     for row in session.query(Country).all():
         url = row.url
 
