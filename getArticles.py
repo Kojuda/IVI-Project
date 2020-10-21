@@ -173,7 +173,7 @@ def getads(browser, session, pages=20, update=True) :
         #Resume the extraction
         print(f"{country} : Resuming extraction...")
         doc.addlog(f"{country} : Resuming extraction...")
-        #resume_extraction(browser, session, pages)
+        resume_extraction(browser, session, pages)
     #Just to avoid passing the first page
     counter=0
     #Allow to break whether we have updated the start of the ads and there is no more new ads
@@ -244,9 +244,9 @@ def getads(browser, session, pages=20, update=True) :
         doc.addlog(f"{country} :\n\tNext page\n\tNo new entry since {counter_not_new} entries\n")
         if counter_not_new > (pages*ADS_PER_PAGE) :
             #We have updated the country
-            # print(f"{country} : Ads have been updated")
-            # break
-            pass
+            print(f"{country} : Ads have been updated")
+            break
+            
     print(f"{country} : No more ads\n")
     doc.addlog(f"{country} : No more ads\n")
 
