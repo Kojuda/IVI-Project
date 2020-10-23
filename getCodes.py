@@ -15,7 +15,8 @@ def saveData(browser, filename_prefix='selenium'):
     '''Fonction pour l'exemple qui enregistre le code client, la capture d'écran et code serveur'''
     browser.clientCode('./results/getCodes/codes/'+filename_prefix+'_clientCode.html')
     browser.screenshot('./results/getCodes/screenshots/' + filename_prefix + '_screenshot.png', width=1080)  # on fixe la largeur de la fenêtre avec width
-    browser.serverCode('./results/getCodes/codes/'+filename_prefix+'_serverCode.html')
+    #browser.serverCode('./results/getCodes/codes/'+filename_prefix+'_serverCode.html')
+    #Décision de pas prendre le serveur code; car même information que client code
 
 
 if __name__ == '__main__':
