@@ -59,7 +59,7 @@ if __name__ == '__main__':
                 
             entry = Ads_Codes(ad_number=i.ad_number, client_code =str(i.ad_number)+'_clientCode.html', server_code=str(i.ad_number)+'_serverCode.html')
             entry.insertCode(session)
-            #i.urls_ads_update(session) #met à jour le status de l'URL
+            i.urls_ads_update(session) #met à jour le status de l'URL
             time.sleep(random.uniform(1.5, 2.5)) #attente entre 1.5 et 2.5 sec
 
 

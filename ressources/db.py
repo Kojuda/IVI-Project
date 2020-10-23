@@ -53,7 +53,7 @@ class Urls_ads(Base):
 
     def urls_ads_update(self, session, newStatus=1):
         self.status = newStatus
-        self.commit()
+        session.commit()
 
 class Country(Base) :
     __tablename__ = 'countries'
@@ -67,7 +67,7 @@ class Country(Base) :
 
     def update(self, session, newStatus=1):
         self.status = newStatus
-        self.commit()
+        session.commit()
 
 class Ads_Codes(Base):
     __tablename__='ads_codes'
@@ -89,7 +89,7 @@ class Ads_Codes(Base):
 
     def update(self, session, newStatus=1):
         self.status = newStatus
-        self.commit()
+        session.commit()
 
 
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
