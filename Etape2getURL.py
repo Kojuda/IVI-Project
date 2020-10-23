@@ -7,13 +7,13 @@
 import time, json, random
 from ressources.webdriver import Chrome, Firefox #fichier selenium_driver.py à placer dans le même dossier que votre script
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressources
-from ressources.db import session, Url #fichier db.py  qui se trouve dans le dossier ressources
+from ressources.db import session, Urls_ads #fichier db.py  qui se trouve dans le dossier ressources
 
 def saveData(browser, filename_prefix='selenium'):
     '''Fonction pour l'exemple qui enregistre le code client, la capture d'écran et code serveur'''
-    browser.clientCode('./results/html/'+filename_prefix+'_clientCode.html')
-    browser.serverCode('./results/html/' + filename_prefix + '_serverCode.html')
-    browser.screenshot('./results/screenshots/'+filename_prefix+'_screenshot.png', width=1080) #on fixe la largeur de la fenêtre avec width
+    browser.clientCode('./results/ads/html/'+filename_prefix+'_clientCode.html')
+    browser.serverCode('./results/ads/html/' + filename_prefix + '_serverCode.html')
+    browser.screenshot('./results/ads/screenshots/'+filename_prefix+'_screenshot.png', width=1080) #on fixe la largeur de la fenêtre avec width
 
 if __name__ == '__main__':
     doc = Documentation()#Crée la documentation
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     browser = Firefox(tor=False, headless=False)
 
     # ~~~~~~~~~~~~~~~ Récupération des URL à parcourir ~~~~~~~~~~~~~ #
-    #ToDo:  Solve for this
+    #ToDo:  Solve for this SQL expression, column, or mapped entity expected - got '<class 'ressources.db.Url'>'
     for i in session.query(Url).filter_by(status=0):
         #Pour tous les urls dans la database qui ne sont pas encore extrait
         doc.info['selenium'] = []
