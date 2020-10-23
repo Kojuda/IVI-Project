@@ -78,7 +78,9 @@ class Ads_Codes(Base):
     client_code = Column(String, nullable=False)
     server_code = Column(String, nullable=False)
     #country_id = Column(Integer, ForeignKey("urls_ads.country_id")) #pas possible d'avoir deux foreign keyes
-    status = Column(Integer, default=0)
+    status = Column(Integer, default=0)#Parsing yes=1,no=0
+    status_image_taken = Column(Integer, default=0)#Image extrait: yes=1, no=0
+    status_vendeur_taken = Column(Integer, default=0)#Vendeur extrait: yes=1, no=0
 
     urls_ads = relationship("Urls_ads", backref="ads_codes")
     def insertCode(self, session):
