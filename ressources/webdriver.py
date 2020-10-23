@@ -92,7 +92,7 @@ class Chrome(Browser):
         self.driver = webdriver.Chrome(executable_path=driverFile, options=options)
 
 class Firefox(Browser):
-    def __init__(self, tor=False, headless=False, useragent=False):
+    def __init__(self, tor=False, headless=False, useragent=False, popup=False):
         #Chemin vers le webdriver téléchargé - A changer si nécessaire
         if sys.platform == 'win32': driverFile = os.getcwd() + r'\webdrivers\geckodriver.exe' #Windows
         if sys.platform == 'darwin': driverFile = os.getcwd() + r'/webdrivers/geckodriver' #OSX
@@ -109,6 +109,9 @@ class Firefox(Browser):
             profile.set_preference("network.proxy.socks_port", 9050)
             profile.set_preference("network.proxy.socks_version", 5)
             profile.set_preference("network.proxy.socks_remote_dns", True)
+        #PROJECT : Avoid popup
+        if not popup :
+            profile.set_preference("dom.disable_open_during_load", False)
 
         #Instanciation du webdriver
         self.driver = webdriver.Firefox(firefox_profile=profile, executable_path=driverFile, options=options)

@@ -1,0 +1,325 @@
+{
+    "ip": "178.211.236.96",
+    "tor": false,
+    "programm": {
+        "software": "Python",
+        "software_version": "3.8.5",
+        "modules": [
+            {
+                "name": "selenium",
+                "version": "3.141.0"
+            },
+            {
+                "name": "dns",
+                "version": "0.0.1"
+            },
+            {
+                "name": "pipreqs",
+                "version": "0.4.10"
+            },
+            {
+                "name": "sqlalchemy",
+                "version": "1.3.20"
+            },
+            {
+                "name": "requests",
+                "version": "2.24.0"
+            }
+        ]
+    },
+    "system": {
+        "os_name": "Windows",
+        "computer_name": "DESKTOP-0OJPOU4",
+        "os_release": "10",
+        "os_version": "10.0.19041",
+        "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD"
+    },
+    "info": {
+        "selenium": [
+            {
+                "request": {
+                    "date": "2020-10-21T20:47:59.895331+02:00",
+                    "url": "https://www.adpost.com/sg/pets/Birds/",
+                    "headers": {
+                        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0",
+                        "referer": "https://www.adpost.com/nz/pets/Birds/",
+                        "cookie": [
+                            {
+                                "name": "visid_incap_574814",
+                                "value": "kzcEYReyS86AIM1D5yncGE2CkF8AAAAAQUIPAAAAAADAnhxZK3ZTo8JZluaiCpqN",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": true,
+                                "httpOnly": true,
+                                "expiry": 1634801788,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "nlbi_574814",
+                                "value": "4pVMfOVO6hEmnuznpuXjegAAAAAlPZjgY0YICzTFNakx4BNI",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": true,
+                                "httpOnly": false,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "incap_ses_448_574814",
+                                "value": "RtSKGeHd70AWP8c82J03Bk6CkF8AAAAAwTSprMjs7+PR+HvIY9negg==",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": true,
+                                "httpOnly": false,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "us_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634842063,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_gat",
+                                "value": "1",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1603306124,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "__gads",
+                                "value": "ID=62952652a51e647e-22f12c704fa60074:T=1603306064:RT=1603306064:S=ALNI_MZpylti-0B3dHxyBXWkBdOAM5XdfA",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1637002064,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "ca_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634842067,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "uk_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634842070,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "ie_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634842072,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "au_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634842075,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "nz_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634842077,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "__smVID",
+                                "value": "2261f7c206fe0fda03aa6190077d9a974c1c0abf80cab239d57cc88370e9c96f",
+                                "path": "/nz/pets/Birds",
+                                "domain": "www.adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1605901677,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "__smToken",
+                                "value": "9NfjtJUVviBvMaeieVqGiH12",
+                                "path": "/",
+                                "domain": "www.adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634842078,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_ga",
+                                "value": "GA1.2.1256563002.1603306065",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1666378078,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_gid",
+                                "value": "GA1.2.1248506886.1603306065",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1603392478,
+                                "sameSite": "None"
+                            }
+                        ]
+                    }
+                },
+                "response": {
+                    "url": "https://www.adpost.com/sg/pets/Birds/",
+                    "ip_server": null
+                },
+                "actions": []
+            }
+        ]
+    },
+    "log": {
+        "2020.10.21 20:47:46.674978": "UNITED STATES : info = getbirds(browser, url)",
+        "2020.10.21 20:47:46.675977": "UNITED STATES : Passed",
+        "2020.10.21 20:47:50.192955": "CANADA : Passed",
+        "2020.10.21 20:47:52.412994": "UNITED KINGDOM : info = getbirds(browser, url)",
+        "2020.10.21 20:47:52.413995": "UNITED KINGDOM : Passed",
+        "2020.10.21 20:47:54.724097": "IRELAND : info = getbirds(browser, url)",
+        "2020.10.21 20:47:54.725099": "IRELAND : Passed",
+        "2020.10.21 20:47:57.300043": "AUSTRALIA : Passed",
+        "2020.10.21 20:47:59.895331": "NEW ZEALAND : Passed",
+        "2020.10.21 20:48:2.14739": "SINGAPORE : info = getbirds(browser, url)",
+        "2020.10.21 20:48:4.683176": "SINGAPORE : browser.driver.find_element_by_xpath('//button[@name=\"login\"]').click())",
+        "2020.10.21 20:48:6.568468": "SINGAPORE : browser.driver.find_element_by_xpath('//option[contains(text(), \"Birds\")]').click()",
+        "2020.10.21 20:48:7.46578": "SINGAPORE : saveData(browser, path+filename_prefix)",
+        "2020.10.21 20:48:7.197613": "SINGAPORE : Updating the ads",
+        "2020.10.21 20:48:7.386656": "SINGAPORE : Resuming extraction...",
+        "2020.10.21 20:48:10.59152": "SINGAPORE :\n\tNext page\n\tNo new entry since 20 entries\n",
+        "2020.10.21 20:48:16.948939": "SINGAPORE :\n\tNext page\n\tNo new entry since 40 entries\n",
+        "2020.10.21 20:48:22.512752": "SINGAPORE :\n\tNext page\n\tNo new entry since 60 entries\n",
+        "2020.10.21 20:48:29.978679": "SINGAPORE :\n\tNext page\n\tNo new entry since 80 entries\n",
+        "2020.10.21 20:48:36.448527": "SINGAPORE :\n\tNext page\n\tNo new entry since 100 entries\n",
+        "2020.10.21 20:48:43.862467": "SINGAPORE :\n\tNext page\n\tNo new entry since 120 entries\n",
+        "2020.10.21 20:48:51.803622": "SINGAPORE :\n\tNext page\n\tNo new entry since 140 entries\n",
+        "2020.10.21 20:48:57.131727": "SINGAPORE :\n\tNext page\n\tNo new entry since 160 entries\n",
+        "2020.10.21 20:49:2.221674": "SINGAPORE :\n\tNext page\n\tNo new entry since 180 entries\n",
+        "2020.10.21 20:49:8.552560": "SINGAPORE :\n\tNext page\n\tNo new entry since 200 entries\n",
+        "2020.10.21 20:49:14.614732": "SINGAPORE :\n\tNext page\n\tNo new entry since 220 entries\n",
+        "2020.10.21 20:49:20.353660": "SINGAPORE :\n\tNext page\n\tNo new entry since 240 entries\n",
+        "2020.10.21 20:49:25.802706": "SINGAPORE :\n\tNext page\n\tNo new entry since 260 entries\n",
+        "2020.10.21 20:49:34.606641": "SINGAPORE :\n\tNext page\n\tNo new entry since 280 entries\n",
+        "2020.10.21 20:49:42.569762": "SINGAPORE :\n\tNext page\n\tNo new entry since 300 entries\n",
+        "2020.10.21 20:49:48.866036": "SINGAPORE :\n\tNext page\n\tNo new entry since 320 entries\n",
+        "2020.10.21 20:49:57.482020": "SINGAPORE :\n\tNext page\n\tNo new entry since 340 entries\n",
+        "2020.10.21 20:50:3.90344": "SINGAPORE :\n\tNext page\n\tNo new entry since 360 entries\n",
+        "2020.10.21 20:50:10.423467": "SINGAPORE :\n\tNext page\n\tNo new entry since 380 entries\n",
+        "2020.10.21 20:50:17.521793": "SINGAPORE :\n\tNext page\n\tNo new entry since 400 entries\n",
+        "2020.10.21 20:50:22.664273": "SINGAPORE :\n\tNext page\n\tNo new entry since 420 entries\n",
+        "2020.10.21 20:50:30.386001": "SINGAPORE :\n\tNext page\n\tNo new entry since 440 entries\n",
+        "2020.10.21 20:50:35.646048": "SINGAPORE :\n\tNext page\n\tNo new entry since 460 entries\n",
+        "2020.10.21 20:50:40.603125": "SINGAPORE :\n\tNext page\n\tNo new entry since 480 entries\n",
+        "2020.10.21 20:50:46.534085": "SINGAPORE :\n\tNext page\n\tNo new entry since 500 entries\n",
+        "2020.10.21 20:50:51.660261": "SINGAPORE :\n\tNext page\n\tNo new entry since 520 entries\n",
+        "2020.10.21 20:50:57.636140": "SINGAPORE :\n\tNext page\n\tNo new entry since 540 entries\n",
+        "2020.10.21 20:51:3.476616": "SINGAPORE :\n\tNext page\n\tNo new entry since 560 entries\n",
+        "2020.10.21 20:51:9.365505": "SINGAPORE :\n\tNext page\n\tNo new entry since 580 entries\n",
+        "2020.10.21 20:51:18.423549": "SINGAPORE :\n\tNext page\n\tNo new entry since 600 entries\n",
+        "2020.10.21 20:51:23.736466": "SINGAPORE :\n\tNext page\n\tNo new entry since 620 entries\n",
+        "2020.10.21 20:51:29.589381": "SINGAPORE :\n\tNext page\n\tNo new entry since 640 entries\n",
+        "2020.10.21 20:51:35.39510": "SINGAPORE :\n\tNext page\n\tNo new entry since 660 entries\n",
+        "2020.10.21 20:51:40.580959": "SINGAPORE :\n\tNext page\n\tNo new entry since 680 entries\n",
+        "2020.10.21 20:51:49.174388": "SINGAPORE :\n\tNext page\n\tNo new entry since 700 entries\n",
+        "2020.10.21 20:51:54.615182": "SINGAPORE :\n\tNext page\n\tNo new entry since 720 entries\n",
+        "2020.10.21 20:52:2.740016": "SINGAPORE :\n\tNext page\n\tNo new entry since 740 entries\n",
+        "2020.10.21 20:52:8.954329": "SINGAPORE :\n\tNext page\n\tNo new entry since 760 entries\n",
+        "2020.10.21 20:52:14.465690": "SINGAPORE :\n\tNext page\n\tNo new entry since 780 entries\n",
+        "2020.10.21 20:52:19.675755": "SINGAPORE :\n\tNext page\n\tNo new entry since 800 entries\n",
+        "2020.10.21 20:52:29.253895": "SINGAPORE :\n\tNext page\n\tNo new entry since 820 entries\n",
+        "2020.10.21 20:52:35.402246": "SINGAPORE :\n\tNext page\n\tNo new entry since 840 entries\n",
+        "2020.10.21 20:52:41.145677": "SINGAPORE :\n\tNext page\n\tNo new entry since 860 entries\n",
+        "2020.10.21 20:52:46.744406": "SINGAPORE :\n\tNext page\n\tNo new entry since 880 entries\n",
+        "2020.10.21 20:52:53.631579": "SINGAPORE :\n\tNext page\n\tNo new entry since 900 entries\n",
+        "2020.10.21 20:53:0.826126": "SINGAPORE :\n\tNext page\n\tNo new entry since 920 entries\n",
+        "2020.10.21 20:53:10.538412": "SINGAPORE :\n\tNext page\n\tNo new entry since 940 entries\n",
+        "2020.10.21 20:53:17.417336": "SINGAPORE :\n\tNext page\n\tNo new entry since 960 entries\n",
+        "2020.10.21 20:53:24.572830": "SINGAPORE :\n\tNext page\n\tNo new entry since 980 entries\n",
+        "2020.10.21 20:53:33.266110": "SINGAPORE :\n\tNext page\n\tNo new entry since 1000 entries\n",
+        "2020.10.21 20:53:41.536072": "SINGAPORE :\n\tNext page\n\tNo new entry since 1020 entries\n",
+        "2020.10.21 20:53:47.781960": "SINGAPORE :\n\tNext page\n\tNo new entry since 1040 entries\n",
+        "2020.10.21 20:53:54.481290": "SINGAPORE :\n\tNext page\n\tNo new entry since 1060 entries\n",
+        "2020.10.21 20:54:6.636267": "SINGAPORE :\n\tNext page\n\tNo new entry since 1080 entries\n",
+        "2020.10.21 20:54:15.141227": "SINGAPORE :\n\tNext page\n\tNo new entry since 1100 entries\n",
+        "2020.10.21 20:54:20.438407": "SINGAPORE :\n\tNext page\n\tNo new entry since 1120 entries\n",
+        "2020.10.21 20:54:28.349074": "SINGAPORE :\n\tNext page\n\tNo new entry since 1140 entries\n",
+        "2020.10.21 20:54:39.399535": "SINGAPORE :\n\tNext page\n\tNo new entry since 1160 entries\n",
+        "2020.10.21 20:54:47.50859": "SINGAPORE :\n\tNext page\n\tNo new entry since 1180 entries\n",
+        "2020.10.21 20:54:53.765423": "SINGAPORE :\n\tNext page\n\tNo new entry since 1200 entries\n",
+        "2020.10.21 20:55:2.75707": "SINGAPORE :\n\tNext page\n\tNo new entry since 1220 entries\n",
+        "2020.10.21 20:55:11.20103": "SINGAPORE :\n\tNext page\n\tNo new entry since 1240 entries\n",
+        "2020.10.21 20:55:16.227396": "SINGAPORE :\n\tNext page\n\tNo new entry since 1260 entries\n",
+        "2020.10.21 20:55:22.208817": "SINGAPORE :\n\tNext page\n\tNo new entry since 1280 entries\n",
+        "2020.10.21 20:55:28.83355": "SINGAPORE :\n\tNext page\n\tNo new entry since 1300 entries\n",
+        "2020.10.21 20:55:33.713414": "SINGAPORE :\n\tNext page\n\tNo new entry since 1320 entries\n",
+        "2020.10.21 20:55:39.728754": "SINGAPORE :\n\tNext page\n\tNo new entry since 1340 entries\n",
+        "2020.10.21 20:55:45.888817": "SINGAPORE :\n\tNext page\n\tNo new entry since 1360 entries\n",
+        "2020.10.21 20:55:57.908998": "SINGAPORE :\n\tNext page\n\tNo new entry since 1380 entries\n",
+        "2020.10.21 20:56:3.814027": "SINGAPORE :\n\tNext page\n\tNo new entry since 1400 entries\n",
+        "2020.10.21 20:56:9.690055": "SINGAPORE :\n\tNext page\n\tNo new entry since 1420 entries\n",
+        "2020.10.21 20:56:15.859067": "SINGAPORE :\n\tNext page\n\tNo new entry since 1440 entries\n",
+        "2020.10.21 20:56:21.787596": "SINGAPORE :\n\tNext page\n\tNo new entry since 1460 entries\n",
+        "2020.10.21 20:56:26.999140": "SINGAPORE :\n\tNext page\n\tNo new entry since 1480 entries\n",
+        "2020.10.21 20:56:33.21152": "SINGAPORE :\n\tNext page\n\tNo new entry since 1500 entries\n",
+        "2020.10.21 20:56:38.953291": "SINGAPORE :\n\tNext page\n\tNo new entry since 1520 entries\n",
+        "2020.10.21 20:56:44.527257": "SINGAPORE :\n\tNext page\n\tNo new entry since 1540 entries\n",
+        "2020.10.21 20:56:50.510359": "SINGAPORE :\n\tNext page\n\tNo new entry since 1560 entries\n",
+        "2020.10.21 20:56:56.796398": "SINGAPORE :\n\tNext page\n\tNo new entry since 1580 entries\n",
+        "2020.10.21 20:57:4.108264": "SINGAPORE :\n\tNext page\n\tNo new entry since 1600 entries\n",
+        "2020.10.21 20:57:9.765809": "SINGAPORE :\n\tNext page\n\tNo new entry since 1620 entries\n",
+        "2020.10.21 20:57:16.146331": "SINGAPORE :\n\tNext page\n\tNo new entry since 1640 entries\n",
+        "2020.10.21 20:57:21.897593": "SINGAPORE :\n\tNext page\n\tNo new entry since 1660 entries\n",
+        "2020.10.21 20:57:27.939438": "SINGAPORE :\n\tNext page\n\tNo new entry since 1680 entries\n",
+        "2020.10.21 20:57:38.983058": "SINGAPORE :\n\tNext page\n\tNo new entry since 1700 entries\n",
+        "2020.10.21 20:57:52.273654": "SINGAPORE :\n\tNext page\n\tNo new entry since 1720 entries\n",
+        "2020.10.21 20:57:57.909769": "SINGAPORE :\n\tNext page\n\tNo new entry since 1740 entries\n",
+        "2020.10.21 20:58:4.424869": "SINGAPORE :\n\tNext page\n\tNo new entry since 1760 entries\n",
+        "2020.10.21 20:58:10.340650": "SINGAPORE :\n\tNext page\n\tNo new entry since 1780 entries\n",
+        "2020.10.21 20:58:16.899245": "SINGAPORE :\n\tNext page\n\tNo new entry since 1800 entries\n",
+        "2020.10.21 20:58:23.250681": "SINGAPORE :\n\tNext page\n\tNo new entry since 1820 entries\n",
+        "2020.10.21 20:58:28.714814": "SINGAPORE :\n\tNext page\n\tNo new entry since 1840 entries\n"
+    },
+    "errorlog": {
+        "2020.10.21 20:48:25.277211": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/sg/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
+        "2020.10.21 20:48:32.682230": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/sg/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
+        "2020.10.21 20:48:39.531660": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/sg/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
+        "2020.10.21 20:50:5.627741": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/sg/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
+        "2020.10.21 20:50:25.425913": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/sg/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
+        "2020.10.21 20:51:43.359355": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/sg/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
+        "2020.10.21 20:51:57.240859": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/sg/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
+        "2020.10.21 20:58:31.341514": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/sg/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n"
+    }
+}

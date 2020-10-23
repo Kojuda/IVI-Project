@@ -6,6 +6,10 @@
         "software_version": "3.8.5",
         "modules": [
             {
+                "name": "dns",
+                "version": "0.0.1"
+            },
+            {
                 "name": "pipreqs",
                 "version": "0.4.10"
             },
@@ -20,10 +24,6 @@
             {
                 "name": "selenium",
                 "version": "3.141.0"
-            },
-            {
-                "name": "dns",
-                "version": "0.0.1"
             }
         ]
     },
@@ -38,25 +38,25 @@
         "selenium": [
             {
                 "request": {
-                    "date": "2020-10-20T19:21:59.423368+02:00",
-                    "url": "https://www.adpost.com/ca/pets/Birds/",
+                    "date": "2020-10-21T10:23:09.694420+02:00",
+                    "url": "https://www.adpost.com/sg/pets/Birds/",
                     "headers": {
                         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0",
-                        "referer": "https://www.adpost.com/us/",
+                        "referer": "https://www.adpost.com/nz/pets/Birds/",
                         "cookie": [
                             {
                                 "name": "visid_incap_574814",
-                                "value": "xdPZZ5QiQkuovY2JV71Rl1IXj18AAAAAQUIPAAAAAACx6PnYczY6lVuUMb23Xr7R",
+                                "value": "PWmLzRUZR7aYk+WUtHqQudrvj18AAAAAQUIPAAAAAADNLI44Ogmoungrscve3iRg",
                                 "path": "/",
                                 "domain": ".adpost.com",
                                 "secure": true,
                                 "httpOnly": true,
-                                "expiry": 1634715387,
+                                "expiry": 1634801788,
                                 "sameSite": "None"
                             },
                             {
                                 "name": "nlbi_574814",
-                                "value": "1SyjFyblY2srzs54puXjegAAAADGJfrD3AOn2lALdLiFalrW",
+                                "value": "QFwFZD/vH3e/fYBMpuXjegAAAACtsmMjBxLjqmB8O7KK270M",
                                 "path": "/",
                                 "domain": ".adpost.com",
                                 "secure": true,
@@ -65,31 +65,11 @@
                             },
                             {
                                 "name": "incap_ses_448_574814",
-                                "value": "A3opSHb26gmP3ZM82J03BlIXj18AAAAACPCtqfRW5YvvvP2TSX12ew==",
+                                "value": "bewcKK+MHGKsca482J03Btrvj18AAAAAGhWKZGrKh6HxbuEUHCrk1A==",
                                 "path": "/",
                                 "domain": ".adpost.com",
                                 "secure": true,
                                 "httpOnly": false,
-                                "sameSite": "None"
-                            },
-                            {
-                                "name": "__gads",
-                                "value": "ID=aadfbc49735d0751-22092d9af9b80055:T=1603213140:RT=1603213140:S=ALNI_MYconquInUSD2jfsDO40lR0OuxC4Q",
-                                "path": "/",
-                                "domain": ".adpost.com",
-                                "secure": false,
-                                "httpOnly": false,
-                                "expiry": 1636909140,
-                                "sameSite": "None"
-                            },
-                            {
-                                "name": "_gat",
-                                "value": "1",
-                                "path": "/",
-                                "domain": ".adpost.com",
-                                "secure": false,
-                                "httpOnly": false,
-                                "expiry": 1603214519,
                                 "sameSite": "None"
                             },
                             {
@@ -99,84 +79,140 @@
                                 "domain": ".adpost.com",
                                 "secure": false,
                                 "httpOnly": false,
-                                "expiry": 1634750508,
+                                "expiry": 1634804572,
                                 "sameSite": "None"
                             },
                             {
-                                "name": "us_pets_caption_header",
-                                "value": "FOR SALE / ADOPTION:",
+                                "name": "_gat",
+                                "value": "1",
                                 "path": "/",
                                 "domain": ".adpost.com",
                                 "secure": false,
                                 "httpOnly": false,
-                                "expiry": 1634750508,
+                                "expiry": 1603268633,
                                 "sameSite": "None"
                             },
                             {
-                                "name": "_ga",
-                                "value": "GA1.2.838918004.1603213141",
+                                "name": "__gads",
+                                "value": "ID=c9061b7fa1d2f836-22731b7b4ea60003:T=1603268572:RT=1603268572:S=ALNI_MaozUxPs8dB0hJj9FBV1UnuJ22XBg",
                                 "path": "/",
                                 "domain": ".adpost.com",
                                 "secure": false,
                                 "httpOnly": false,
-                                "expiry": 1666286508,
+                                "expiry": 1636964572,
                                 "sameSite": "None"
                             },
                             {
-                                "name": "_gid",
-                                "value": "GA1.2.1436892762.1603213141",
+                                "name": "ca_pets_category",
+                                "value": "Birds",
                                 "path": "/",
                                 "domain": ".adpost.com",
                                 "secure": false,
                                 "httpOnly": false,
-                                "expiry": 1603300908,
+                                "expiry": 1634804575,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "uk_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634804579,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "ie_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634804581,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "au_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634804584,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "nz_pets_category",
+                                "value": "Birds",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1634804587,
                                 "sameSite": "None"
                             },
                             {
                                 "name": "__smVID",
-                                "value": "b8bc0c3ef1eea1ef3cdda2ae538fb89e50a1180e4e1269ade533f5b9cb1f6a1c",
-                                "path": "/us",
+                                "value": "a87fe856dbe8794d1112d5dd91f94aea93d6b363975c294fd3c46c2492196395",
+                                "path": "/nz/pets/Birds",
                                 "domain": "www.adpost.com",
                                 "secure": false,
                                 "httpOnly": false,
-                                "expiry": 1605810112,
+                                "expiry": 1605864187,
                                 "sameSite": "None"
                             },
                             {
                                 "name": "__smToken",
-                                "value": "QAhxLHCMvC2v045hxFRvNm6s",
+                                "value": "S4RDWFgXVfPfBfya9BG7O77Z",
                                 "path": "/",
                                 "domain": "www.adpost.com",
                                 "secure": false,
                                 "httpOnly": false,
-                                "expiry": 1634750518,
+                                "expiry": 1634804588,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_ga",
+                                "value": "GA1.2.123945093.1603268573",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1666340588,
+                                "sameSite": "None"
+                            },
+                            {
+                                "name": "_gid",
+                                "value": "GA1.2.514632648.1603268573",
+                                "path": "/",
+                                "domain": ".adpost.com",
+                                "secure": false,
+                                "httpOnly": false,
+                                "expiry": 1603354988,
                                 "sameSite": "None"
                             }
                         ]
                     }
                 },
                 "response": {
-                    "url": "https://www.adpost.com/ca/pets/Birds/",
+                    "url": "https://www.adpost.com/sg/pets/Birds/",
                     "ip_server": null
                 },
-                "actions": [
-                    "info = browser.get(url)"
-                ]
+                "actions": []
             }
         ]
     },
     "log": {
-        "2020.10.20 18:59:2.383831": "info = getbirds(browser, url)",
-        "2020.10.20 18:59:4.900111": "browser.driver.find_element_by_xpath('//button[@name=\"login\"]').click())",
-        "2020.10.20 18:59:6.840599": "browser.driver.find_element_by_xpath('//option[contains(text(), \"Birds\")]').click()",
-        "2020.10.20 18:59:7.215684": "saveData(browser, path+filename_prefix)",
-        "2020.10.20 18:59:7.268695": "To resume the extraction : 0 have been passed per 20 pages interval",
-        "2020.10.20 19:21:59.421368": "getads(browser, session)",
-        "2020.10.20 19:22:2.509024": "info = getbirds(browser, url)"
+        "2020.10.21 10:22:55.161908": "UNITED STATES : Passed",
+        "2020.10.21 10:22:58.526861": "CANADA : Passed",
+        "2020.10.21 10:23:0.681462": "UNITED KINGDOM : info = getbirds(browser, url)",
+        "2020.10.21 10:23:0.682461": "UNITED KINGDOM : Passed",
+        "2020.10.21 10:23:4.489918": "IRELAND : Passed",
+        "2020.10.21 10:23:7.28500": "AUSTRALIA : Passed",
+        "2020.10.21 10:23:9.693420": "NEW ZEALAND : info = getbirds(browser, url)",
+        "2020.10.21 10:23:9.694420": "NEW ZEALAND : Passed",
+        "2020.10.21 10:23:12.141349": "SINGAPORE : info = getbirds(browser, url)"
     },
-    "errorlog": {
-        "2020.10.20 19:0:28.402627": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/us/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
-        "2020.10.20 19:1:12.8752": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/us/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n",
-        "2020.10.20 19:3:26.477639": "Message: Reached error page: about:neterror?e=nssFailure2&u=https%3A//www.adpost.com/us/&c=UTF-8&d=La%20connexion%20avec%20www.adpost.com%20a%20%C3%A9t%C3%A9%20interrompue%20pendant%20le%20chargement%20de%20la%20page.\n\n"
-    }
+    "errorlog": {}
 }
