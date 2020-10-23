@@ -44,7 +44,7 @@ class Urls_ads(Base):
     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
     country_id= Column(Integer, ForeignKey("countries.name"))
     ad_number=Column(Integer, nullable=False)
-    
+
     country=relationship("Country", backref="urls_ads")
     def insertURL(self, session):
         session.add(self)
@@ -91,17 +91,8 @@ class Ads_Codes(Base):
 
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
-engine = create_engine('sqlite:///DATABASES/project.db') #, echo=True pour les log
+engine = create_engine('sqlite:///../DATABASES/project.db') #, echo=True pour les log
+#j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier
 Base.metadata.create_all(engine) #Create the database if it does not exist
 Session = sessionmaker(bind=engine)
 session = Session()
-
-
-
-
-
-
-
-
-
-
