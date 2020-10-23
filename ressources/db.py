@@ -11,22 +11,22 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 
 
-class Url():
-     __tablename__ = 'urls'
-     id = Column(Integer, primary_key=True)
-     url = Column(String, nullable=False)
-     status = Column(Integer, default=0)
-     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
-     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
-
-def insertURL(session, url):
-     url = Url(url=url)
-     session.add(url)
-     session.commit()
-
-def updateURL(session, url_object, newStatus=1):
-     url_object.status = newStatus
-     session.commit()
+# class Url():
+#      __tablename__ = 'urls'
+#      id = Column(Integer, primary_key=True)
+#      url = Column(String, nullable=False)
+#      status = Column(Integer, default=0)
+#      date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
+#      date_updated = Column(DateTime, onupdate=datetime.datetime.now())
+#
+# def insertURL(session, url):
+#      url = Url(url=url)
+#      session.add(url)
+#      session.commit()
+#
+# def updateURL(session, url_object, newStatus=1):
+#      url_object.status = newStatus
+#      session.commit()
 
 #~~~~~~~~~~~~~~~~~~~~~Create de base~~~~~~~~~~~~~~~~~~~~~
 Base = declarative_base()
@@ -61,6 +61,26 @@ class Country(Base) :
     url = Column(String, nullable=False)
 
     def insertCountry(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+class Ads_Codes(Base):
+    __tablename__='ads_codes'
+    id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
+    ad_number = Column(Integer, ForeignKey("urls_ads.ad_number"))
+    date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
+    date_updated = Column(DateTime, onupdate=datetime.datetime.now())
+    client_code = Column(String, nullable=False)
+    server_code = Column(String, nullable=False)
+    status = Column(Integer, default=0)
+
+    urls_ads = relationship("Urls_ads", backref="ads_codes")
+
+    def insertCode(self, session):
         session.add(self)
         session.commit()
 
