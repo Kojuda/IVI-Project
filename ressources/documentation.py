@@ -33,12 +33,12 @@ class Documentation():
                 driver.get('http://httpbin.org/ip')
                 content = driver.find_element_by_xpath("//body").text
                 self.ip = json.loads(content)['origin']
-            except: print('Documentation - erreur à retrouvé l\'adresse IP publique.')
+            except: print('Documentation - erreur à retrouver l\'adresse IP publique.')
         else:
             if self.tor: proxies = {'http': 'socks5h://127.0.0.1:9050', 'https': 'socks5h://127.0.0.1:9050'}
             else: proxies = {}
             try: self.ip = requests.get('http://httpbin.org/ip', proxies=proxies).json()['origin'] #utilisation du service ipinfo.io
-            except: print('Documentation - erreur à retrouvé l\'adresse IP publique.')
+            except: print('Documentation - erreur à retrouver l\'adresse IP publique.')
 
     def toJSON(self):
         """Retourne l'objet dans le format JSON"""
