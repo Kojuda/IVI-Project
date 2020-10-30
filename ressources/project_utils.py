@@ -27,3 +27,7 @@ def map_country(url) :
     abr = re.findall(".*www.adpost.com/(.*?)/.*", url)[0]  #.groups()[0]
     country=mapping_countries[abr]
     return country
+
+def get_abr_country(url) :
+    abr = re.findall(".*www.adpost.com/(.*?)/.*", url)[0]
+    return abr

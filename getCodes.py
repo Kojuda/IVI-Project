@@ -10,6 +10,7 @@ from ressources.webdriver import Chrome, Firefox #fichier selenium_driver.py à 
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressources
 from ressources.db import * #fichier db.py  qui se trouve dans le dossier ressources
 from selenium.common.exceptions import TimeoutException
+from ressources.project_utils import get_abr_country
 
 
 def saveData(browser, filename_prefix='selenium'):
@@ -32,7 +33,7 @@ if __name__ == '__main__':
     # ~~~~~~~~~~~~~~~ Récupération des URL à parcourir ~~~~~~~~~~~~~ #
     for i in session.query(Urls_ads).filter_by(status=0):
         #Pour tous les urls dans la database qui ne sont pas encore extrait
-        if session.query(exists().where(Ads_Codes.ad_number == i.ad_number)).scalar():
+        if session.query(exists().where(Ads_Codes.ad_id == i.ad_id)).scalar():
             pass
         else:
             pass_test=0
@@ -50,14 +51,14 @@ if __name__ == '__main__':
 
             doc.info["selenium"] = []  # documentation
             doc.info["selenium"].append(info)  # documentation
-            saveData(browser, filename_prefix=str(i.ad_number)) #sauvgarder les codes recuperées
+            abr_country=get_abr_country(i.url)
+            saveData(browser, filename_prefix=f"{i.ad_number}_{abr_country}") #sauvgarder les codes recuperées
 
 
 
-            with open(f'./results/getCodes/documentation/{i.ad_number}__documentation.json', 'wb') as f:
+            with open(f'./results/getCodes/documentation/{i.ad_number}_{abr_country}__documentation.json', 'wb') as f:
                 f.write(str(doc).encode('utf-8'))
-                
-            entry = Ads_Codes(ad_number=i.ad_number, client_code =str(i.ad_number)+'_clientCode.html', server_code=str(i.ad_number)+'_serverCode.html')
+            entry = Ads_Codes(ad_id=f"{i.ad_number}_{abr_country}" ,ad_number=i.ad_number, client_code =f"{i.ad_number}_{abr_country}_clientCode.html")
             entry.insertCode(session)
             i.urls_ads_update(session) #met à jour le status de l'URL
             time.sleep(random.uniform(0.1, 1.5)) #attente entre 1.5 et 2.5 sec
