@@ -23,7 +23,9 @@ print (test)
 
 
 
-liste = ['Reply to Ad','Category', 'Ad Number', 'Description', 'Breed','Age', 'Sex', 'Advertiser','Email','Forum']
+liste2 = ['Reply to Ad','Category', 'Ad Number', 'Description', 'Breed','Age', 'Sex',' Primilary Color', 'Secondary Color','Advertiser','Price','Payment Forms','Estimated Shipping', 'Estimated Shipping £',' Estimated Shipping $','Estimated Shipping Rs','Posted by','Contact information',' Name', 'Company', 'Address', 'Postal Code',\
+'Zip Code', 'Post Code', 'City', 'State > District', 'State > City', 'State > County', 'Province > County', 'Province > City','Region > County', 'Region', 'County', 'State > Metro', 'Country', 'Phone','Email','Forum']
+
 clean_list = [x for x in liste if x in test] #comprehensive list
 
 parse_data = {}
@@ -39,7 +41,7 @@ for idx, ele in enumerate(clean_list):
 
 
 description = parse_data.get('Description')
-email, phone = None, None
+email, phone, website = None, None, None
 if description:
     #regex
     #phone = re.findall()
@@ -47,8 +49,19 @@ if description:
     if email_regex:
         email = email_regex.group(1)
         print (email)
-    #if phone_regex:
-        #phone = phone.group(1)
+
+    import pdb; pdb.set_trace()
+    phone_regex = re.search(r"(((?:\+|00)[17](?: |\-)?|(?:\+|00)[1-9]\d{0,2}(?: |\-)?|(?:\+|00)1\-\d{3}(?: |\-)?)?(0\d|\([0-9]{3}\)|[1-9]{0,3})(?:((?: |\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\-)[0-9]{3}(?: |\-)[0-9]{4})|([0-9]{7})))",description)
+    if phone_regex:
+        phone = phone_regex.group(1)
+        print (phone)
+
+    website= re.search(r"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})",description)
+    if website_regex:
+        website = website_regex.group(1)
+        print (website)
+
+
 
     #parse_data['phone'] = phone
     parse_data['Email'] = email
