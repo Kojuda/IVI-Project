@@ -5,70 +5,79 @@
 # But: parser les pages web
 
 import time, json, random
-from sqlalchemy.sql import exists
 from ressources.webdriver import Chrome, Firefox #fichier selenium_driver.py à placer dans le même dossier que votre script
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressources
-from ressources.db import * #fichier db.py  qui se trouve dans le dossier ressources
+from ressources.db import Parse_ads, session
 from selenium import webdriver
 import re
+import pdb
+
+driver = webdriver.Firefox(executable_path=r"webdrivers/geckodriver")
+set=driver.get("https://www.adpost.com/us/pets/553087/")
+
+balise_b = driver.find_element_by_xpath("//b")
+test = balise_b.find_element_by_xpath("./..").find_element_by_xpath("//div").text
+test = test.strip()
+test = test.replace("\n"," ")
+print (test)
 
 
-def main():
+
+liste = ['Reply to Ad','Category', 'Ad Number', 'Description', 'Breed','Age', 'Sex', 'Advertiser','Email','Forum']
+clean_list = [x for x in liste if x in test] #comprehensive list
+
+parse_data = {}
+for idx, ele in enumerate(clean_list):
+    if idx == len(clean_list)-1:
+        break
+    else:
+        regex_ = "{}(.*){}".format(ele, clean_list[idx+1])
+        tag = re.search(regex_, test).group(1)
+        parse_data[ele] = tag
+        #parse_data.append(tag)
+        print (parse_data)
 
 
-    driver= webdriver.Firefox(executable_path=r"webdrivers/geckodriver")
-    urls = open("results\getArticles\2020-10-21_0-59_urlArticles_documentation.json", “r”) # c'est un exemple en attendant le résultat getCodes
-    for url in urls:
-        driver.get(url)
+description = parse_data.get('Description')
+email, phone = None, None
+if description:
+    #regex
+    #phone = re.findall()
+    email_regex = re.search(r"((?:[a-z0-9!#$%&'*+\=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))",description)
+    if email_regex:
+        email = email_regex.group(1)
+        print (email)
+    #if phone_regex:
+        #phone = phone.group(1)
 
-        rows = driver.find_elements_by_class_name('row')
+    #parse_data['phone'] = phone
+    parse_data['Email'] = email
+    del parse_data['Description']
 
-        for row in rows:
-            balise_b = driver.find_element_by_xpath("//b")
-            test = balise_b.find_element_by_xpath("./..").find_element_by_xpath("//div").text
-            test = test.strip()
-            test = test.replace('\n', '')
-            category = re.search("Category\:(.*).+?(?=Ad+\s+Number)", test).group(1) ## https://stackoverflow.com/questions/7124778/how-to-match-anything-up-until-this-sequence-of-characters-in-a-regular-expres
+    print(parse_data)
 
-            list = ['Reply+\s+to+\s+Ad','Category', 'Ad+\s+Number', 'Description', 'Breed','Age','Sex','Primilary+\s+Color','Secondary+\s+Color','Advertiser','Price','Payment+\s+Forms','Estimated+\s+Shipping','Posted+\s+By|Contact+\s+Information','Name','Zip+\s+Code|Postal+\s+Code|Post+\s+Code ','City','State+\s+>+\s+District|State+\s+>+\s+City|State+\s+>+\s+County|Province+\s+>+\s+County|Province+\s+>+\s+City|Region+\s+>+\s+County|Region|County|State+\s+>+\s+Metro','Country','Email'] # Reply to AD is to get the title, Posted by is for the username
-            parse_data = []
-            for idx, ele in enumerate(list):
-                print(idx)
-                regex_ = "{}\:(.*).+?(?={})".format(ele, list[idx+1])
-                tag = re.search(regex_, test).group(1)
-                print(tag)
-                ele = ele.replace('+\s+', ' ')
-                if ele == "Description":
-                    mail=findMails(ele)
-                    phone = findPhones(ele)
-                    website = findURL(ele)
-                    parse_Data[mail] = mail
-                    parse_Data[phone] = phone
-                    parse_Data[website]= website
-                parse_data[ele] = tag
+    #if ele == "Description":
+                    #mail=findMails(ele)
+                    #parse_data.append(mail)
 
-                return parse_Data
-       ### ajouter le titre et le nom d'utilisatueur
-    #titre = driver.find_element_by_xpath("//font").text
-    #parse_Data.append(titre)
-    #id_user = driver.find_element_by_xpath("//td[@class='text-center']")
-    #parse_Data.append(id_user)
+    #if test.find(ele) != -1:  #https://www.programiz.com/python-programming/methods/string/find
+        #continue
+    #else:
+        #idx += 1
+        #parse_data.append("None")
+        #import pdb; pdb.set_trace()
+
+
+
+print (parse_data)
+#essai= ["la","2","4"]
+#Parse_ads(title=essai[0], category=essai[1], ad_number= essai[2]).insertParse_ads(session)
+
 
 def findMails(string):
     '''Récupère des adresses emails dans une chaine de caractère'''
-    result = re.findall("\\b[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*(?:[\s\[\(])*(?:@|at)(?:[\s\]\)])*(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", string)
+    result = re.findall(r'+', str)
+    #result = re.findall("\\b[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*(?:[\s\[\(])*(?:@|at)(?:[\s\]\)])*(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", string)
+
     return result
-
-def findPhones(string):
-    '''Récupère les numéros internationaux avec des espaces, /, - ou concatené'''
-    result = re.findall("(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)\s*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})", string)
-    return result
-
-def findURL(string):
-    '''Récupère les URL dans une page (utile lorsque les liens n'ont pas de balises <a href>). Attention, uniquement les liens "HTTP(S) ou www."!'''
-    result = re.findall("(\\b(?:HTTP[S]?://|www\.)[\w\d\-\+&@#/%=~_\|\$\?!:,\.]{2,}[\w\d\+&@#/%=~_\|\$]*)", string, re.IGNORECASE)
-    return result
-
-main()
-
-        import pdb; pdb.set_trace()
+    #regex_ = "{}\:(.*).+?(?={})".format(ele, list[idx+1]
