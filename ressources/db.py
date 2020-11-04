@@ -96,6 +96,40 @@ class Ads_Codes(Base):
 
 
 
+
+class Parse_ads(Base):
+    __tablename__='parse_ads'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String, nullable=False)
+    ad_number = Column(Integer, nullable=False)
+    category = Column(String, nullable=False)
+    breed = Column(String, nullable=False)
+    age = Column(Integer, nullable=False)
+    sex = Column(String, nullable=False)
+    primary_color = Column(String, nullable=False)
+    secondary_color = Column(String, nullable=False)
+    advertiser = Column(String, nullable=False)
+    price = Column(Integer, nullable=False)
+    payment_forms = Column(String, nullable=False)
+    estimated_shipping = Column(String, nullable=False)
+    posted_by = Column(String, nullable=False)
+    name = Column(String, nullable=False)
+    zip = Column(Integer, nullable=False)
+    city = Column(String, nullable=False)
+    state = Column(String, nullable=False)
+    country = Column(String, nullable=False)
+    email = Column(String, nullable=False)
+    phone = Column(Integer, nullable=False)
+    redirect_website= Column(String, nullable=False)
+
+    def insertParse_ads(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
 engine = create_engine('sqlite:///DATABASES/project.db') #, echo=True pour les log
