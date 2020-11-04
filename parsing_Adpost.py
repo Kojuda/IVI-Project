@@ -97,10 +97,11 @@ if description:
     #print(parse_data)
 
 
-
+#Est ce que qqn est sur le GIT ? je n'arrive plus commit
 
 print (parse_data)
 # sqlite
 
-#Parse_ads(title=parse_data.get('title'), category= parse_data.get('Category'), ad_number= parse_data.get('Ad Number'), breed = parse_data.get('Breed'), age = parse_data.get('Age'), sex= parse_data.get('Sex'), primary_color = parse_data.get('Primary Color'), \
-#secondary_color= parse_data.get('Secondary Color'), advertiser= parse_data.get('Advertiser'), price= parse_data.get('Price'), ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')ad_number= parse_data.get('Ad Number')).insertParse_ads(session)
+Parse_ads(title=parse_data.get('title'), ad_number= parse_data.get('Ad Number'), category= parse_data.get('Category'), breed = parse_data.get('Breed'), age = parse_data.get('Age'), sex= parse_data.get('Sex'), primary_color = parse_data.get('Primary Color'), \
+secondary_color= parse_data.get('Secondary Color'), advertiser= parse_data.get('Advertiser'), price= parse_data.get('Price'), payment_forms= parse_data.get('Payment Forms'), estimated_shipping= parse_data.get('Estimated Shipping'), posted_by = parse_data.get('Username'), name= parse_data.get('Name'),\
+zip= parse_data.get('Postal Code'), city= parse_data.get('City'), state= parse_data.get('State'), country= parse_data.get('United States'), email= parse_data.get('Email'), phone = parse_data.get('phone'), redirect_website= parse_data.get('redirect_website')).insertParse_ads(session)
