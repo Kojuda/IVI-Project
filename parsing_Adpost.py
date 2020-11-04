@@ -97,7 +97,7 @@ if description:
     #print(parse_data)
 
 
-#Est ce que qqn est sur le GIT ? je n'arrive plus commit
+
 
 print (parse_data)
 # sqlite
