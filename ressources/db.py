@@ -119,8 +119,6 @@ class Parse_ads(Base):
     phone = Column(Integer, nullable=False)
     redirect_website= Column(String, nullable=False)
 
-
-
     def insertParse_ads(self, session):
         session.add(self)
         session.commit()
