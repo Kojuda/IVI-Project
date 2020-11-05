@@ -14,8 +14,8 @@ import pdb
 
 driver = webdriver.Firefox(executable_path=r"webdrivers/geckodriver")
 set=driver.get("https://www.adpost.com/uk/pets/81040/")
-
 balise_b = driver.find_element_by_xpath("//b")
+import pdb; pdb.set_trace()
 test = balise_b.find_element_by_xpath("./..").find_element_by_xpath("//div").text
 test = test.strip()
 test = test.replace("\n"," ").replace(": "," ").replace("click above for more info on this user","").replace("Please quote Adpost when calling","").replace("click to view 1 more image","").replace("click to view 2 more images","")
@@ -24,23 +24,21 @@ test = test.replace("\n"," ").replace(": "," ").replace("click above for more in
 
 
 
-
 list_mot = ['Reply to Ad','Category', 'Ad Number','Date Posted','Description', 'Breed','Age ', 'Sex','Primary Color', 'Secondary Color','Advertiser','Price','Payment Forms','Estimated Shipping','Posted By','Contact Information','Name', 'Company', 'Address', 'Postal Code',\
 'Zip Code', 'Post Code', 'State > District', 'State > City','City', 'State > County','Province > County', 'Province > City','Region > County','County','Region', 'State > Metro', 'Country', 'Phone', 'Email','Forum']
 
 clean_list = [x for x in list_mot if x in test] #comprehensive list / liste de mot réelleemnt présent sur la page parmi toutes les possibilités de list_mot
-#import pdb; pdb.set_trace()
 
-if 'Province > City' in test or 'State > City' in test: #if "x" in test or "y" in test or "z" in test: print(x)
+if 'Province > City' in test or 'State > City' in test:
     clean_list.remove('City')
-#import pdb; pdb.set_trace()
+
 if 'Region > County' in test or 'State > County' in test or 'Province > County' in test:
     clean_list.remove('County')
     clean_list.remove('Region')
-#import pdb; pdb.set_trace()
+
 
 parse_data = {}
-#import pdb; pdb.set_trace()
+#Récupérer les mots au milieu des termes de clean_list en utilisant regex
 for idx, ele in enumerate(clean_list):
     if idx == len(clean_list)-1:
         break
@@ -51,7 +49,7 @@ for idx, ele in enumerate(clean_list):
         #import pdb; pdb.set_trace()
         parse_data[ele] = tag
         test = test.replace(tag, "")
-        #print (parse_data)
+
 
 
 """
@@ -89,7 +87,7 @@ parse_data[new_key]= parse_data.pop(old_key)
 new_key = "category"
 old_key = "Category"
 parse_data[new_key]= parse_data.pop(old_key)
-#import pdb; pdb.set_trace()
+
 
 
 
@@ -108,7 +106,7 @@ for z in posted_by:
     if z in parse_data:
         parse_data["Posted By"] =parse_data.pop(z)
 
-#import pdb; pdb.set_trace()
+
 
 
 
@@ -128,10 +126,10 @@ if parse_data['Email'] == None or parse_data['phone'] == None or parse_data['red
 
 
 
-#import pdb; pdb.set_trace()
-# partie sqlite
 
-#import pdb; pdb.set_trace()
+
+
+# partie sqlite
 # Mettre à none les valeurs vide
 list_database = ['title','category','Ad Number','Date Posted','Description','Breed','Age ','Sex','Primary Color','Secondary Color','Advertiser','Price', 'Payment Forms','Estimated Shipping','Posted By','Name','Zip Code','City','State','Country','Email','phone']
 for mot in list_database:
