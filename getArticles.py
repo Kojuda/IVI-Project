@@ -275,7 +275,12 @@ if __name__ == '__main__':
     """REMOVE TO UPDATE THE COUNTRY => That's the only solution you can't go to the end of the ads' list
     and you can't select a specific page AND you can't sort by age (Advanced search doesn't work at the moment)
     For this reason, the code contains a great amount of try/except since we need to go across all pages manually, 
-    this increases the chance of a bug and we need to handle them"""
+    this increases the chance of a bug and we need to handle them
+    
+    
+    UPDATE WARNING : Le code peut être grandement amélioré car le numéro de page dans l'URL est visible si l'on clique
+    sur le bouton pour développer plus d'annonce. Le code ici ne prenait pas cela en compte. Il n'a pas été amélioré car 
+    le crawling avait déjà été fait et le présent code peut extraire les données à mettre à jour."""
 
     completed_countries=["UNITED STATES", "CANADA", "UNITED KINGDOM", "IRELAND", "AUSTRALIA", "NEW ZEALAND", "MALAYSIA", "INDONESIA", "HONG KONG", "INDIA", "SINGAPORE"] #REMOVE TO UPDATE
     for row in session.query(Country).all():

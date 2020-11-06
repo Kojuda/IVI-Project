@@ -49,3 +49,8 @@ def removeEmptyString(liste):
     '''Supprime des éléments vides dans une liste (passer une liste en argument)'''
     result = [element for element in liste if element] # "if element" est vrai si l'element contient quelque chose. Sinon il n'est pas retourné et est supprimé de la liste
     return result
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~ Project REGEX ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
