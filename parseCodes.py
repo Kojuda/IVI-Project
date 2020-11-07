@@ -1,24 +1,23 @@
 #!/usr/bin/env python
 # coding=utf-8
-# author: L.Lopez
+# author: L.Lopez and D.Kohler
 # creation: 25.10.2020
-# But: parser les pages web
+# But: parser le code client des publications de vente
 
 import time, json, random, re, datetime, os
-from ressources.webdriver import Chrome, Firefox #fichier selenium_driver.py à placer dans le même dossier que votre script
-from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressources
-from selenium import webdriver
+from sqlalchemy.sql import exists
+from ressources.documentation import Documentation 
 from ressources.db import Parse_ads, session, Ads_Codes
 import lxml.html
 # import pdb
 # import pdb; pdb.set_trace()
 
-champs = ['Reply to Ad','Category', 'Ad Number','Date Posted','Description', 'Breed','Age ', 'Sex','Primary Color', 'Secondary Color','Advertiser','Price','Payment Forms','Estimated Shipping','Posted By','Contact Information','Name', 'Company', 'Address', 'Postal Code',\
+champs = ['Reply to Ad','Category', 'Ad Number','Date Posted','Description', 'Breed','Age', 'Sex','Primary Color', 'Secondary Color','Advertiser','Price','Payment Forms','Estimated Shipping','Posted By','Contact Information','Name', 'Company', 'Address', 'Postal Code',\
 'Zip Code', 'Post Code', 'State > District', 'State > City','City', 'State > County','Province > County', 'Province > City','Region > County','County','Region', 'State > Metro', 'Country', 'Phone', 'Email','Forum']
 
 dict_champ = {'Title' : None, 'Category' : None, 'Ad Number' : None,
 'Date Posted' : None,'Description' : None, 'Breed' : None,
-'Age ' : None, 'Sex' : None,'Primary Color' : None,
+'Age' : None, 'Sex' : None,'Primary Color' : None,
  'Secondary Color' : None,'Advertiser' : None,
  'Price' : None,'Payment Forms' : None,'Estimated Shipping' : None,
  'Pseudo' : None,'Contact Information' : None,'Name' : None,
@@ -27,38 +26,20 @@ dict_champ = {'Title' : None, 'Category' : None, 'Ad Number' : None,
  'State > City' : None,'City' : None, 'State > County' : None,
  'Province > County' : None, 'Province > City' : None,'Region > County' : None,
  'County' : None,'Region' : None, 'State > Metro' : None,
-  'Country' : None, 'Phone' : None, 'Email' : None,'Forum' : None, "Link Vendor" : None}
+  'Country' : None, 'Phone' : None, 'Email' : None, "Link Vendor" : None}
 
 def check_exists_by_xpath(tag, xpath): 
     """Check whether exist"""
     try:
-        tag.xpath(xpath)
+        tag.xpath(xpath)[0]
+        return True
     except :
         return False
-    return True
-
-def parse(filename):
-    objet = lxml.html.parse(filename).getroot()
-    stateScript = objet.xpath("//script[@id='state']")
-    data = re.search(r'window.__INITIAL_STATE__\s*=\s*(.*)\s*', stateScript[0].text, flags=re.DOTALL)[1]
-    data = re.sub('\s+',' ', data)
-    data = json.loads(data)['detail']
-    result = {
-        'annonce_id': valeur(data, 'annonce_id'),
-        'auteur_id': valeur(data, 'auteur_id'),
-        'date': valeur(data, 'date'),
-        'categorie': valeur(data, 'categories'),
-        'titre': valeur(data, 'titre'),
-        'description': valeur(data, 'description'),
-        'adresse': valeur(data, 'adresse'),
-        'ville': valeur(data, 'ville'),
-        'prix': valeur(data, 'prix'),
-        'phone': valeur(data, 'phone'),
-        'website': valeur(data, 'url')
-    }
-    return result
 
 def get_champs(dic, html_object) :
+    """Iterate through the tag containing the fields of the ad. The function fills a dictionary containing
+    the label of the possible fields. If the label is not found, the value of the key remains None. """
+
     #Get the xpath of the title in the dev browser with right click
     dic["Title"]=html_object.xpath("//html/body/div/div/div[3]/div[1]/div[5]/div/div[2]/div/table/tbody/tr/th/font")[0].text
     #Get the list of champs from the tag containing the whole ad
@@ -72,24 +53,29 @@ def get_champs(dic, html_object) :
         if check_exists_by_xpath(row, "./div/div[@style=\'font-size:14px\']/b") :
             if row.xpath("./div/div[@style=\'font-size:14px\']/b")[0].text == "Posted By: " :
                 #Left side of the pane concerning the vendor information
-                vendor_left=row.xpath("./div[@class=\'col-md-3 col-sm-3 col-xs-12 z-ad-func-obj\']")[0]
-                dic["Link Vendor"]=vendor_left.xpath("./a[@style=\'color: #fff;\']/@href")[0]
-                dic["Pseudo"]=vendor_left.xpath("./a[@style=\'color: #fff;\']/@href")[0].text
-                #Unique xpath at this level to obtain the list of row elements
-                vendor_entries=row.xpath("./div[@class=\'col-md-9 col-sm-9 col-xs-12 z-ad-func-obj\']")
-                for row_vendor in vendor_entries :
-                    #The categorie --> Ex : Address/Name/Postal Code
-                    categorie=row_vendor.xpath("./div[@class=\'col-md-4 col-sm-5 col-xs-6 z-ad-func-obj\']/b")[0].text.strip(" :")
-                    #Check the categorie
-                    if categorie in dic.keys() :
-                        #Get the entry of this categorie
-                        field=row_vendor.xpath("./div[@class=\'col-md-8 col-sm-7 col-xs-6 z-ad-func-obj\']/b")[0].text.strip(" ")
-                        dic[categorie]=field
+                check_exists_by_xpath(row, "./div/div[@class=\'col-md-3 col-sm-3 col-xs-12 z-ad-func-obj\']")
+                if check_exists_by_xpath(row, "./div/div/div[@class=\'col-md-3 col-sm-3 col-xs-12 z-ad-func-obj\']") :
+                    vendor_left=row.xpath("./div/div/div[@class=\'col-md-3 col-sm-3 col-xs-12 z-ad-func-obj\']")[0]
+                    dic["Link Vendor"]=vendor_left.xpath("./div/table/tbody/tr/td/a[@style=\'color: #fff;\']/@href")[0]
+                    dic["Pseudo"]=vendor_left.xpath("./div/table/tbody/tr/td/a[@style=\'color: #fff;\']/text()")[0].strip(" ")
+                    #Unique xpath at this level to obtain the list of row elements
+                    #vendor_entries=row.xpath("./div[@class=\'col-md-9 col-sm-9 col-xs-12 z-ad-func-obj\']")
+                    vendor_entries=row.xpath("./div/div[2]/div[2]/div[@class=\'row\']")
+                    for row_vendor in vendor_entries :
+                        #The categorie --> Ex : Address/Name/Postal Code
+                        categorie=row_vendor.xpath("./div[1]/b/text()")[0].strip(" :")
+                        #Check the categorie
+                        if categorie in dic.keys() :
+                            #Get the entry of this categorie
+                            field=row_vendor.xpath("string(./div[2]/text())").strip(" \n")
+                            if field != "" :
+                                dic[categorie]=field
         #Here the special case of the description
         elif check_exists_by_xpath(row, "./div[@class=\'col-md-4\']/b") :
             if row.xpath("./div[@class=\'col-md-4\']/b")[0].text == "Description: " :
-                description=row.xpath("./div[@class=\'col-md-4\']/following-sibling::div[@class=\'col-md-12\']")[0].text
-                dic[Description]=description
+                if check_exists_by_xpath(row, "./following::div[1]") :
+                    description=row.xpath("string(./following::div[1])").replace("\t", " ").replace("\n", " ").replace("  ", " ").strip(" ")
+                    dic["Description"]=description
         #All other fields
         elif check_exists_by_xpath(row, "./div[@class=\'col-md-4 col-sm-5 col-xs-6 z-ad-func-obj\']/b") :
             #The categorie --> Ex : Address/Name/Postal Code
@@ -97,32 +83,166 @@ def get_champs(dic, html_object) :
             #Check the categorie
             if categorie in dic.keys() :
                 #Get the entry of this categorie
-                field=row.xpath("./div[@class=\'col-md-8 col-sm-7 col-xs-6 z-ad-func-obj\']/b")[0].text.strip(" ")
-                dic[categorie]=field
+                if check_exists_by_xpath(row, "./div[2]") :
+                    #field=row.xpath("./div[@class=\'col-md-8 col-sm-7 col-xs-6 z-ad-func-obj\']/text()")[0].strip(" ")
+                    field=row.xpath("string(./div[2])").strip(" \t\n")
+                if field != "" :
+                    dic[categorie]=field
+                #Allow to check if a field has been assigned without the 2 conditions are True
+                field="ERROR"
         else :
             print("Pass\n")
 
-
     return dic
 
+def create_entry(dic, entry_ads_codes) :
+    entry = Parse_ads(
+        title = dic["Title"],
+        ad_id = entry_ads_codes.ad_id,
+        ad_number = entry_ads_codes.ad_number,
+        category = dic["Category"],
+        description = dic["Description"],
+        breed = dic["Breed"],
+        age = dic["Age"],
+        sex = dic["Sex"],
+        primary_color = dic["Primary Color"],
+        secondary_color = dic["Secondary Color"],
+        advertiser = dic["Advertiser"],
+        price = dic["Price"],
+        payment_forms = dic["Payment Forms"],
+        estimated_shipping = dic["Estimated Shipping"],
+        pseudo = dic["Pseudo"],
+        contact_information = dic["Contact Information"],
+        name = dic["Name"],
+        company=  dic["Company"],
+        zip = get_zip(dic),
+        city = get_city(dic),
+        state = get_state(dic),
+        county = get_county(dic),
+        country= dic["Country"],
+        region = get_region(dic),
+        province = get_province(dic),
+        email = dic["Email"],
+        phone = dic["Phone"],
+        redirect_website= dic["Link Vendor"]
+    )
+    return entry
+
+def get_zip(dic) :
+    """Function to get an information that might be in several fields"""
+    if not dic["Post Code"] is None :
+        output=dic["Post Code"]
+    elif not dic["Zip Code"] is None :
+        output=dic["Zip Code"]
+    else :
+        output=None
+    return output
+
+def get_state(dic) :
+    """Function to get an information that might be in several fields"""
+    if not dic["State > City"] is None :
+        output=re.findall("(.*)>.*",dic["State > City"])[0].strip(" ")
+    elif not dic["State > County"] is None :
+        output=re.findall("(.*)>.*",dic["State > County"])[0].strip(" ")
+    
+    elif not dic["State > Metro"] is None :
+        output=re.findall("(.*)>.*",dic["State > Metro"])[0].strip(" ")
+    elif not dic["State > District"] is None :
+        output=re.findall("(.*)>.*",dic["State > District"])[0].strip(" ")
+    else :
+        output=None
+    
+    return output
+
+def get_county(dic) :
+    """Function to get an information that might be in several fields"""
+    if not dic["County"] is None :
+        output=dic["County"]
+    elif not dic["Region > County"] is None :
+        output=re.findall(".*>(.*)",dic["Region > County"])[0].strip(" ")
+    elif not dic["State > County"] is None :
+        output=re.findall(".*>(.*)",dic["State > County"])[0].strip(" ")
+    elif not dic["Province > County"] is None :
+        output=re.findall(".*>(.*)",dic["Province > County"])[0].strip(" ")
+    else :
+        output=None
+    return output
+
+
+def get_city(dic) :
+    """Function to get an information that might be in several fields"""
+    if not dic["City"] is None :
+        output=dic["City"]
+    elif not dic["State > City"] is None :
+        output=re.findall(".*>(.*)",dic["State > City"])[0].strip(" ")
+    elif not dic["Province > City"] is None :
+        output=re.findall(".*>(.*)",dic["Province > City"])[0].strip(" ")
+    else :
+        output=None
+    return output
+
+def get_region(dic) :
+    """Function to get an information that might be in several fields"""
+    if not dic["Region"] is None :
+        output=dic["Region"]
+    elif not dic["Region > County"] is None :
+        output=re.findall("(.*)>.*",dic["Region > County"])[0].strip(" ")
+    else :
+        output=None
+    return output
+
+def get_province(dic) :
+    """Function to get an information that might be in several fields"""
+    if not dic["Province > City"] is None :
+        output=re.findall("(.*)>.*",dic["Province > City"])[0].strip(" ")
+    elif not dic["Province > County"] is None :
+        output=re.findall("(.*)>.*",dic["Province > County"])[0].strip(" ")
+    else :
+        output=None
+    return output
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
+
+    #Documentation
+    cT = datetime.datetime.now()
+    date_parsing = f"{str(cT.year)}-{str(cT.month)}-{str(cT.day)}_{str(cT.hour)}-{str(cT.minute)}"
+    doc = Documentation()
+    
     counter=0
     path_result="./results/getCodes/codes/"
-    for i in session.query(Ads_Codes).filter_by(status=0):
-        #TEST
-        if counter > 1 :
-            break
-        dic_champs=dict_champ.copy()
-        filename=i.client_code
-        objet = lxml.html.parse(f"{path_result}{filename}").getroot()
-        get_champs(dic_champs, objet)
+    for row in session.query(Ads_Codes).filter_by(status=0):
+        #Skip if already exists
+        if session.query(exists().where(Parse_ads.ad_id == row.ad_id)).scalar():
+            pass
+        else:
+            #TEST
+            if counter > 5 :
+                break
+            dic_champs=dict_champ.copy()
+            filename=row.client_code
+            objet = lxml.html.parse(f"{path_result}{filename}").getroot()
+            dic_champs=get_champs(dic_champs, objet)
+            entry=create_entry(dic_champs, row)
+            entry.insertParse_ads(session)
+            #row.update(session)
 
 
 
 
 
 
-        counter+=1
+
+            counter+=1
+    with open(f'./results/getCodes/documentation/{date_parsing}_documentation.json', 'wb') as f:
+                f.write(str(doc).encode('utf-8'))
 
 
 
