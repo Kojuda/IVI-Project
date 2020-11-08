@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="734aa4ab-d5fb-4d25-b131-69692661af5e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parsing_AdPost_brouillon.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATABASES/project.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASES/project.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parseCodes.py" beforeDir="false" afterPath="$PROJECT_DIR$/parseCodes.py" afterDir="false" />
     </list>
@@ -15,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/IVI_Project$parseCodes.coverage" NAME="parseCodes Coverage Results" MODIFIED="1604848508168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/IVI_Project$parseCodes.coverage" NAME="parseCodes Coverage Results" MODIFIED="1604872229733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -33,23 +31,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="parsing_AdPost_brouillon.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/parsing_AdPost_brouillon.py">
+      <file leaf-file-name="parsing_AdPost_round2_fill_gaps.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/parsing_AdPost_round2_fill_gaps.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
-              <folding>
-                <element signature="e#81#115#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="221">
+              <caret line="13" selection-start-line="13" selection-end-line="14" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parseCodes.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="default.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/sqlalchemy/engine/default.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="591" selection-start-line="591" selection-end-line="591" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parseCodes.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/parseCodes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="257" column="20" selection-start-line="257" selection-start-column="20" selection-end-line="257" selection-end-column="20" />
+            <state relative-caret-position="187">
+              <caret line="217" column="25" selection-start-line="217" selection-start-column="25" selection-end-line="217" selection-end-column="25" />
               <folding>
                 <element signature="e#147#190#0" expanded="true" />
               </folding>
@@ -61,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/ressources/db.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+              <caret line="74" selection-start-line="74" selection-end-line="74" />
             </state>
           </provider>
         </entry>
@@ -79,7 +83,7 @@
         <entry file="file://$PROJECT_DIR$/getCodes.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="63" column="33" lean-forward="true" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
+              <caret line="63" column="33" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -115,8 +119,9 @@
     <findStrings>
       <find>./results/getCodes/codes/552627_clientCode.html</find>
       <find>path_result</find>
-      <find>pass</find>
       <find>552627_clientCode.html</find>
+      <find>pass</find>
+      <find>dic</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -126,6 +131,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/parsing_AdPost_brouillon.py" />
+        <option value="$PROJECT_DIR$/parsing_AdPost_round2_fill_gaps.py" />
         <option value="$PROJECT_DIR$/parseCodes.py" />
       </list>
     </option>
@@ -251,7 +257,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32874355" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32874355" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24941361" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -276,13 +282,10 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/parsing_AdPost_brouillon.py">
+    <entry file="file://$PROJECT_DIR$/parsing_AdPost_round2_fill_gaps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1292">
           <caret line="77" column="88" selection-start-line="8" selection-end-line="77" selection-end-column="88" />
-          <folding>
-            <element signature="e#81#115#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -314,27 +317,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/parsing_AdPost_brouillon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
-          <folding>
-            <element signature="e#81#115#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ressources/db.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/getCodes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="63" column="33" lean-forward="true" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
         </state>
       </provider>
     </entry>
@@ -345,13 +331,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/getCodes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="63" column="33" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/sqlalchemy/engine/default.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="591" selection-start-line="591" selection-end-line="591" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/parseCodes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="257" column="20" selection-start-line="257" selection-start-column="20" selection-end-line="257" selection-end-column="20" />
+        <state relative-caret-position="187">
+          <caret line="217" column="25" selection-start-line="217" selection-start-column="25" selection-end-line="217" selection-end-column="25" />
           <folding>
             <element signature="e#147#190#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parsing_AdPost_round2_fill_gaps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="14" />
         </state>
       </provider>
     </entry>

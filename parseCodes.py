@@ -41,7 +41,11 @@ def get_champs(dic, html_object) :
     the label of the possible fields. If the label is not found, the value of the key remains None. """
 
     #Get the xpath of the title in the dev browser with right click
-    dic["Title"]=html_object.xpath("//html/body/div/div/div[3]/div[1]/div[5]/div/div[2]/div/table/tbody/tr/th/font")[0].text
+    try:
+        # Todo needs error log
+        dic["Title"]=html_object.xpath("//html/body/div/div/div[3]/div[1]/div[5]/div/div[2]/div/table/tbody/tr/th/font")[0].text
+    except:
+        dic["Title"]= 'error'
     #Get the list of champs from the tag containing the whole ad
     ad=html_object.xpath("///html/body/div/div/div[3]/div[1]/div[5]/div/div[3]/div[2]/div/div/div[@class=\"row\"]")
     #Each row can have a entry (Or not !). We iterate over all rows to extract entry
@@ -63,7 +67,11 @@ def get_champs(dic, html_object) :
                     vendor_entries=row.xpath("./div/div[2]/div[2]/div[@class=\'row\']")
                     for row_vendor in vendor_entries :
                         #The categorie --> Ex : Address/Name/Postal Code
-                        categorie=row_vendor.xpath("./div[1]/b/text()")[0].strip(" :")
+                        try:
+                            categorie=row_vendor.xpath("./div[1]/b/text()")[0].strip(" :")
+                        except:
+                            #Todo needs error log
+                            categorie = None
                         #Check the categorie
                         if categorie in dic.keys() :
                             #Get the entry of this categorie
@@ -83,7 +91,7 @@ def get_champs(dic, html_object) :
             if type(categorie) == str:
                 categorie = categorie.strip(" :")
             else:
-                print("nonetype")
+                print("nonetype", print(dic['Ad Number']))
             #Check the categorie
             if categorie in dic.keys() :
                 #Get the entry of this categorie
@@ -198,9 +206,18 @@ def get_city(dic) :
     if not dic["City"] is None :
         output=dic["City"]
     elif not dic["State > City"] is None :
-        output=re.findall(".*>(.*)",dic["State > City"])[0].strip(" ")
+        if not re.findall(".*>(.*)",dic["State > City"]) == []:
+            output=re.findall(".*>(.*)",dic["State > City"])[0].strip(" ")
+        else:
+            output = None
     elif not dic["Province > City"] is None :
-        output=re.findall(".*>(.*)",dic["Province > City"])[0].strip(" ")
+        if not re.findall(".*>(.*)",dic["Province > City"]):
+            if not re.findall(".*>(.*)",dic["Province > City"]) == []:
+                output=re.findall(".*>(.*)",dic["Province > City"])[0].strip(" ")
+            else:
+                output = None
+        else:
+            output = None
     else :
         output=None
     return output
@@ -210,17 +227,26 @@ def get_region(dic) :
     if not dic["Region"] is None :
         output=dic["Region"]
     elif not dic["Region > County"] is None :
-        output=re.findall("(.*)>.*",dic["Region > County"])[0].strip(" ")
-    else :
+        if not re.findall("(.*)>.*",dic["Region > County"]) == []:
+            output=re.findall("(.*)>.*",dic["Region > County"])[0].strip(" ")
+        else:
+            output= None
+    else:
         output=None
     return output
 
 def get_province(dic) :
     """Function to get an information that might be in several fields"""
     if not dic["Province > City"] is None :
-        output=re.findall("(.*)>.*",dic["Province > City"])[0].strip(" ")
+        if not re.findall("(.*)>.*",dic["Province > City"])==[]:
+            output=re.findall("(.*)>.*",dic["Province > City"])[0].strip(" ")
+        else:
+            output = None
     elif not dic["Province > County"] is None :
-        output=re.findall("(.*)>.*",dic["Province > County"])[0].strip(" ")
+        if not re.findall("(.*)>.*",dic["Province > County"])==[]:
+            output=re.findall("(.*)>.*",dic["Province > County"])[0].strip(" ")
+        else:
+            output= None
     else :
         output=None
     return output
