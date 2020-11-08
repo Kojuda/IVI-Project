@@ -77,9 +77,13 @@ def get_champs(dic, html_object) :
                     description=row.xpath("string(./following::div[1])").replace("\t", " ").replace("\n", " ").replace("  ", " ").strip(" ")
                     dic["Description"]=description
         #All other fields
-        elif check_exists_by_xpath(row, "./div[@class=\'col-md-4 col-sm-5 col-xs-6 z-ad-func-obj\']/b") :
+        elif check_exists_by_xpath(row, "./div[@class=\'col-md-4 col-sm-5 col-xs-6 z-ad-func-obj\']/b"):
             #The categorie --> Ex : Address/Name/Postal Code
-            categorie=row.xpath("./div[@class=\'col-md-4 col-sm-5 col-xs-6 z-ad-func-obj\']/b")[0].text.strip(" :")
+            categorie=row.xpath("./div[@class=\'col-md-4 col-sm-5 col-xs-6 z-ad-func-obj\']/b")[0].text
+            if type(categorie) == str:
+                categorie = categorie.strip(" :")
+            else:
+                print("nonetype")
             #Check the categorie
             if categorie in dic.keys() :
                 #Get the entry of this categorie
@@ -140,15 +144,26 @@ def get_zip(dic) :
 
 def get_state(dic) :
     """Function to get an information that might be in several fields"""
-    if not dic["State > City"] is None :
-        output=re.findall("(.*)>.*",dic["State > City"])[0].strip(" ")
+    if not dic["State > City"] is None : #if its not None do something
+        if not re.findall("(.*)>.*",dic["State > City"]) == []: #To catch error if list is empty
+            output = re.findall("(.*)>.*",dic["State > City"])[0].strip(" ")
+        else:
+            output = None
     elif not dic["State > County"] is None :
-        output=re.findall("(.*)>.*",dic["State > County"])[0].strip(" ")
-    
+        if not re.findall("(.*)>.*",dic["State > County"]) == []:
+            output = re.findall("(.*)>.*",dic["State > County"])[0].strip(" ")
+        else:
+            output = None
     elif not dic["State > Metro"] is None :
-        output=re.findall("(.*)>.*",dic["State > Metro"])[0].strip(" ")
+        if not re.findall("(.*)>.*",dic["State > Metro"]) == []:
+            output = re.findall("(.*)>.*",dic["State > Metro"])[0].strip(" ")
+        else:
+            output = None
     elif not dic["State > District"] is None :
-        output=re.findall("(.*)>.*",dic["State > District"])[0].strip(" ")
+        if not re.findall("(.*)>.*",dic["State > District"]) == []:
+            output = re.findall("(.*)>.*",dic["State > District"])[0].strip(" ")
+        else:
+            output = None
     else :
         output=None
     
@@ -159,11 +174,20 @@ def get_county(dic) :
     if not dic["County"] is None :
         output=dic["County"]
     elif not dic["Region > County"] is None :
-        output=re.findall(".*>(.*)",dic["Region > County"])[0].strip(" ")
+        if not re.findall(".*>(.*)",dic["Region > County"]) == []:
+            output=re.findall(".*>(.*)",dic["Region > County"])[0].strip(" ")
+        else:
+            output = None
     elif not dic["State > County"] is None :
-        output=re.findall(".*>(.*)",dic["State > County"])[0].strip(" ")
+        if not re.findall(".*>(.*)",dic["State > County"]) == []:
+            output=re.findall(".*>(.*)",dic["State > County"])[0].strip(" ")
+        else:
+            output = None
     elif not dic["Province > County"] is None :
-        output=re.findall(".*>(.*)",dic["Province > County"])[0].strip(" ")
+        if not re.findall(".*>(.*)",dic["Province > County"]) == []:
+            output=re.findall(".*>(.*)",dic["Province > County"])[0].strip(" ")
+        else:
+            output = None
     else :
         output=None
     return output
@@ -210,6 +234,7 @@ def get_province(dic) :
 
 
 if __name__ == '__main__':
+    #to do it in all the files of client code
 
     #Documentation
     cT = datetime.datetime.now()
@@ -217,20 +242,18 @@ if __name__ == '__main__':
     doc = Documentation()
     
     counter=0
-    path_result="./results/getCodes/codes/"
+    path_result=r'C:\Users\Jasmin\Documents\Switchdrive\results\getCodes\codes\\'
     for row in session.query(Ads_Codes).filter_by(status=0):
         #Skip if already exists
         if session.query(exists().where(Parse_ads.ad_id == row.ad_id)).scalar():
             pass
         else:
             #TEST
-            if counter > 5 :
-                break
             dic_champs=dict_champ.copy()
             filename=row.client_code
             objet = lxml.html.parse(f"{path_result}{filename}").getroot()
-            dic_champs=get_champs(dic_champs, objet)
-            entry=create_entry(dic_champs, row)
+            dic_champs = get_champs(dic_champs, objet)
+            entry = create_entry(dic_champs, row)
             entry.insertParse_ads(session)
             #row.update(session)
 
@@ -241,7 +264,10 @@ if __name__ == '__main__':
 
 
             counter+=1
-    with open(f'./results/getCodes/documentation/{date_parsing}_documentation.json', 'wb') as f:
+    #before: f'./results/getCodes/documentation/
+    # for jasmin: f'C:/Users/Jasmin/Documents/Switchdrive/results/getCodes/documentation/'
+    print(date_parsing)
+    with open(f'C:/Users/Jasmin/Documents/Switchdrive/results/getCodes/documentation/{date_parsing}_documentation.json', 'wb') as f:
                 f.write(str(doc).encode('utf-8'))
 
 
