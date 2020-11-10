@@ -123,6 +123,10 @@ class Parse_ads(Base):
     def update(self, session, newStatus=1):
         self.status = newStatus
         session.commit()
+    
+    def deleteEntry(self, session) :
+        session.delete(self)
+        session.commit()
 
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
