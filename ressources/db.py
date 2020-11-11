@@ -83,7 +83,7 @@ class Ads_Codes(Base):
 class Parse_ads(Base):
     __tablename__='parse_ads'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String, nullable=False)
+    title = Column(String)
     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
     ad_id = Column(String, ForeignKey("ads_codes.ad_id"), unique=True)

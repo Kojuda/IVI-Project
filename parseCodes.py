@@ -45,6 +45,9 @@ def get_champs(dic, html_object, doc) :
     #Get the xpath of the title in the dev browser with right click
     if check_exists_by_xpath(html_object, "//html/body/div/div/div[3]/div[1]/div[5]/div/div[2]/div/table/tbody/tr/th/font", doc, dic) :
         dic["Title"]=html_object.xpath("//html/body/div/div/div[3]/div[1]/div[5]/div/div[2]/div/table/tbody/tr/th/font")[0].text
+    else :
+        #No ad found
+        dic["Title"]="-1"
     #Get the list of champs from the tag containing the whole ad
 
     #TWO CASES : there is a picture in the ad or not. Difference of 1 tag since the field lists is at the same level that the photo
@@ -290,9 +293,9 @@ if __name__ == '__main__':
 
     #before: f'./results/parseCodes/documentation/
     # for jasmin: f'C:/Users/Jasmin/Documents/Switchdrive/results/getCodes/documentation/'
-    print(date_parsing)
-    with open(f'./results/parseCodes/documentation/{date_parsing}_documentation.json', 'wb') as f:
-                f.write(str(doc).encode('utf-8'))
+        #Write the doc several time to lost the documentation whether the script fails.
+        with open(f'./results/parseCodes/documentation/{date_parsing}_documentation.json', 'wb') as f:
+                    f.write(str(doc).encode('utf-8'))
 
 
 
