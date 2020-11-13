@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
+from sqlalchemy import MetaData, Table, Column, Integer, String
 
 
 #~~~~~~~~~~~~~~~~~~~~~Create de base~~~~~~~~~~~~~~~~~~~~~
@@ -128,11 +129,36 @@ class Parse_ads(Base):
         session.delete(self)
         session.commit()
 
+class Parsing_bird_or_no():
+    __tablename__ = 'parse_bird_or_no'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ad_id = Column(String, ForeignKey("ads_codes.ad_id"), unique=True)
+    status_bird = Column(Integer, default=0)#0: not classified 1: classified
+
+    parsing_bird_or_no = relationship("Parsing_bird_or_no", backref="parse_bird_or_no")
+    def insertParse_bird(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session):
+        session.delete(self)
+        session.commit()
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
-engine = create_engine('sqlite:///DATABASES/project.db') #, echo=True pour les log
+engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
     #j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier [a faire entre Luisa&autres]
 Base.metadata.create_all(engine) #Create the database if it does not exist
 Session = sessionmaker(bind=engine)
 session = Session()
 
+#~~~~~~~~~~~~~~~Create a table~~~~~~~~~~~~~~~~
+meta = MetaData()
+parse_bird_or_no = Table('parse_bird_or_no', meta,
+                         Column('id', Integer, primary_key = True, nullable=False, autoincrement=True),
+                         Column('ad_id', String(32)),
+                         Column('status_bird', Integer, default=0))
+meta.create_all(engine)

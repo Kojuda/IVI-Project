@@ -280,7 +280,6 @@ if __name__ == '__main__':
         else:
             dic_champs=dict_champ.copy()
             filename=row.client_code
-            #To document error
             dic_champs["Ad Number"]=row.ad_number
             objet = lxml.html.parse(f"{path_result}{filename}").getroot()
             dic_champs = get_champs(dic_champs, objet, doc)
