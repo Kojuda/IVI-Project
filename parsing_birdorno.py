@@ -13,12 +13,11 @@ from spelling_error_mitigation import word_to_regex
 
 #Goal 1: Decide if ad contains bird
 #Strategy: Look in title for words describing birds with regular expressions
-list_of_birds_test = ["bird","amazon","amazona","parrot","african grey","macaw","cockatoo"] #Global variable which contains re to match
+list_of_birds_test = ["bird","amazon","amazona","parot","african grey","macaw","cockatoo","winged"] #Global variable which contains re to match
 list_of_birds = []
 for i in list_of_birds_test:
     a = word_to_regex(i)
     list_of_birds.append(a)
-print(list_of_birds)
 
 if __name__ == '__main__':
     path_result = './results/parse/'
@@ -65,8 +64,9 @@ if __name__ == '__main__':
                 session.commit()
 
         else:
-            print(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar())
+            #print(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar(), type(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()))
             if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()==0:
+                print('change')
                 status_change = False
                 # step 1 search in title
                 for expression in list_of_birds:
@@ -79,3 +79,12 @@ if __name__ == '__main__':
                             c += 1
                             status_change = True
                             pass
+                    res_des = re.search(expression, row.description)
+                    if res_des != None:
+                        if status_change:
+                            Parsing_bird_or_no(ad_id=row.ad_id).update(session)
+                            session.commit()
+                            c += 1
+                            status_change = True
+                            pass
+
