@@ -129,13 +129,13 @@ class Parse_ads(Base):
         session.delete(self)
         session.commit()
 
-class Parsing_bird_or_no():
+class Parsing_bird_or_no(Base):
     __tablename__ = 'parse_bird_or_no'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    ad_id = Column(String, ForeignKey("ads_codes.ad_id"), unique=True)
+    ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
     status_bird = Column(Integer, default=0)#0: not classified 1: classified
 
-    parsing_bird_or_no = relationship("Parsing_bird_or_no", backref="parse_bird_or_no")
+    parse_ads = relationship("Parse_ads", backref="parse_bird_or_no")
     def insertParse_bird(self, session):
         session.add(self)
         session.commit()
@@ -156,9 +156,9 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 #~~~~~~~~~~~~~~~Create a table~~~~~~~~~~~~~~~~
-meta = MetaData()
-parse_bird_or_no = Table('parse_bird_or_no', meta,
-                         Column('id', Integer, primary_key = True, nullable=False, autoincrement=True),
-                         Column('ad_id', String(32)),
-                         Column('status_bird', Integer, default=0))
-meta.create_all(engine)
+#meta = MetaData()
+#parse_bird_or_no = Table('parse_bird_or_no', meta,
+#                         Column('id', Integer, primary_key = True, nullable=False, autoincrement=True),
+#                         Column('ad_id', String(32)),
+#                         Column('status_bird', Integer, default=0))
+#meta.create_all(engine)
