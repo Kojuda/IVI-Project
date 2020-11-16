@@ -34,7 +34,7 @@ if __name__ == '__main__':
                 #For each defined regular expression
                 res = re.search(expression, row.title) #search in title
                 if res != None: #if there is a match, go on
-                    if session.query(Parsing_bird_or_no.ad_id).filter_by(ad_id=row.ad_id, status_bird =1).scalar() == None: #if there isn't already an entry
+                    if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar() == None: #if there isn't already an entry
                         entry = Parsing_bird_or_no(ad_id=row.ad_id, status_bird=1)
                         entry.insertParse_bird(session)
                         session.commit()

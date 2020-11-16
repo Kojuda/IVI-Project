@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="734aa4ab-d5fb-4d25-b131-69692661af5e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/parsing_birdorno.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATABASES/project.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASES/project.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parseCodes.py" beforeDir="false" afterPath="$PROJECT_DIR$/parseCodes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsing_birdorno.py" beforeDir="false" afterPath="$PROJECT_DIR$/parsing_birdorno.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,9 +14,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/IVI_Project$db.coverage" NAME="db Coverage Results" MODIFIED="1605306946427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ressources" />
-    <SUITE FILE_PATH="coverage/IVI_Project$parsing_birdorno.coverage" NAME="parsing_birdorno Coverage Results" MODIFIED="1605307087425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/IVI_Project$db.coverage" NAME="db Coverage Results" MODIFIED="1605355913076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ressources" />
+    <SUITE FILE_PATH="coverage/IVI_Project$parsing_birdorno.coverage" NAME="parsing_birdorno Coverage Results" MODIFIED="1605474085855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IVI_Project$parseCodes.coverage" NAME="parseCodes Coverage Results" MODIFIED="1605281474620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/IVI_Project$spelling_error_mitigation.coverage" NAME="spelling_error_mitigation Coverage Results" MODIFIED="1605447207033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -46,11 +43,8 @@
       <file leaf-file-name="parseCodes.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/parseCodes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="119" column="22" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="22" />
-              <folding>
-                <element signature="e#147#190#0" expanded="true" />
-              </folding>
+            <state>
+              <caret line="262" selection-start-line="262" selection-end-line="262" />
             </state>
           </provider>
         </entry>
@@ -58,11 +52,8 @@
       <file leaf-file-name="db.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ressources/db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="160" column="101" selection-start-line="160" selection-start-column="101" selection-end-line="160" selection-end-column="101" />
-              <folding>
-                <element signature="e#138#153#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-293">
+              <caret line="47" selection-start-line="47" selection-end-line="47" />
             </state>
           </provider>
         </entry>
@@ -70,7 +61,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/lxml/html/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
+            <state relative-caret-position="17">
               <caret line="938" selection-start-line="938" selection-end-line="938" />
             </state>
           </provider>
@@ -79,11 +70,29 @@
       <file leaf-file-name="parsing_birdorno.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/parsing_birdorno.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="13" column="142" selection-start-line="13" selection-start-column="142" selection-end-line="13" selection-end-column="142" />
+            <state relative-caret-position="-184">
+              <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
               <folding>
                 <element signature="e#133#176#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="relationships.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/sqlalchemy/orm/relationships.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="2611" column="48" selection-start-line="2611" selection-start-column="48" selection-end-line="2611" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spelling_error_mitigation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spelling_error_mitigation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -107,8 +116,11 @@
       <find>row</find>
       <find>session</find>
       <find>dict_champ</find>
-      <find>meta</find>
       <find>create_entry</find>
+      <find>meta</find>
+      <find>update</find>
+      <find>pr</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -121,6 +133,7 @@
         <option value="$PROJECT_DIR$/parsing_AdPost_round2_fill_gaps.py" />
         <option value="$PROJECT_DIR$/parseCodes.py" />
         <option value="$PROJECT_DIR$/ressources/db.py" />
+        <option value="$PROJECT_DIR$/spelling_error_mitigation.py" />
         <option value="$PROJECT_DIR$/parsing_birdorno.py" />
       </list>
     </option>
@@ -134,9 +147,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-56" />
-    <option name="y" value="222" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-22" />
+    <option name="y" value="162" />
     <option name="width" value="2520" />
     <option name="height" value="1200" />
   </component>
@@ -144,48 +157,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="IVI-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IVI-Project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IVI-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IVI-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="DATABASES" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IVI-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IVI-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="ressources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IVI-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IVI-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="results" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IVI-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IVI-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="results" type="462c0819:PsiDirectoryNode" />
-              <item name="getCodes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IVI-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IVI-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="results" type="462c0819:PsiDirectoryNode" />
-              <item name="getCodes" type="462c0819:PsiDirectoryNode" />
-              <item name="documentation_bis" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -263,13 +235,34 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="spelling_error_mitigation" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="IVI-Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spelling_error_mitigation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list>
+      <item itemvalue="Python.parsing_birdorno" />
       <item itemvalue="Python.parseCodes" />
       <item itemvalue="Python.db" />
-      <item itemvalue="Python.parsing_birdorno" />
+      <item itemvalue="Python.spelling_error_mitigation" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.spelling_error_mitigation" />
         <item itemvalue="Python.db" />
         <item itemvalue="Python.parseCodes" />
       </list>
@@ -289,7 +282,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-28" y="111" width="1260" height="600" extended-state="0" />
+    <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -297,7 +290,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39139345" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39070567" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.25601926" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -305,7 +298,7 @@
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39931154" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -316,7 +309,7 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25601926" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25601926" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -325,11 +318,11 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39139345" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39070567" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.0" />
+      <window_info anchor="right" id="Database" order="4" weight="0.0" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -344,7 +337,153 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/sqlalchemy/orm/relationships.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44846">
+          <caret line="2638" selection-start-line="2638" selection-end-line="2638" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spelling_error_mitigation.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parsing_birdorno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="52" column="104" selection-start-line="52" selection-start-column="104" selection-end-line="52" selection-end-column="104" />
+          <folding>
+            <element signature="e#133#176#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parseCodes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4845">
+          <caret line="289" column="22" selection-start-line="289" selection-start-column="16" selection-end-line="289" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2278">
+          <caret line="134" column="69" selection-start-line="134" selection-start-column="69" selection-end-line="134" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/lxml/html/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15946">
+          <caret line="938" selection-start-line="938" selection-end-line="938" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parsing_birdorno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <element signature="e#133#176#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/sqlalchemy/sql/selectable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15963">
+          <caret line="978" selection-start-line="978" selection-end-line="978" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/sqlalchemy/orm/relationships.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44846">
+          <caret line="2638" selection-start-line="2638" selection-end-line="2638" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spelling_error_mitigation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="10" lean-forward="true" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parseCodes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4675">
+          <caret line="275" column="11" selection-start-line="275" selection-start-column="11" selection-end-line="275" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/lxml/html/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15946">
+          <caret line="938" selection-start-line="938" selection-end-line="938" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parsing_birdorno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" selection-start-line="15" selection-end-line="15" selection-end-column="26" />
+          <folding>
+            <element signature="e#133#176#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spelling_error_mitigation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="33" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2465">
+          <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parseCodes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4675">
+          <caret line="275" column="11" lean-forward="true" selection-start-line="275" selection-start-column="11" selection-end-line="275" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2754">
+          <caret line="162" column="23" lean-forward="true" selection-start-line="162" selection-start-column="23" selection-end-line="162" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/lxml/html/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15946">
+          <caret line="938" selection-start-line="938" selection-end-line="938" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parsing_birdorno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#133#176#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/parsing_AdPost_round2_fill_gaps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -363,9 +502,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1173">
           <caret line="74" selection-start-line="74" selection-end-line="74" />
-          <folding>
-            <element signature="e#138#153#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -394,9 +530,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3621">
           <caret line="217" column="25" selection-start-line="217" selection-start-column="25" selection-end-line="217" selection-end-column="25" />
-          <folding>
-            <element signature="e#147#190#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -418,9 +551,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3689">
           <caret line="217" column="25" selection-start-line="217" selection-start-column="25" selection-end-line="217" selection-end-column="25" />
-          <folding>
-            <element signature="e#147#190#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -493,44 +623,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/getcountries.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-740">
-          <folding>
-            <element signature="e#157#204#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-740" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/lxml/html/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="938" selection-start-line="938" selection-end-line="938" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/parseCodes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="119" column="22" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="22" />
-          <folding>
-            <element signature="e#147#190#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/lxml/html/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="938" selection-start-line="938" selection-end-line="938" />
+        <state>
+          <caret line="262" selection-start-line="262" selection-end-line="262" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ressources/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="160" column="101" selection-start-line="160" selection-start-column="101" selection-end-line="160" selection-end-column="101" />
-          <folding>
-            <element signature="e#138#153#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-293">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/sqlalchemy/orm/query.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="3467" selection-start-line="3467" selection-end-line="3467" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/sqlalchemy/sql/selectable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="978" selection-start-line="978" selection-end-line="978" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/sqlalchemy/orm/relationships.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2611" column="48" selection-start-line="2611" selection-start-column="48" selection-end-line="2611" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spelling_error_mitigation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/parsing_birdorno.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="13" column="142" selection-start-line="13" selection-start-column="142" selection-end-line="13" selection-end-column="142" />
+        <state relative-caret-position="-184">
+          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
           <folding>
             <element signature="e#133#176#0" expanded="true" />
           </folding>
