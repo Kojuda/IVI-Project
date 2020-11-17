@@ -1,0 +1,6 @@
+Bonjour mes cheres,
+ici une vite liste des choses que j'ai remarqué buggent/ont besoin d'un deuxième paire d'oeils
+
+1. Autant dans parsing_birdorno que cage.py j'ai oublié d'entregistrer la documentation comme une petite merde
+2. Controler si l'output est utilisable
+3. Améliorer le clause else (ligne 66 ss)
