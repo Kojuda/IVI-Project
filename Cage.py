@@ -14,6 +14,10 @@ from spelling_error_mitigation import word_to_regex
 #Goal 1: Decide if ad contains bird
 #Strategy: Look in title for words describing birds with regular expressions
 cagenames = [" cage "] #Global variable which contains re to match
+#todo: chercher que dans titre
+#todo: enlever "with cage"
+#todo: lier avec hit bird
+
 list_of_cage = []
 for i in cagenames:
     a = word_to_regex(i)
@@ -41,21 +45,21 @@ if __name__ == '__main__':
                         c+=1
                         pass
         #step 2 search in description
-            for expression in list_of_cage:
-                if row.description != None:
-                    try:
-                        res = re.search(expression, row.description)
-                    except:
-                        print('unknown error')
-                        print(row.ad_id)
-                        res = None
-                if res != None:
-                    if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar() == None:
-                        print('description')
-                        entry = MentionedCage(ad_id=row.ad_id, status_cage=1)
-                        entry.insertCage(session)
-                        session.commit()
-                        pass
+#            for expression in list_of_cage:
+#                if row.description != None:
+#                    try:
+#                        res = re.search(expression, row.description)
+#                    except:
+#                        print('unknown error')
+#                        print(row.ad_id)
+#                        res = None
+#                if res != None:
+#                    if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar() == None:
+#                        print('description')
+#                        entry = MentionedCage(ad_id=row.ad_id, status_cage=1)
+#                        entry.insertCage(session)
+#                        session.commit()
+#                        pass
         #last step if no match add status 0
         #if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()
             if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar() == None:
