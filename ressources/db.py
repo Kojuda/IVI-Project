@@ -147,6 +147,25 @@ class Parsing_bird_or_no(Base):
     def deleteEntry(self, session):
         session.delete(self)
         session.commit()
+
+class MentionedCage(Base):
+    __tablename__ = 'cage'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
+    status_cage = Column(Integer, default=0)#0: not classified 1: classified
+
+    parse_ads = relationship("Parse_ads", backref="cage")
+    def insertCage(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session):
+        session.delete(self)
+        session.commit()
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
 engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
