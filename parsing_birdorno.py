@@ -42,7 +42,7 @@ if __name__ == '__main__':
                         session.commit()
                         c += 1
                         pass
-                # step 2 search in description
+            # step 2 search in description
             for expression in list_of_birds:
                 if row.description != None:
                     try:
