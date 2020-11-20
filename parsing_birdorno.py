@@ -13,7 +13,7 @@ from spelling_error_mitigation import word_to_regex
 
 #Goal 1: Decide if ad contains bird
 #Strategy: Look in title for words describing birds with regular expressions
-list_of_birds_test = ["bird","brd","amazon","amazona","parot","african grey","macaw","mcw","macw","mcaw","macow","cockato","winged","paraket"] #Global variable which contains re to match
+list_of_birds_test = ["bird","brd","amazon","amazona","parot", "prot", "african grey","macaw","mcw","macw","mcaw","macow","cockato","winged","paraket"] #Global variable which contains re to match
 list_of_birds = []
 for i in list_of_birds_test:
     a = word_to_regex(i)
@@ -87,4 +87,3 @@ if __name__ == '__main__':
                             c += 1
                             status_change = True
                             pass
-
