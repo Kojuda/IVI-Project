@@ -34,6 +34,7 @@ dict_alphabet['x']='x+|X+'
 dict_alphabet['y']='y+|Y+'
 dict_alphabet['z']='z+|Z+'
 dict_alphabet[' ']='\s+'
+dict_alphabet['.']='\s*'
 
 def word_to_regex(word: str):
     l = []

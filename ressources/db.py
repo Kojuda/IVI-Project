@@ -153,6 +153,7 @@ class MentionedCage(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
     status_cage = Column(Integer, default=0)#0: not classified 1: classified
+    status_alerte = Column(Integer, default=0)#0:alright 1: contains words with waarant recheck of classification
 
     parse_ads = relationship("Parse_ads", backref="cage")
     def insertCage(self, session):
@@ -166,11 +167,68 @@ class MentionedCage(Base):
     def deleteEntry(self, session):
         session.delete(self)
         session.commit()
+
+class Parsing_Psittaciformes_or_no(Base):
+    __tablename__ = 'psittaciformes_or_no'
+    #H: une annonce ne match pas plus que 10 oiseaux
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
+    match_cites_parrot = Column(Integer, default=0)#0: not classified 1: classified
+    match_common_parrot = Column(Integer, default=0)#0: not classified 1: classified
+    mapping_match_1 = Column(Integer, ForeignKey("mapping_cites.id")) #premier fois que ca match
+    #mapping_match_2 = Column(Integer, ForeignKey("mapping_cites.id")) #deuxième fois que sa match
+    #mapping_match_3 = Column(Integer, ForeignKey("mapping_cites.id"))
+    #mapping_match_4 = Column(Integer, ForeignKey("mapping_cites.id"))
+    #mapping_match_5 = Column(Integer, ForeignKey("mapping_cites.id"))
+    #mapping_match_6 = Column(Integer, ForeignKey("mapping_cites.id"))
+    #mapping_match_7 = Column(Integer, ForeignKey("mapping_cites.id"))
+    #mapping_match_8 = Column(Integer, ForeignKey("mapping_cites.id"))
+    #mapping_match_9 = Column(Integer, ForeignKey("mapping_cites.id"))
+    #mapping_match_10 = Column(Integer, ForeignKey("mapping_cites.id"))
+    parse_ads = relationship("Parse_ads", backref="psittaciformes_or_no")
+    mapping_cites = relationship("Mapping", backref="psittaciformes_or_no")
+    def insertPsittaciformes(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session):
+        session.delete(self)
+        session.commit()
+
+class Mapping(Base):
+    __tablename__ = 'mapping_cites'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    scientific_name_cites = Column(String)
+    common_name = Column(String)
+    region = Column(String)
+    danger_status_UCIN = Column(String)
+    slang = Column(String)
+    annex_number_CITES = Column(Integer)
+    order = Column(String)
+    family = Column(String)
+    #pas de relation avec un autre table
+    #parse_ads = relationship("Parse_ads", backref="psittaciformes_or_no")
+    def insert(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session):
+        session.delete(self)
+        session.commit()
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
-engine = create_engine('sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db') #, echo=True pour les log
+engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
     #j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier [a faire entre Luisa&autres]
     #engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
+    #pour luisa la path est: 'sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db'
 Base.metadata.create_all(engine) #Create the database if it does not exist
 Session = sessionmaker(bind=engine)
 session = Session()

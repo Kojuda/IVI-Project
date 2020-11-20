@@ -9,11 +9,12 @@ from sqlalchemy.sql import exists
 from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, Parsing_bird_or_no
 from spelling_error_mitigation import word_to_regex
-
+#logique de ce code: éviter au plus les FN
+#but:estimer la nombre des annonces (en anglais) pour les oiseaux
 
 #Goal 1: Decide if ad contains bird
 #Strategy: Look in title for words describing birds with regular expressions
-list_of_birds_test = ["bird","brd","amazon","amazona","parot", "prot", "african grey","macaw","mcw","macw","mcaw","macow","cockato","winged","paraket"] #Global variable which contains re to match
+list_of_birds_test = ["bird","brd","amazon","amazona","parot", "prot", "african grey","macaw","mcw","macw","mcaw","macow","cockato","winged","paraket","lovebird","canary","cnry"] #Global variable which contains re to match
 list_of_birds = []
 for i in list_of_birds_test:
     a = word_to_regex(i)
@@ -29,18 +30,19 @@ if __name__ == '__main__':
     c = 0 #counter to trace vow many ads have status 1 = classified as bird
     for row in session.query(Parse_ads):
         if session.query(Parsing_bird_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
-        #step 1 search in title
+            print('no entry')
+            # step 1 search in title
             for expression in list_of_birds:
-                #For each defined regular expression
-                res = re.search(expression, row.title) #search in title
-                if res != None: #if there is a match, go on
-                    if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar() == None: #if there isn't already an entry
+                # For each defined regular expression
+                res = re.search(expression, row.title)  # search in title
+                if res != None:  # if there is a match, go on
+                    if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar() == None:  # if there isn't already an entry
                         entry = Parsing_bird_or_no(ad_id=row.ad_id, status_bird=1)
                         entry.insertParse_bird(session)
                         session.commit()
-                        c+=1
+                        c += 1
                         pass
-        #step 2 search in description
+                # step 2 search in description
             for expression in list_of_birds:
                 if row.description != None:
                     try:
@@ -56,14 +58,15 @@ if __name__ == '__main__':
                         entry.insertParse_bird(session)
                         session.commit()
                         pass
-        #last step if no match add status 0
-        #if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()
+                # last step if no match add status 0
+                # if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()
             if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar() == None:
                 entry = Parsing_bird_or_no(ad_id=row.ad_id, status_bird=0)
                 entry.insertParse_bird(session)
                 session.commit()
 
         else:
+            print('entry exists')
             #print(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar(), type(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()))
             if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()==0:
                 print('change')
@@ -74,14 +77,20 @@ if __name__ == '__main__':
                     res = re.search(expression, row.title)  # search in title
                     if res != None:  # if there is a match, go on
                         if status_change:
+                            print('change stat')
                             Parsing_bird_or_no(ad_id=row.ad_id).update(session)
                             session.commit()
                             c += 1
                             status_change = True
                             pass
-                    res_des = re.search(expression, row.description)
+                    try:
+                        res_des = re.search(expression, row.description)
+                    except:
+                        res_des = None
+                    print(res_des.scalar())
                     if res_des != None:
                         if status_change:
+                            print('change des')
                             Parsing_bird_or_no(ad_id=row.ad_id).update(session)
                             session.commit()
                             c += 1

@@ -17,12 +17,15 @@ cagenames = [" cage "] #Global variable which contains re to match
 #todo: chercher que dans titre
 #todo: enlever "with cage"
 #todo: lier avec hit bird
-
+alerte = ['with'] #si plus qu'un mot code doit être changé
+list_alerte = []
 list_of_cage = []
 for i in cagenames:
     a = word_to_regex(i)
     list_of_cage.append(a)
-
+for i in alerte:
+    a = word_to_regex(i)
+    list_alerte.append(a)
 if __name__ == '__main__':
     path_result = './results/parse/'
     #Documentation
@@ -32,18 +35,28 @@ if __name__ == '__main__':
     #parse database
     c = 0 #counter to trace vow many ads have status 1 = classified as bird
     for row in session.query(Parse_ads):
-        if session.query(MentionedCage.ad_id).filter_by(ad_id=row.ad_id, status_cage =1).scalar() == None:
+        if session.query(MentionedCage.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
         #step 1 search in title
             for expression in list_of_cage:
                 #For each defined regular expression
                 res = re.search(expression, row.title) #search in title
                 if res != None: #if there is a match, go on
                     if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar() == None: #if there isn't already an entry
-                        entry = MentionedCage(ad_id=row.ad_id, status_cage=1)
+                        for al in list_alerte:
+                            #pour l'instant ca marche que pour 1 mot d'alerte, changer si besoin
+                            try:
+                                alert = re.search(al, row.title)
+                            except:
+                                alerte = None
+                        if alerte == None:
+                            entry = MentionedCage(ad_id=row.ad_id, status_cage=1)
+                        else:
+                            entry = MentionedCage(ad_id=row.ad_id, status_cage=1, status_alerte=1)
                         entry.insertCage(session)
                         session.commit()
                         c+=1
                         pass
+#decision d'omettre etape 2 car trop de FP
         #step 2 search in description
 #            for expression in list_of_cage:
 #                if row.description != None:
@@ -83,7 +96,10 @@ if __name__ == '__main__':
                             c += 1
                             status_change = True
                             pass
-                    res_des = re.search(expression, row.description)
+                    try:
+                        res_des = re.search(expression, row.description)
+                    except:
+                        res_des = None
                     if res_des != None:
                         if status_change:
                             MentionedCage(ad_id=row.ad_id).update(session)
