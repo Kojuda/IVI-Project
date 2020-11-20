@@ -202,16 +202,49 @@ class Parsing_Psittaciformes_or_no(Base):
 class Mapping(Base):
     __tablename__ = 'mapping_cites'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    scientific_name_cites = Column(String)
-    common_name = Column(String)
-    region = Column(String)
-    danger_status_UCIN = Column(String)
-    slang = Column(String)
-    annex_number_CITES = Column(Integer)
-    order = Column(String)
-    family = Column(String)
-    #pas de relation avec une autre table
-    #parse_ads = relationship("Parse_ads", backref="psittaciformes_or_no")
+    title = Column(String)
+    date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
+    date_updated = Column(DateTime, onupdate=datetime.datetime.now())
+    ad_id = Column(String, ForeignKey("ads_codes.ad_id"), unique=True)
+    ad_number = Column(Integer, nullable=False)
+    status= Column(Integer, default=0)
+    status_vendeur_taken = Column(Integer, default=0)
+
+    ads_codes = relationship("Ads_Codes", backref="mapping_cites")
+    def insertParse_ads(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session) :
+        session.delete(self)
+        session.commit()
+
+    def insert(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session):
+        session.delete(self)
+        session.commit()
+
+class Matching_Ads(Base):
+    __tablename__ = 'matching_ads'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ad_id = Column(String, ForeignKey("parse_ads.ad_id"), unique=True)
+    date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
+    date_updated = Column(DateTime, onupdate=datetime.datetime.now())
+    ids_matching = Column(String)
+    regex = Column(String)
+    
+    parse_ads = relationship("Parse_ads", backref="matching_ads")
 
     def insert(self, session):
         session.add(self)
