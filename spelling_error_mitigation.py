@@ -40,7 +40,10 @@ def word_to_regex(word: str):
     l = []
     seperator=''
     for i in range(0, len(word)):
-       l.append("("+dict_alphabet[word[i].lower()]+"){1}")
+        try:
+            l.append("("+dict_alphabet[word[i].lower()]+"){1}")
+        except:
+            l.append("("+"\w"+"){1}")
     res= seperator.join(l)
     return res
 

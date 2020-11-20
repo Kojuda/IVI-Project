@@ -7,17 +7,18 @@
 import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation
-from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Mapping
+from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Mapping, Regex, Match_Regex_IdMap
 from spelling_error_mitigation import word_to_regex
 list_scientific = []
+status_modified = False
 
-#transformer table mapping_names en REGEX
-for row in session.query(Mapping):
-
+#transformer table mapping_names en REGEX if modifications were made [aliments tables regex et match_regex_idmap
+if status_modified:
+    for row in session.query(Mapping):
+    print(row.id)
     # traitement scientific name
     a = word_to_regex(row.scientific_name_cites)
     list_scientific.append(a)
-
     # traitement common name
     entree = row.common_name.split('; ') #créer la liste
     for name in entree:
@@ -26,45 +27,74 @@ for row in session.query(Mapping):
         #print(name)
         # try:
         name.lower()
-        list = name.split(' ')
+        list_of_words = name.split(' ')
+        for i in list_of_words:
+            if len(i) < 3: #let alone small words
+                pass
+            else: #big words - we do something with them: namely
+                if type(i)==str: #check if string, if not string we just sit idle
+                    res = word_to_regex(i)
+                else:
+                    print('problem with input')
+                    res = False
+                if session.query(Regex).filter(Regex.reg==res).scalar()==None: #if entry doesn't exist: create entry in regex database
+                    entry = Regex(reg=res)
+                    entry.insertregex(session)
+                    session.commit()
+                else: #if no entry pass
+                    pass
+                #now we fillup  Match_Regex_IdMap
+                request=session.query(Regex.id).filter(Regex.reg==res).scalar()
+                if request!=None:
+                    entry = Match_Regex_IdMap(id_re=request, id_map=row.id)
+                    entry.insertMatch(session)
+                    session.commit()
+
+
+
+
+
+
+
+
         #Il faudra quand même mettre quelque part Parrot, Parakeet, Amazon, Psittacus, etc. pour
         #PARROT OR NO, mais pour la race spécifique c'est mieux d'enlever:
         #Aussi problème de couleur (chaque green est trouvé p. ex.) et problème de type (Amazone, Macaw, Cockatoo):
         #Toujours plusieurs races comprenant ces noms, mais parfois la personne va juste écrire "Amazone" ou "Cockatoo" sans préciser
         #Et si on enlève on ne trouvera jamais....
-        while 'Amazon' in list:
-            list.remove('Amazon')
-        while 'Amazone' in list:
-            list.remove('Amazone')
-        while 'Amazona' in list:
-            list.remove('Amazona')
-        while 'Psittacus' in list:
-            list.remove('Psittacus')
-        while 'Parrot' in list:
-            list.remove('Parrot')
-        while 'parrot' in list:
-            list.remove('parrot')
-        while 'parakeet' in list:
-            list.remove('parakeet')
-        while 'Parakeet' in list:
-            list.remove('Parakeet')
-        while 'Macaw' in list:
-            list.remove('Macaw')
-        while 'macaw' in list:
-            list.remove('macaw')
-        while 'de' in list:
-            list.remove('de')
-        while 'des' in list:
-            list.remove('des')
-        while 'le' in list:
-            list.remove('le')
-        while 'la' in list:
-            list.remove('la')
-        while 'à' in list:
-            list.remove('à')
-        while '' in list:
-            list.remove('')
-        print(list)
+        # while 'Amazon' in list:
+        #     list.remove('Amazon')
+        # while 'Amazone' in list:
+        #     list.remove('Amazone')
+        # while 'Amazona' in list:
+        #     list.remove('Amazona')
+        # while 'Psittacus' in list:
+        #     list.remove('Psittacus')
+        # while 'Parrot' in list:
+        #     list.remove('Parrot')
+        # while 'parrot' in list:
+        #     list.remove('parrot')
+        # while 'parakeet' in list:
+        #     list.remove('parakeet')
+        # while 'Parakeet' in list:
+        #     list.remove('Parakeet')
+        # while 'Macaw' in list:
+        #     list.remove('Macaw')
+        # while 'macaw' in list:
+        #     list.remove('macaw')
+        # while 'de' in list:
+        #     list.remove('de')
+        # while 'des' in list:
+        #     list.remove('des')
+        # while 'le' in list:
+        #     list.remove('le')
+        # while 'la' in list:
+        #     list.remove('la')
+        # while 'à' in list:
+        #     list.remove('à')
+        # while '' in list:
+        #     list.remove('')
+        # print(list)
         # except:
         #     pass
 
@@ -83,8 +113,8 @@ if __name__ == '__main__':
 
     #SCIENTIFIC: parse database
 
-    connexion = session.query(Mapping.id).scalar()
-    print(connexion)
+    #connexion = session.query(Mapping.id).scalar()
+    #print(connexion)
     #mapping_match_1=mapping_cites.id
 
     # c = 0 #counter to trace vow many ads have status 1 = classified as psittaciforme

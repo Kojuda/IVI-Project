@@ -175,18 +175,10 @@ class Parsing_Psittaciformes_or_no(Base):
     ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
     match_cites_parrot = Column(Integer, default=0)#0: not classified 1: classified
     match_common_parrot = Column(Integer, default=0)#0: not classified 1: classified
-    mapping_match_1 = Column(Integer, ForeignKey("mapping_cites.id")) #première fois que ça match
-    #mapping_match_2 = Column(Integer, ForeignKey("mapping_cites.id")) #deuxième fois que ça match, etc.
-    #mapping_match_3 = Column(Integer, ForeignKey("mapping_cites.id"))
-    #mapping_match_4 = Column(Integer, ForeignKey("mapping_cites.id"))
-    #mapping_match_5 = Column(Integer, ForeignKey("mapping_cites.id"))
-    #mapping_match_6 = Column(Integer, ForeignKey("mapping_cites.id"))
-    #mapping_match_7 = Column(Integer, ForeignKey("mapping_cites.id"))
-    #mapping_match_8 = Column(Integer, ForeignKey("mapping_cites.id"))
-    #mapping_match_9 = Column(Integer, ForeignKey("mapping_cites.id"))
-    #mapping_match_10 = Column(Integer, ForeignKey("mapping_cites.id"))
+    mapping_match = Column(String) #en gros les differents matches_regex separée par ;
+
     parse_ads = relationship("Parse_ads", backref="psittaciformes_or_no")
-    mapping_cites = relationship("Mapping", backref="psittaciformes_or_no")
+    #mapping_cites = relationship("Mapping", backref="psittaciformes_or_no")
     def insertPsittaciformes(self, session):
         session.add(self)
         session.commit()
@@ -224,9 +216,48 @@ class Mapping(Base):
     def deleteEntry(self, session):
         session.delete(self)
         session.commit()
+
+class Regex(Base):
+    __tablename__ = 'regex'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    reg = Column(String)
+
+    def insertregex(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session):
+        session.delete(self)
+        session.commit()
+
+
+class Match_Regex_IdMap(Base):
+    __tablename__ = 'reg_map_match'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    id_re = Column(Integer, ForeignKey("regex.id"))
+    id_map = Column(Integer, ForeignKey("mapping_cites.id"))
+    #pas de relation avec une autre table
+    mapping_cites = relationship("Mapping", backref="reg_map_match")
+    regex = relationship("Regex", backref="reg_map_match")
+
+    def insertMatch(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session):
+        session.delete(self)
+        session.commit()
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
-engine = create_engine('sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db') #, echo=True pour les log
+engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
     #j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier [a faire entre Luisa&autres]
     #engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
     #pour luisa la path est: 'sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db'
