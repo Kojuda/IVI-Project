@@ -53,4 +53,32 @@ def removeEmptyString(liste):
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~ Project REGEX ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+#Dict of letters with some possibilites of misspelling (Don't consider absence)
+misspelling_mitigations ={
+    "a" : "[Aa4]{1,2}",
+    "b" : "[Bb]{1,2}",
+    "c" : "[Cc]{1,2}",
+    "d" : "[Dd]{1,2}",
+    "e" : "[Ee3]{1,2}",
+    "f" : "[Ff]{1,2}",
+    "g" : "[Gg]{1,2}",
+    "h" : "[Hh]{1,2}",
+    "i" : "[Ii]{1,2}",
+    "j" : "[Jj]{1,2}",
+    "k" : "[Kk]{1,2}",
+    "l" : "[Ll]{1,2}",
+    "m" : "[Mm]{1,2}",
+    "n" : "[Nn]{1,2}",
+    "o" : "[Oo0]{1,2}",
+    "p" : "[Pp]{1,2}",
+    "q" : "[Qq]{1,2}",
+    "r" : "[Rr]{1,2}",
+    "s" : "[Ss]{1,2}",
+    "t" : "[Tt]{1,2}",
+    "u" : "[Uu]{1,2}",
+    "v" : "[Vv]{1,2}",
+    "w" : "[Ww]{1,2}",
+    "x" : "[Xx]{1,2}",
+    "y" : "[Yy]{1,2}",
+    "z" : "[Zz]{1,2}"
+}
