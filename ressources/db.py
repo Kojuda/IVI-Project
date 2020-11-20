@@ -4,13 +4,15 @@
 # adapte par: Danny Kohler, Luisa Rodrigues, Jasmin Wyss
 # creation: 06.10.2020
 
-import datetime
+import datetime. json
 from sqlalchemy import create_engine #pip install sqlalchemy
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, JSON
 from sqlalchemy.orm import relationship
-from sqlalchemy import MetaData, Table, Column, Integer, String
+from sqlalchemy import MetaData
+
+
 
 
 #~~~~~~~~~~~~~~~~~~~~~Create de base~~~~~~~~~~~~~~~~~~~~~
@@ -242,8 +244,8 @@ class Matching_Ads(Base):
     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
     ids_matching = Column(String)
-    regex = Column(String)
-    
+    regex = Column(JSON)
+    com_names = Column(JSON)
     parse_ads = relationship("Parse_ads", backref="matching_ads")
 
     def insert(self, session):
