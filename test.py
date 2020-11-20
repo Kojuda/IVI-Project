@@ -20,12 +20,12 @@ os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 # print(a)
 # b=int(re.findall("Number of ads: (\d*)\. .*", a)[0])
 # print(floor(b/30))
+test = "Amazone à couronne lilas; Lilac-crowned Amazon; Lilac-crowned Parrot; Amazona guayabera; Amazona Guayabera; Cotorra Frente Roja; Loro Corona-violeta;"
 
-pages = 29
-counter = 30
-back_pages = counter%pages if pages!=counter else pages
-print(back_pages)
-
+cns = [_.strip(" ") for _ in test.split(";")]
+        #List of list of termes included in common names without little words
+cns_decomposed=[[ str.lower(_) for _ in first.split(" ") if (len(_)>2)]  for first in cns if (len(first)>0)]
+print(cns_decomposed)
 
 
 
