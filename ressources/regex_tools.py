@@ -113,4 +113,5 @@ mp_mit_2 ={
 }
 
 cage_lexic=["cage", "jail", "enclosure", "cabine", "trap"]
-birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori"]
+birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure"]
+bird_denominations=["parrot"]

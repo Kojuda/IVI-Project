@@ -56,3 +56,7 @@ cp_re=re.compile(regex)
 # result=cp_re.search(text, re.DOTALL|re.MULTILINE)
 result=cp_re.search(text, re.DOTALL)
 print(result)
+
+test="Yellow-headed Amazon"
+s=re.split(" |-", test)
+print(s)

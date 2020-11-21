@@ -8,10 +8,9 @@ import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation 
 from ressources.db import Parse_ads, session, Matching_Ads, Mapping 
-from ressources.regex_tools import mp_mit, mp_mit_2
+from ressources.regex_tools import mp_mit, mp_mit_2, cage_lexic, birds_lexic, bird_denominations
 os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 
-def 
 def re_generator_species() :
     """Create a dictionary {id_species : {common name 1 : regex1, ....}}. These regexes
     will be used to multiples times, so we create them for once for each parsing. We can change
@@ -22,7 +21,10 @@ def re_generator_species() :
         #List of common names
         cns = [_.strip(" ") for _ in row.common_name.split(";") if (len(_.strip(" "))>0)]
         #List of list of termes included in common names without little words
-        cns_decomposed=[[ str.lower(_) for _ in first.split(" ") if (len(_)>2)]  for first in cns if (len(first)>0)]
+        cns_decomposed=[[ str.lower(_) for _ in re.split(" |-", first) if (len(_)>2)]  for first in cns if (len(first)>0)] #re.split(" -", first)
+        #Drop common bird denomination since several ads don't mention it (it's trivial) (e.g. "parrot")
+        cns_decomposed=[[word for word in l if (word not in bird_denominations)] for l in cns_decomposed]
+        print(cns_decomposed)
         #Replace each letter with its mitigation in the mitigation dic
         miss_cns=map(lambda list_words : ("".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in list_words), cns_decomposed)
         #Interpret map object
@@ -35,6 +37,24 @@ def re_generator_species() :
                 dict_regex[name]=reg
         all_birds[row.id]=dict_regex
     return all_birds
+
+def re_isBird() :
+    """Create a regex according to a dictionnary that will signal the presence of a word
+    of this lexic in a text"""
+    #Replacement that tolerate misspelling
+    miss_bird=["".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in birds_lexic]
+    #A regex that matches only if one of bird_lexic word is present
+    reg=f"^(?=.*{'|.*'.join(miss_bird)}).*"
+    return reg
+
+def re_hasCage() :
+    """Create a regex according to a dictionnary that will signal the presence of a word
+    of this lexic in a text"""
+    #Replacement that tolerate misspelling
+    miss_cage=["".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in cage_lexic]
+    #A regex that matches only if one of cage_lexic word is present
+    reg=f"^(?=.*{'|.*'.join(miss_cage)}).*"
+    return reg
 
 def search_re(ad, regexes) :
     """For each ad, we search with the regexes in the breed, title and description fields to
@@ -50,28 +70,47 @@ def search_re(ad, regexes) :
     re_matches={}
     #number of matches
     nb_match=0
-    for id_bird in regexes.keys() :
-        for regex in regexes[id_bird].values() :
-            #True at the first match, it's enough
-            result=re.search(regex, text, re.DOTALL)#|re.MULTILINE
-            if result :
-                matches+=f";{id_bird}" if (len(matches)>0) else f"{id_bird}"
-                nb_match+=1
-                #Find the corresponding common name according to the regex
-                com_name = [_[0] for _ in regexes[id_bird].items() if (regex in _)][0]
-                re_matches[id_bird]=(com_name, regex)
-                #Break because we don't need to match all common names, usually only one is used
-                break
-            else :
-                pass
-
+    #cage mentionned (-1 = no check)
+    cage=-1
+    #Check whether it is a bird
+    if re.search(re_isBird, text, re.DOTALL) :
+        #cage mentionned or not
+        if re.search(re_hasCage, text, re.DOTALL) :
+            cage=1
+        else :
+            cage=0
+        for id_bird in regexes.keys() :
+            for regex in regexes[id_bird].values() :
+                #True at the first match, it's enough
+                result=re.search(regex, text, re.DOTALL)#|re.MULTILINE
+                if result :
+                    matches+=f";{id_bird}" if (len(matches)>0) else f"{id_bird}"
+                    nb_match+=1
+                    #Find the corresponding common name according to the regex
+                    com_name = [_[0] for _ in regexes[id_bird].items() if (regex in _)][0]
+                    re_matches[id_bird]=(com_name, regex)
+                    #Break because we don't need to match all common names, usually only one is used
+                    break
+                else :
+                    pass
+    else :
+        #No birds => -2
+        matches+="-2"
+    
+    #If not match => -1
+    matches="-1" if (len(matches)==0) else matches
     entry=Matching_Ads(
             ad_id=ad.ad_id,
             ids_matching=matches,
             regex=json.dumps(re_matches),
-            nb_species_matches=nb_match
+            nb_species_matches=nb_match,
+            cage=cage
     )
     return entry
+
+#GLOBAL
+re_hasCage=re_hasCage()
+re_isBird=re_isBird()
 
 if __name__ == '__main__':
     #Documentation
@@ -85,8 +124,10 @@ if __name__ == '__main__':
 
     #~~~~~~~~~~~~~~ Create Regexes ~~~~~~~~~~~~~~
     dic_regexes=re_generator_species()
-    doc.info["Regexes"]=dic_regexes
+    doc.info["regexes"]=dic_regexes
     doc.addlog("Create regexes")
+    doc.info["cage_regex"]=re_hasCage
+    doc.info["isbird_regex"]=re_isBird
 
 
     for row in session.query(Parse_ads).filter_by(status_vendeur_taken=0):
@@ -95,7 +136,7 @@ if __name__ == '__main__':
             pass
         else:
             entry = search_re(ad=row, regexes=dic_regexes)
-            print("One search...\n")
+            print(f"{row.ad_id}...\n")
             doc.addlog(f"Search in ad {row.ad_id}")
 
             entry.insert(session)

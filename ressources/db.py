@@ -265,11 +265,10 @@ class Matching_Ads(Base):
     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
     ids_matching = Column(String)
     regex = Column(JSON)
-    #com_names = Column(JSON)
     nb_species_matches= Column(Integer)
     #Presence or not
     cage= Column(Integer)
-    status=Column(Integer)
+    status=Column(Integer, default=0)
     parse_ads = relationship("Parse_ads", backref="matching_ads")
 
     def insert(self, session):
