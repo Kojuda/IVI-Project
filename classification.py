@@ -8,11 +8,11 @@ import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation 
 from ressources.db import Parse_ads, session, Matching_Ads, Mapping 
-from ressources.regex_tools import mp_mit
+from ressources.regex_tools import mp_mit, mp_mit_2
 os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 
-
-def re_generator() :
+def 
+def re_generator_species() :
     """Create a dictionary {id_species : {common name 1 : regex1, ....}}. These regexes
     will be used to multiples times, so we create them for once for each parsing. We can change
     the code here to adapt the way of create these regexes."""
@@ -24,7 +24,7 @@ def re_generator() :
         #List of list of termes included in common names without little words
         cns_decomposed=[[ str.lower(_) for _ in first.split(" ") if (len(_)>2)]  for first in cns if (len(first)>0)]
         #Replace each letter with its mitigation in the mitigation dic
-        miss_cns=map(lambda list_words : ("".join([mp_mit[char] if (char in mp_mit.keys())  else char for char in list(word)]) for word in list_words), cns_decomposed)
+        miss_cns=map(lambda list_words : ("".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in list_words), cns_decomposed)
         #Interpret map object
         miss_cns=[list(_) for _ in list(miss_cns)]
         dict_regex = {}
@@ -42,8 +42,8 @@ def search_re(ad, regexes) :
     from each birds. If a common name is matched, it passes to the next bird. No need to match several common
     names."""
     #We add the fields in this order to start with the fields that most likely contain the name
-    #to stop as fast as possible to earn computational time
-    text=f"{ad.breed} {ad.title} {ad.description}"
+    #to stop as fast as possible to earn computational time. (lower reduces variability)
+    text=f"{ad.breed} {ad.title} {ad.description}".lower()
     #String with all the id_birds that have matched with ";" separator
     matches=""
     #Dict containing the matching regex with the bird_id and the common name
@@ -52,14 +52,13 @@ def search_re(ad, regexes) :
     nb_match=0
     for id_bird in regexes.keys() :
         for regex in regexes[id_bird].values() :
-            cp_re=re.compile(regex)
             #True at the first match, it's enough
-            result=cp_re.search(text, re.DOTALL|re.MULTILINE)
+            result=re.search(regex, text, re.DOTALL)#|re.MULTILINE
             if result :
-                matches+=f";{id_bird}"
+                matches+=f";{id_bird}" if (len(matches)>0) else f"{id_bird}"
                 nb_match+=1
                 #Find the corresponding common name according to the regex
-                com_name = [_[0] for _ in re_matches[id_bird].items() if (regex in _)][0]
+                com_name = [_[0] for _ in regexes[id_bird].items() if (regex in _)][0]
                 re_matches[id_bird]=(com_name, regex)
                 #Break because we don't need to match all common names, usually only one is used
                 break
@@ -69,7 +68,7 @@ def search_re(ad, regexes) :
     entry=Matching_Ads(
             ad_id=ad.ad_id,
             ids_matching=matches,
-            regex=json.dumps(re_matches, indent=4),
+            regex=json.dumps(re_matches),
             nb_species_matches=nb_match
     )
     return entry
@@ -85,20 +84,20 @@ if __name__ == '__main__':
 
 
     #~~~~~~~~~~~~~~ Create Regexes ~~~~~~~~~~~~~~
-    dic_regexes=re_generator()
+    dic_regexes=re_generator_species()
     doc.info["Regexes"]=dic_regexes
     doc.addlog("Create regexes")
 
 
     for row in session.query(Parse_ads).filter_by(status_vendeur_taken=0):
         #Skip if already exists
-        if session.query(exists().where(Parse_ads.ad_id == row.ad_id)).scalar():
+        if session.query(exists().where(Matching_Ads.ad_id == row.ad_id)).scalar():
             pass
         else:
             entry = search_re(ad=row, regexes=dic_regexes)
-            doc.addlog[f"Search in ad {row.ad_id}"]
+            print("One search...\n")
+            doc.addlog(f"Search in ad {row.ad_id}")
 
-            session.commit()
             entry.insert(session)
             # row.update(session)
 

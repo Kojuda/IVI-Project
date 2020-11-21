@@ -267,6 +267,9 @@ class Matching_Ads(Base):
     regex = Column(JSON)
     #com_names = Column(JSON)
     nb_species_matches= Column(Integer)
+    #Presence or not
+    cage= Column(Integer)
+    status=Column(Integer)
     parse_ads = relationship("Parse_ads", backref="matching_ads")
 
     def insert(self, session):
