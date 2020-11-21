@@ -36,7 +36,13 @@ def re_generator() :
         all_birds[row.id]=dict_regex
     return all_birds
 
-def search_re() :
+def search_re(ad, regexes) :
+    #We add the fields in this order to start with the fields that most likely contain the name
+    #to stop as fast as possible to earn computational time
+    text=f"{ad.breed} {ad.title} {ad.description}"
+    for id_bird in regexes.keys() :
+        for regex in regexes[id_bird].values()
+            
     pass
 if __name__ == '__main__':
     #Documentation
@@ -46,13 +52,20 @@ if __name__ == '__main__':
  
     path_result='./results/calssification/'
     #Vendeur taken en attendant
+
+
+    #~~~~~~~~~~~~~~ Create Regexes ~~~~~~~~~~~~~~
+    dic_regexes=re_generator()
+    doc.info["Regexes"]=dic_regexes
+    doc.addlog("Create regexes")
+
+
     for row in session.query(Parse_ads).filter_by(status_vendeur_taken=0):
         #Skip if already exists
         if session.query(exists().where(Parse_ads.ad_id == row.ad_id)).scalar():
             pass
         else:
-            dic_regexes=re_generator()
-            doc.info["Regexes"]=dic_regexes
+            pass
             # entry = create_entry(dic_champs, row)
 
             # session.commit()
