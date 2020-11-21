@@ -21,6 +21,17 @@ os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 # print(a)
 # b=int(re.findall("Number of ads: (\d*)\. .*", a)[0])
 # print(floor(b/30))
+
+
+
+
+
+
+
+
+
+
+
 test = "Amazone à couronne lilas; Lilac-crowned Amazon; Lilac-crowned Parrot; Amazona guayabera; Amazona Guayabera; Cotorra Frente Roja; Loro Corona-violeta;"
 
 cns = [_.strip(" ") for _ in test.split(";") if (len(_.strip(" "))>0)]
