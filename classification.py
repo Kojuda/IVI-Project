@@ -12,6 +12,7 @@ from ressources.regex_tools import mp_mit
 
 
 def re_generator() :
+    dict
     for row in session.query(Mapping) :
         id = row.id 
         #List of common names
@@ -21,7 +22,7 @@ def re_generator() :
         #Replace each letter with its mitigation in the mitigation dic
         miss_cns=["".join([mp_mit[char] if (char in mp_mit.keys())  else char for char in list(word)]) for l in cns_decomposed for word in l]
         dict_regex = {}
-        for word_from_names in cns_decomposed :
+        for word_from_names in miss_cns :
 
         
     #create a dictionary {id_species : {common name 1 : regex1, ....}}
@@ -34,7 +35,7 @@ if __name__ == '__main__':
     date_parsing = f"{str(cT.year)}-{str(cT.month)}-{str(cT.day)}_{str(cT.hour)}-{str(cT.minute)}"
     doc = Documentation()
  
-    path_result='./results/getCodes/codes/'
+    path_result='./results/calssification/'
 
     for row in session.query(Ads_Codes).filter_by(status=0):
         #Skip if already exists

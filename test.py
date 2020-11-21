@@ -24,10 +24,19 @@ os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 test = "Amazone à couronne lilas; Lilac-crowned Amazon; Lilac-crowned Parrot; Amazona guayabera; Amazona Guayabera; Cotorra Frente Roja; Loro Corona-violeta;"
 
 cns = [_.strip(" ") for _ in test.split(";") if (len(_.strip(" "))>0)]
-        #List of list of termes included in common names without little words
+#List of list of termes included in common names without little words
 cns_decomposed=[[ str.lower(_) for _ in first.split(" ") if (len(_)>2)]  for first in cns if (len(first)>0)]
-miss_cns=["".join([mp_mit[char] if (char in mp_mit.keys())  else char for char in list(word)]) for l in cns_decomposed for word in l]
-print(miss_cns)
+#Replace each letter with its mitigation in the mitigation dic
+miss_cns=map(lambda list_words : ("".join([mp_mit[char] if (char in mp_mit.keys())  else char for char in list(word)]) for word in list_words), cns_decomposed)
+#Interpret map object
+miss_cns=[list(_) for _ in list(miss_cns)]
+dict_regex = {}
+#Populate the dict with regex according to each name
+for name_decomposed, name in zip(miss_cns, cns) :
+        reg="".join([f"(?=.*{word})" for word in name])
+        reg=f"^{reg}.*"
+        dict_regex[name]=reg
+
 
 
 
