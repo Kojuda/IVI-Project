@@ -37,13 +37,43 @@ def re_generator() :
     return all_birds
 
 def search_re(ad, regexes) :
+    """For each ad, we search with the regexes in the breed, title and description fields to
+    find one common name of a bird in the CITES mapping. The text is analyzed with each regex common name
+    from each birds. If a common name is matched, it passes to the next bird. No need to match several common
+    names."""
     #We add the fields in this order to start with the fields that most likely contain the name
     #to stop as fast as possible to earn computational time
     text=f"{ad.breed} {ad.title} {ad.description}"
+    #String with all the id_birds that have matched with ";" separator
+    matches=""
+    #Dict containing the matching regex with the bird_id and the common name
+    re_matches={}
+    #number of matches
+    nb_match=0
     for id_bird in regexes.keys() :
-        for regex in regexes[id_bird].values()
-            
-    pass
+        for regex in regexes[id_bird].values() :
+            cp_re=re.compile(regex)
+            #True at the first match, it's enough
+            result=cp_re.search(text, re.DOTALL|re.MULTILINE)
+            if result :
+                matches+=f";{id_bird}"
+                nb_match+=1
+                #Find the corresponding common name according to the regex
+                com_name = [_[0] for _ in re_matches[id_bird].items() if (regex in _)][0]
+                re_matches[id_bird]=(com_name, regex)
+                #Break because we don't need to match all common names, usually only one is used
+                break
+            else :
+                pass
+
+    entry=Matching_Ads(
+            ad_id=ad.ad_id,
+            ids_matching=matches,
+            regex=json.dumps(re_matches, indent=4),
+            nb_species_matches=nb_match
+    )
+    return entry
+
 if __name__ == '__main__':
     #Documentation
     cT = datetime.datetime.now()
@@ -65,11 +95,11 @@ if __name__ == '__main__':
         if session.query(exists().where(Parse_ads.ad_id == row.ad_id)).scalar():
             pass
         else:
-            pass
-            # entry = create_entry(dic_champs, row)
+            entry = search_re(ad=row, regexes=dic_regexes)
+            doc.addlog[f"Search in ad {row.ad_id}"]
 
-            # session.commit()
-            # entry.insert(session)
+            session.commit()
+            entry.insert(session)
             # row.update(session)
 
 
