@@ -8,16 +8,20 @@ import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation 
 from ressources.db import Parse_ads, session, Matching_Ads, Mapping 
-from ressources.regex_tools import misspelling_mitigations
+from ressources.regex_tools import mp_mit
 
 
 def re_generator() :
     for row in session.query(Mapping) :
         id = row.id 
         #List of common names
-        cns = [_.strip(" ") for _ in row.common_name.split(";")]
+        cns = [_.strip(" ") for _ in row.common_name.split(";") if (len(_.strip(" "))>0)]
         #List of list of termes included in common names without little words
         cns_decomposed=[[ str.lower(_) for _ in first.split(" ") if (len(_)>2)]  for first in cns if (len(first)>0)]
+        #Replace each letter with its mitigation in the mitigation dic
+        miss_cns=["".join([mp_mit[char] if (char in mp_mit.keys())  else char for char in list(word)]) for l in cns_decomposed for word in l]
+        dict_regex = {}
+        for word_from_names in cns_decomposed :
 
         
     #create a dictionary {id_species : {common name 1 : regex1, ....}}

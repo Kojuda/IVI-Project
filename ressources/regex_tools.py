@@ -54,7 +54,7 @@ def removeEmptyString(liste):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~ Project REGEX ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #Dict of letters with some possibilites of misspelling (Don't consider absence)
-misspelling_mitigations ={
+mp_mit ={
     "a" : "[Aa4]{1,2}",
     "b" : "[Bb]{1,2}",
     "c" : "[Cc]{1,2}",

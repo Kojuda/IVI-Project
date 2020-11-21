@@ -4,6 +4,7 @@ from sqlalchemy import and_, exists
 import re
 import os
 from math import floor
+from ressources.regex_tools import mp_mit
 os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 
 # for row in session.query(Country).all():
@@ -22,10 +23,11 @@ os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 # print(floor(b/30))
 test = "Amazone à couronne lilas; Lilac-crowned Amazon; Lilac-crowned Parrot; Amazona guayabera; Amazona Guayabera; Cotorra Frente Roja; Loro Corona-violeta;"
 
-cns = [_.strip(" ") for _ in test.split(";")]
+cns = [_.strip(" ") for _ in test.split(";") if (len(_.strip(" "))>0)]
         #List of list of termes included in common names without little words
 cns_decomposed=[[ str.lower(_) for _ in first.split(" ") if (len(_)>2)]  for first in cns if (len(first)>0)]
-print(cns_decomposed)
+miss_cns=["".join([mp_mit[char] if (char in mp_mit.keys())  else char for char in list(word)]) for l in cns_decomposed for word in l]
+print(miss_cns)
 
 
 
