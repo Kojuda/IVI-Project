@@ -256,6 +256,29 @@ class Match_Regex_IdMap(Base):
     def deleteEntry(self, session):
         session.delete(self)
         session.commit()
+
+class Matching_Ads(Base):
+    __tablename__ = 'matching_ads'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ad_id = Column(String, ForeignKey("parse_ads.ad_id"), unique=True)
+    date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
+    date_updated = Column(DateTime, onupdate=datetime.datetime.now())
+    ids_matching = Column(String)
+    regex = Column(JSON)
+    com_names = Column(JSON)
+    parse_ads = relationship("Parse_ads", backref="matching_ads")
+
+    def insert(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session):
+        session.delete(self)
+        session.commit()
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
 
