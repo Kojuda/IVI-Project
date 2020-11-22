@@ -35,6 +35,17 @@ dict_alphabet['y']='y+|Y+'
 dict_alphabet['z']='z+|Z+'
 dict_alphabet[' ']='\s+'
 dict_alphabet['.']='\s*'
+dict_alphabet['-']='-*|\s*'
+dict_alphabet[';']='\s*'
+dict_alphabet['\'']='\'*|\s*'
+dict_alphabet['è']='è+|é+|e+|E+'
+dict_alphabet['é']='è+|é+|e+|E+'
+dict_alphabet['à']='à+|a+|á+|A+|4+'
+dict_alphabet['á']='à+|a+|á+|A+|4+'
+dict_alphabet['ç']='ç+|c+|C+'
+
+
+
 
 #dict_alphabet = {}
 #dict_alphabet['a']='[aA4]'
@@ -65,6 +76,7 @@ dict_alphabet['.']='\s*'
 #dict_alphabet['z']='[zZ]'
 #dict_alphabet[' ']='\s'
 #dict_alphabet['.']='\s'
+
 def word_to_regex(word: str):
     l = []
     seperator=''
@@ -72,9 +84,16 @@ def word_to_regex(word: str):
         try:
             l.append('('+dict_alphabet[word[i].lower()]+'){1}')
         except:
-            l.append("\w")
-    res= seperator.join(l)
-    return res
+            if len(l)<4:
+                pass
+            else:
+                l.append("\w")
+    if len (l)>3:
+        res= seperator.join(l)
+        return res
+    else:
+        print(word, None)
+        return None
 
 
 if __name__ == '__main__':

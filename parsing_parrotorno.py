@@ -10,7 +10,7 @@ from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Parsing_bird_or_no, Mapping, Regex, Match_Regex_IdMap
 from spelling_error_mitigation import word_to_regex
 list_scientific = []
-status_modified = False #A changer à true si changé spelling erreur mitigation ou table cites + supprimer tables
+status_modified = True #A changer à true si changé spelling erreur mitigation ou table cites + supprimer tables
 
 #transformer table mapping_names en REGEX if modifications were made [aliments tables regex et match_regex_idmap
 if status_modified:
