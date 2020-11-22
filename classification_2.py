@@ -119,7 +119,7 @@ def search_re(ad, regexes) :
     )
     return entry
 
-#GLOBAL
+#GLOBAL (regexes)
 re_hasCage=re_hasCage()
 re_isBird=re_isBird()
 re_hasEgg=re_hasEgg()
