@@ -10,45 +10,46 @@ from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Mapping, Regex, Match_Regex_IdMap
 from spelling_error_mitigation import word_to_regex
 list_scientific = []
-status_modified = False
+status_modified = False #A changer à true si changé spelling erreur mitigation ou table cites + supprimer tables
 
 #transformer table mapping_names en REGEX if modifications were made [aliments tables regex et match_regex_idmap
 if status_modified:
     for row in session.query(Mapping):
-    print(row.id)
+        #print(row.id)
     # traitement scientific name
-    a = word_to_regex(row.scientific_name_cites)
-    list_scientific.append(a)
-    # traitement common name
-    entree = row.common_name.split('; ') #créer la liste
-    for name in entree:
-        #if (name == '')or(name == ' '):
-        #    pass
-        #print(name)
-        # try:
-        name.lower()
-        list_of_words = name.split(' ')
-        for i in list_of_words:
-            if len(i) < 3: #let alone small words
-                pass
-            else: #big words - we do something with them: namely
-                if type(i)==str: #check if string, if not string we just sit idle
-                    res = word_to_regex(i)
-                else:
-                    print('problem with input')
-                    res = False
-                if session.query(Regex).filter(Regex.reg==res).scalar()==None: #if entry doesn't exist: create entry in regex database
-                    entry = Regex(reg=res)
-                    entry.insertregex(session)
-                    session.commit()
-                else: #if no entry pass
+        a = word_to_regex(row.scientific_name_cites)
+        list_scientific.append(a)
+        # traitement common name
+        entree = row.common_name.split('; ') #créer la liste
+        for name in entree:
+            #if (name == '')or(name == ' '):
+            #    pass
+            #print(name)
+            # try:
+            name.lower()
+            list_of_words = name.split(' ')
+            for i in list_of_words:
+                if len(i) < 3: #let alone small words
                     pass
-                #now we fillup  Match_Regex_IdMap
-                request=session.query(Regex.id).filter(Regex.reg==res).scalar()
-                if request!=None:
-                    entry = Match_Regex_IdMap(id_re=request, id_map=row.id)
-                    entry.insertMatch(session)
-                    session.commit()
+                else: #big words - we do something with them: namely
+                    if type(i)==str: #check if string, if not string we just sit idle
+                        res = word_to_regex(i)
+                    else:
+                        print('problem with input')
+                        res = False
+                    if session.query(Regex).filter(Regex.reg==res).scalar()==None: #if entry doesn't exist: create entry in regex database
+                        entry = Regex(reg=res)
+                        entry.insertregex(session)
+                        session.commit()
+                    else: #if no entry pass
+                        pass
+                    #now we fillup  Match_Regex_IdMap
+                    requested_re = session.query(Regex.id).filter(Regex.reg==res)
+                    request = session.query(Match_Regex_IdMap.id).filter_by(id_re=requested_re, id_map=row.id).scalar()
+                    if request==None:
+                        entry = Match_Regex_IdMap(id_re=requested_re, id_map=row.id)
+                        entry.insertMatch(session)
+                        session.commit()
 
 
 
