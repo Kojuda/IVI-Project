@@ -77,6 +77,7 @@ if __name__ == '__main__':
                 if match_scientific == 0:
                     for expression in list_scientific:
         #             # For each defined regular expression
+                        
                         res = re.search(expression, row.title)
                         if res!= None:
                             match_scientific = 1
