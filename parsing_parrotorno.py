@@ -7,10 +7,10 @@
 import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation
-from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Mapping, Regex, Match_Regex_IdMap
+from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Parsing_bird_or_no, Mapping, Regex, Match_Regex_IdMap
 from spelling_error_mitigation import word_to_regex
 list_scientific = []
-status_modified = False #A changer à true si changé spelling erreur mitigation ou table cites + supprimer tables
+status_modified = True #A changer à true si changé spelling erreur mitigation ou table cites + supprimer tables
 
 #transformer table mapping_names en REGEX if modifications were made [aliments tables regex et match_regex_idmap
 if status_modified:
@@ -22,10 +22,6 @@ if status_modified:
         # traitement common name
         entree = row.common_name.split('; ') #créer la liste
         for name in entree:
-            #if (name == '')or(name == ' '):
-            #    pass
-            #print(name)
-            # try:
             name.lower()
             list_of_words = name.split(' ')
             for i in list_of_words:
@@ -52,59 +48,12 @@ if status_modified:
                         session.commit()
 
 
-
-
-
-
-
-
-        #Il faudra quand même mettre quelque part Parrot, Parakeet, Amazon, Psittacus, etc. pour
-        #PARROT OR NO, mais pour la race spécifique c'est mieux d'enlever:
-        #Aussi problème de couleur (chaque green est trouvé p. ex.) et problème de type (Amazone, Macaw, Cockatoo):
-        #Toujours plusieurs races comprenant ces noms, mais parfois la personne va juste écrire "Amazone" ou "Cockatoo" sans préciser
-        #Et si on enlève on ne trouvera jamais....
-        # while 'Amazon' in list:
-        #     list.remove('Amazon')
-        # while 'Amazone' in list:
-        #     list.remove('Amazone')
-        # while 'Amazona' in list:
-        #     list.remove('Amazona')
-        # while 'Psittacus' in list:
-        #     list.remove('Psittacus')
-        # while 'Parrot' in list:
-        #     list.remove('Parrot')
-        # while 'parrot' in list:
-        #     list.remove('parrot')
-        # while 'parakeet' in list:
-        #     list.remove('parakeet')
-        # while 'Parakeet' in list:
-        #     list.remove('Parakeet')
-        # while 'Macaw' in list:
-        #     list.remove('Macaw')
-        # while 'macaw' in list:
-        #     list.remove('macaw')
-        # while 'de' in list:
-        #     list.remove('de')
-        # while 'des' in list:
-        #     list.remove('des')
-        # while 'le' in list:
-        #     list.remove('le')
-        # while 'la' in list:
-        #     list.remove('la')
-        # while 'à' in list:
-        #     list.remove('à')
-        # while '' in list:
-        #     list.remove('')
-        # print(list)
-        # except:
-        #     pass
-
-
-# TODO: mettre qqch pour que ce soit case non-sensitive si pas déjà fait?
-
-
-
 if __name__ == '__main__':
+    #générer list_scientific
+    for row in session.query(Mapping):
+        a = word_to_regex(row.scientific_name_cites)
+        list_scientific.append(a)
+
     path_result = './results/parse/'
     #Documentation
     cT = datetime.datetime.now()
@@ -119,83 +68,54 @@ if __name__ == '__main__':
 
     # c = 0 #counter to trace vow many ads have status 1 = classified as psittaciforme
     for row in session.query(Parse_ads):
-        if session.query(Parsing_Psittaciformes_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
-    #         print('no entry')
-    #NOM SCIENTIFIQUE
-    #         # step 1 search in title
-            match_scientifique = 0 #default pas de match
-            if match_scientifique == 0:
-                for expression in list_scientific:
-    #             # For each defined regular expression
-                    res = re.search(expression, row.title)
-                    if res!= None:
-                        match_scientifique =1
-                    if row.description != None:
-                        res_des = re.search(expression,row.description)
-                        if res_des!= None:
-                            match_scientifique = 1
-                    # search in title
-    #                if res != None:  # if there is a match, go on
-    #                if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar() == None:  # if there isn't already an entry
-    #                      entry = Parsing_Psittaciformes_or_no(ad_id=row.ad_id, match_cites_parrot=1)
-    #                      entry.insertPsittaciformes(session)
-    #                      session.commit()
-    #                     c += 1
-    #                      pass
-    #
-    #
-    #         # step 2 search in description
-    #          for expression in list_scientific:
-    #              if row.description != None:
-    #                  try:
-    #                      res = re.search(expression, row.description)
-    #                  except:
-    #                     print('unknown error')
-    #                     print(row.ad_id)
-    #                      res = None
-    #              if res != None:
-    #                  if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar() == None:
-    #                     print('description')
-    #                      entry = Parsing_Psittaciformes_or_no(ad_id=row.ad_id, match_cites_parrot=1)
-    #                      entry.insertPsittaciformes(session)
-    #                      session.commit()
-    #                      pass
-    #
-    #         # last step if no match add status 0
-    #         # if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar()
-    #         if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar() == None:
-    #             entry = Parsing_Psittaciformes_or_no(ad_id=row.ad_id, match_cites_parrot=0)
-    #             entry.insertPsittaciformes(session)
-    #             session.commit()
-    #
-    #     else:
-    #         print('entry exists')
-    #         #print(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar(), type(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()))
-    #         if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar()==0:
-    #             print('change')
-    #             status_change = False
-    #             # step 1 search in title
-    #             for expression in list_scientific:
-    #                 # For each defined regular expression
-    #                 res = re.search(expression, row.title)  # search in title
-    #                 if res != None:  # if there is a match, go on
-    #                     if status_change:
-    #                         print('change stat')
-    #                         Parsing_Psittaciformes_or_no(ad_id=row.ad_id).update(session)
-    #                         session.commit()
-    #                         c += 1
-    #                         status_change = True
-    #                         pass
-    #                 try:
-    #                     res_des = re.search(expression, row.description)
-    #                     print(res_des.scalar()) #déplacé
-    #                 except:
-    #                     res_des = None
-    #                 if res_des != None:
-    #                     if status_change:
-    #                         print('change des')
-    #                         Parsing_Psittaciformes_or_no(ad_id=row.ad_id).update(session)
-    #                         session.commit()
-    #                         c += 1
-    #                         status_change = True
-    #                         pass
+        if session.query(Parsing_bird_or_no).filter_by(status_bird=1, ad_id=row.ad_id).scalar() != None:
+            if session.query(Parsing_Psittaciformes_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
+        #         print('no entry')
+        #NOM SCIENTIFIQUE
+        #         # step 1 search in title
+                match_scientific = 0 #default pas de match
+                if match_scientific == 0:
+                    for expression in list_scientific:
+        #             # For each defined regular expression
+                        
+                        res = re.search(expression, row.title)
+                        if res!= None:
+                            match_scientific = 1
+                        if row.description != None:
+                            res_des = re.search(expression,row.description)
+                            if res_des!= None:
+                                match_scientific = 1
+                    #if match_scientific == 1:
+                        #print(match_scientific, row.ad_id)
+
+                match_common = 0 #default pas de match
+                list_match_common = []
+                for regex in session.query(Regex):
+                    try:
+                        res_titre = re.search(regex.reg, row.title)
+                        if res_titre != None:
+                            match_common = 1
+                            if str(regex.id) not in list_match_common:
+                                list_match_common.append(str(regex.id))
+                    except:
+                        print('error in re_titre')
+                    try:
+                        res_description = re.search(regex.reg, row.description)
+                        if res_description != None:
+                            match_common = 1
+                            if str(regex.id) not in list_match_common:
+                                list_match_common.append(str(regex.id))
+                    except:
+                        print('error in res_description')
+                #print(row.ad_id, match_common, list_match_common)
+
+                separator = ';'
+                try:
+                    lmc = separator.join(list_match_common) #dans spelling_error_mitigation separator.join(l)
+                #print(lmc)
+                except:
+                    print('error lmc empty')
+                    lmc = None
+                entry = Parsing_Psittaciformes_or_no(ad_id=row.ad_id, match_cites_parrot=match_scientific, match_common_parrot=match_common, mapping_match=lmc)
+                entry.insertPsittaciformes(session)
+                session.commit()

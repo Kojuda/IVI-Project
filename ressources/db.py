@@ -131,7 +131,7 @@ class Parse_ads(Base):
         session.commit()
 
 class Parsing_bird_or_no(Base):
-    __tablename__ = 'parse_bird_or_no'
+    __tablename__ = 'classification_1_parse_bird_or_no'
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
     status_bird = Column(Integer, default=0)#0: not classified 1: classified
@@ -150,7 +150,7 @@ class Parsing_bird_or_no(Base):
         session.commit()
 
 class MentionedCage(Base):
-    __tablename__ = 'cage'
+    __tablename__ = 'classification_1_cage'
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
     status_cage = Column(Integer, default=0)#0: not classified 1: classified
@@ -170,7 +170,7 @@ class MentionedCage(Base):
         session.commit()
 
 class Parsing_Psittaciformes_or_no(Base):
-    __tablename__ = 'psittaciformes_or_no'
+    __tablename__ = 'classification_1_psittaciformes_or_no'
     #H: une même annonce ne match pas plus que 10 noms d'oiseaux différents
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
@@ -219,7 +219,7 @@ class Mapping(Base):
         session.commit()
 
 class Regex(Base):
-    __tablename__ = 'regex'
+    __tablename__ = 'classification_1_regex'
     id = Column(Integer, primary_key=True, autoincrement=True)
     reg = Column(String)
 
@@ -237,7 +237,7 @@ class Regex(Base):
 
 
 class Match_Regex_IdMap(Base):
-    __tablename__ = 'reg_map_match'
+    __tablename__ = 'classification_1_reg_map_match'
     id = Column(Integer, primary_key=True, autoincrement=True)
     id_re = Column(Integer, ForeignKey("regex.id"))
     id_map = Column(Integer, ForeignKey("mapping_cites.id"))
@@ -258,7 +258,7 @@ class Match_Regex_IdMap(Base):
         session.commit()
 
 class Matching_Ads(Base):
-    __tablename__ = 'matching_ads'
+    __tablename__ = 'classification_2_matching_ads'
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String, ForeignKey("parse_ads.ad_id"), unique=True)
     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
@@ -285,7 +285,7 @@ class Matching_Ads(Base):
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
 
-engine = create_engine('sqlite:///DATABASES/project.db')
+engine = create_engine('sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db')
     #j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier [a faire entre Luisa&autres]
     #engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
     #pour luisa la path est: 'sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db'
