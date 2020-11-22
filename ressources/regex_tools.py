@@ -128,11 +128,18 @@ mp_mit_2 ={
     "x" : "[x]{1,2}",
     "y" : "[y]{1,2}",
     "z" : "[z]{1,2}",
-    "è" : "[èée]{1,2}",
-    "é" : "[èée]{1,2}",
+    "è" : "[èéêe]{1,2}",
+    "é" : "[èéêe]{1,2}",
     "à" : "[àaá4]{1,2}",
     "á" : "[àaá4]{1,2}",
     "ç" : "[çc]{1,2}",
+    "ú" : "[úùûüu]{1,2}",
+    "å" : "[ãåàaá]{1,2}",
+    "ã" : "[ãåàaá]{1,2}",
+    "ù" : "[úùûüu]{1,2}",
+    "ê" : "[èéêe]{1,2}",
+    "(" : "",
+    ")" : ""
 }
 
 dict_alphabet = {}
@@ -176,7 +183,7 @@ dict_alphabet['ç']='ç+|c+|C+'
 cage_lexic=["cage", "jail", "enclosure", "cabine", "trap"]
 birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet"]
 egg_lexic=["egg", "cackleberry"]
-bird_denominations=["parrot", "cuckatoo"]
+bird_denominations=["parrot", "cuckatoo", "and", "all", "des", "spp.", "st."]
 
 
 

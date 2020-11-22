@@ -23,7 +23,7 @@ def re_generator_species() :
         #Add the scientific name
         cns.append(row.scientific_name_cites)
         #List of list of termes included in common names without little words
-        cns_decomposed=[[ str.lower(_) for _ in re.split(" |-", first) if (len(_)>2)]  for first in cns if (len(first)>0)] #re.split(" -", first)
+        cns_decomposed=[[ str.lower(_) for _ in re.split(" |-|'", first) if (len(_)>2)]  for first in cns if (len(first)>0)] #re.split(" -", first)
         #Drop common bird denomination since several ads don't mention it (it's trivial) (e.g. "parrot")
         cns_decomposed=[[word for word in l if (word not in bird_denominations)] for l in cns_decomposed]
         print(cns_decomposed)
