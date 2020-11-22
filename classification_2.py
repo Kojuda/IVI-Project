@@ -8,7 +8,7 @@ import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation 
 from ressources.db import Parse_ads, session, Matching_Ads, Mapping 
-from ressources.regex_tools import mp_mit, mp_mit_2, cage_lexic, birds_lexic, bird_denominations, eggs_lexic
+from ressources.regex_tools import mp_mit, mp_mit_2, cage_lexic, birds_lexic, bird_denominations, egg_lexic
 os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 
 def re_generator_species() :
@@ -20,6 +20,8 @@ def re_generator_species() :
         id = row.id 
         #List of common names
         cns = [_.strip(" ") for _ in row.common_name.split(";") if (len(_.strip(" "))>0)]
+        #Add the scientific name
+        cns.append(row.scientific_name_cites)
         #List of list of termes included in common names without little words
         cns_decomposed=[[ str.lower(_) for _ in re.split(" |-", first) if (len(_)>2)]  for first in cns if (len(first)>0)] #re.split(" -", first)
         #Drop common bird denomination since several ads don't mention it (it's trivial) (e.g. "parrot")

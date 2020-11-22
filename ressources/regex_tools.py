@@ -175,7 +175,7 @@ dict_alphabet['ç']='ç+|c+|C+'
 
 cage_lexic=["cage", "jail", "enclosure", "cabine", "trap"]
 birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet"]
-eggs_lexic=["egg", "cackleberry"]
+egg_lexic=["egg", "cackleberry"]
 bird_denominations=["parrot", "cuckatoo"]
 
 

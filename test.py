@@ -48,15 +48,26 @@ os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 #         reg=f"^{reg}.*"
 #         dict_regex[name]=reg
 
-regex='^(?=.*[a]{1,2}[f]{1,2}[r]{1,2}[i]{1,2}[c]{1,2}[a]{1,2}[n]{1,2})(?=.*[g]{1,2}[r]{1,2}[e]{1,2}[y]{1,2})(?=.*[p]{1,2}[a]{1,2}[r]{1,2}[r]{1,2}[o]{1,2}[t]{1,2}).*'
-text="""\n\t\t  \tpurebred african grey parrot's available now.,l male and female african grey parrots for sale.parrots are currently being nurtured in a beautiful environment and ready to be shipped worldwide. all our babies are very friendly, entertaining, love been held cuddled and played with and very well socialized. a $280 deposit will reserve the pair for a period of 1 month. all our parrots come with a health certificate from an avian vet and all babies are also disease-free they are vaccinated, checked and tamed, they will come alongside with all bird accessories..... just contact.... for more details about our birds..(magareteambang01@gmail.com)"""
 
-cp_re=re.compile(regex)
-            #True at the first match, it's enough
-# result=cp_re.search(text, re.DOTALL|re.MULTILINE)
-result=cp_re.search(text, re.DOTALL)
-print(result)
 
-test="Yellow-headed Amazon"
-s=re.split(" |-", test)
-print(s)
+
+
+# regex='^(?=.*[a]{1,2}[f]{1,2}[r]{1,2}[i]{1,2}[c]{1,2}[a]{1,2}[n]{1,2})(?=.*[g]{1,2}[r]{1,2}[e]{1,2}[y]{1,2})(?=.*[p]{1,2}[a]{1,2}[r]{1,2}[r]{1,2}[o]{1,2}[t]{1,2}).*'
+# text="""\n\t\t  \tpurebred african grey parrot's available now.,l male and female african grey parrots for sale.parrots are currently being nurtured in a beautiful environment and ready to be shipped worldwide. all our babies are very friendly, entertaining, love been held cuddled and played with and very well socialized. a $280 deposit will reserve the pair for a period of 1 month. all our parrots come with a health certificate from an avian vet and all babies are also disease-free they are vaccinated, checked and tamed, they will come alongside with all bird accessories..... just contact.... for more details about our birds..(magareteambang01@gmail.com)"""
+
+# cp_re=re.compile(regex)
+# result=cp_re.search(text, re.DOTALL)
+# print(result)
+
+# test="Yellow-headed Amazon"
+# s=re.split(" |-", test)
+# print(s)
+
+
+
+test = "Amazone à couronne lilas; Lilac-crowned Amazon; Lilac-crowned Parrot; Amazona guayabera; Amazona Guayabera; Cotorra Frente Roja; Loro Corona-violeta;"
+
+scientific="Pyrrhura cruentata"
+cns = [_.strip(" ") for _ in test.split(";") if (len(_.strip(" "))>0)]
+abss = cns.append(scientific.split(" "))
+print(cns)
