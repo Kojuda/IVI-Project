@@ -8,7 +8,7 @@ import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation 
 from ressources.db import Parse_ads, session, Matching_Ads, Mapping 
-from ressources.regex_tools import mp_mit, mp_mit_2, cage_lexic, birds_lexic, bird_denominations
+from ressources.regex_tools import mp_mit, mp_mit_2, cage_lexic, birds_lexic, bird_denominations, eggs_lexic
 os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 
 def re_generator_species() :
@@ -51,6 +51,15 @@ def re_hasCage() :
     """Create a regex according to a dictionnary that will signal the presence of a word
     of this lexic in a text"""
     #Replacement that tolerate misspelling
+    miss_egg=["".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in egg_lexic]
+    #A regex that matches only if one of cage_lexic word is present
+    reg=f"^(?=.*{'|.*'.join(miss_egg)}).*"
+    return reg
+
+def re_hasEgg() :
+    """Create a regex according to a dictionnary that will signal the presence of a word
+    of this lexic in a text"""
+    #Replacement that tolerate misspelling
     miss_cage=["".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in cage_lexic]
     #A regex that matches only if one of cage_lexic word is present
     reg=f"^(?=.*{'|.*'.join(miss_cage)}).*"
@@ -72,13 +81,14 @@ def search_re(ad, regexes) :
     nb_match=0
     #cage mentionned (-1 = no check)
     cage=-1
+    #egg is mentioned (-1 no check)
+    egg=-1
     #Check whether it is a bird
     if re.search(re_isBird, text, re.DOTALL) :
         #cage mentionned or not
-        if re.search(re_hasCage, text, re.DOTALL) :
-            cage=1
-        else :
-            cage=0
+        cage=1 if re.search(re_hasCage, text, re.DOTALL) else 0
+        #egg is mentionned
+        egg=1 if re.search(re_hasEgg, text, re.DOTALL) else 0
         for id_bird in regexes.keys() :
             for regex in regexes[id_bird].values() :
                 #True at the first match, it's enough
@@ -104,13 +114,15 @@ def search_re(ad, regexes) :
             ids_matching=matches,
             regex=json.dumps(re_matches),
             nb_species_matches=nb_match,
-            cage=cage
+            cage=cage,
+            egg=egg
     )
     return entry
 
 #GLOBAL
 re_hasCage=re_hasCage()
 re_isBird=re_isBird()
+re_hasEgg=re_hasEgg()
 
 if __name__ == '__main__':
     #Documentation

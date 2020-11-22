@@ -102,11 +102,11 @@ mp_mit ={
 }
 
 mp_mit_2 ={
-    "a" : "[a]{1,2}",
+    "a" : "[ae4]{1,2}", #grey
     "b" : "[b]{1,2}",
     "c" : "[c]{1,2}",
     "d" : "[d]{1,2}",
-    "e" : "[e]{1,2}",
+    "e" : "[ea3]{1,2}", #gray
     "f" : "[f]{1,2}",
     "g" : "[g]{1,2}",
     "h" : "[h]{1,2}",
@@ -116,7 +116,7 @@ mp_mit_2 ={
     "l" : "[l]{1,2}",
     "m" : "[m]{1,2}",
     "n" : "[n]{1,2}",
-    "o" : "[o]{1,2}",
+    "o" : "[o0]{1,2}",
     "p" : "[p]{1,2}",
     "q" : "[q]{1,2}",
     "r" : "[r]{1,2}",
@@ -127,7 +127,12 @@ mp_mit_2 ={
     "w" : "[w]{1,2}",
     "x" : "[x]{1,2}",
     "y" : "[y]{1,2}",
-    "z" : "[z]{1,2}"
+    "z" : "[z]{1,2}",
+    "è" : "[èée]{1,2}",
+    "é" : "[èée]{1,2}",
+    "à" : "[àaá4]{1,2}",
+    "á" : "[àaá4]{1,2}",
+    "ç" : "[çc]{1,2}",
 }
 
 dict_alphabet = {}
@@ -169,8 +174,10 @@ dict_alphabet['á']='à+|a+|á+|A+|4+'
 dict_alphabet['ç']='ç+|c+|C+'
 
 cage_lexic=["cage", "jail", "enclosure", "cabine", "trap"]
-birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure"]
-bird_denominations=["parrot"]
+birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet"]
+eggs_lexic=["egg"]
+bird_denominations=["parrot", "cuckatoo"]
+
 
 
 

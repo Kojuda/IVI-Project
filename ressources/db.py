@@ -268,6 +268,7 @@ class Matching_Ads(Base):
     nb_species_matches= Column(Integer)
     #Presence or not
     cage= Column(Integer)
+    egg=Column(Integer)
     status=Column(Integer, default=0)
 
     #parse_ads = relationship("Parse_ads", backref="classification_2_matching_ads")
