@@ -25,24 +25,33 @@ if status_modified:
             name.lower()
             list_of_words = name.split(' ')
             for i in list_of_words:
-                if len(i) < 3: #let alone small words
+                if len(i) <= 2: #let alone small words
                     pass
                 else: #big words - we do something with them: namely
                     if type(i)==str: #check if string, if not string we just sit idle
                         res = word_to_regex(i)
                     else:
                         print('problem with input')
-                        res = False
-                    if session.query(Regex).filter(Regex.reg==res).scalar()==None: #if entry doesn't exist: create entry in regex database
+                        res = None
+                    if len(i)<5:
+                        if ('\s' in res) or ('\w' in res) or (res==''):
+                            print('exception, pass short error', res)
+                            res = None
+                        else:
+                            if session.query(Regex).filter(Regex.reg==res).scalar()==None and res!= None:
+                                entry = Regex(reg=res)
+                                entry.insertregex(session)
+                                session.commit()
+                    elif session.query(Regex).filter(Regex.reg==res).scalar()==None and res!= None: #if entry doesn't exist: create entry in regex database
                         entry = Regex(reg=res)
                         entry.insertregex(session)
                         session.commit()
                     else: #if no entry pass
                         pass
                     #now we fillup  Match_Regex_IdMap
-                    requested_re = session.query(Regex.id).filter(Regex.reg==res)
+                    requested_re = session.query(Regex.id).filter(Regex.reg==res).scalar()
                     request = session.query(Match_Regex_IdMap.id).filter_by(id_re=requested_re, id_map=row.id).scalar()
-                    if request==None:
+                    if request==None and requested_re!=None:
                         entry = Match_Regex_IdMap(id_re=requested_re, id_map=row.id)
                         entry.insertMatch(session)
                         session.commit()
@@ -68,8 +77,8 @@ if __name__ == '__main__':
 
     # c = 0 #counter to trace vow many ads have status 1 = classified as psittaciforme
     for row in session.query(Parse_ads):
-        if session.query(Parsing_bird_or_no).filter_by(status_bird=1, ad_id=row.ad_id).scalar() != None:
-            if session.query(Parsing_Psittaciformes_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
+        #if session.query(Parsing_bird_or_no).filter_by(status_bird=1, ad_id=row.ad_id).scalar() != None:
+        if session.query(Parsing_Psittaciformes_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
         #         print('no entry')
         #NOM SCIENTIFIQUE
         #         # step 1 search in title
@@ -77,12 +86,12 @@ if __name__ == '__main__':
                 if match_scientific == 0:
                     for expression in list_scientific:
         #             # For each defined regular expression
-                        
-                        res = re.search(expression, row.title)
+
+                        res = re.search(str(expression), row.title)
                         if res!= None:
                             match_scientific = 1
                         if row.description != None:
-                            res_des = re.search(expression,row.description)
+                            res_des = re.search(str(expression),row.description)
                             if res_des!= None:
                                 match_scientific = 1
                     #if match_scientific == 1:

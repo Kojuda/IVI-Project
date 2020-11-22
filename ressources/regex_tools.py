@@ -55,21 +55,21 @@ def removeEmptyString(liste):
 
 def word_to_regex(word: str):
     l = []
-    seperator=''
+    separator=''
     for i in range(0, len(word)):
         try:
             l.append('('+dict_alphabet[word[i].lower()]+'){1}')
         except:
-            if len(l)<4:
+            if len(l)<2:
                 pass
             else:
                 l.append("\w")
-    if len (l)>3:
-        res= seperator.join(l)
-        return res
-    else:
-        print(word, None)
-        return None
+    res = separator.join(l)
+    return res
+
+    # else:
+    #     print(word, None)
+    #     return None
 
 #Dict of letters with some possibilites of misspelling (Don't consider absence)
 mp_mit ={
@@ -131,11 +131,11 @@ mp_mit_2 ={
 }
 
 dict_alphabet = {}
-dict_alphabet['a']='a+|A+|4+'
+dict_alphabet['a']='à+|á+|a+|A+|4+'
 dict_alphabet['b']='b+|B+'
-dict_alphabet['c']='c+|C+'
+dict_alphabet['c']='c+|C+|ç+'
 dict_alphabet['d']='d+|D+'
-dict_alphabet['e']='e+|E+|3+'
+dict_alphabet['e']='è+|é+|e+|E+|3+'
 dict_alphabet['f']='f+|F+'
 dict_alphabet['g']='g+|G+'
 dict_alphabet['h']='h+|H+'
@@ -158,10 +158,10 @@ dict_alphabet['x']='x+|X+'
 dict_alphabet['y']='y+|Y+'
 dict_alphabet['z']='z+|Z+'
 dict_alphabet[' ']='\s+'
-dict_alphabet['.']='\s*'
-dict_alphabet['-']='-*|\s*'
-dict_alphabet[';']='\s*'
-dict_alphabet['\'']='\'*|\s*'
+dict_alphabet['.']='\s+'
+dict_alphabet['-']='-+|\s+'
+dict_alphabet[';']='\s+'
+dict_alphabet['\'']='\'+|\s+'
 dict_alphabet['è']='è+|é+|e+|E+'
 dict_alphabet['é']='è+|é+|e+|E+'
 dict_alphabet['à']='à+|a+|á+|A+|4+'
@@ -174,14 +174,14 @@ bird_denominations=["parrot"]
 
 
 
-if __name__ == '__main__':
-    test_1 = 'hdegegfgfe pakrrot gezdlzted african grey'
-    test = 'african grey'
-    res = word_to_regex(test)
-    list_of_birds_test = ["bird", "ara", "amazon", "amazona", "parrot", "african grey", "macaw", "cockatoo"]
-
-    for i in list_of_birds_test:
-        print(word_to_regex(i))
-    print(res, type(res))
-    print(re.search(res, test_1))
-    #for i in list_of_birds_test:
+# if __name__ == '__main__':
+#     test_1 = 'hdegegfgfe pakrrot gezdlzted african grey'
+#     test = 'african grey'
+#     res = word_to_regex(test)
+#     list_of_birds_test = ["bird", "ara", "amazon", "amazona", "parrot", "african grey", "macaw", "cockatoo"]
+#
+#     for i in list_of_birds_test:
+#         print(word_to_regex(i))
+#     print(res, type(res))
+#     print(re.search(res, test_1))
+#     #for i in list_of_birds_test:
