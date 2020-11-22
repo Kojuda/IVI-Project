@@ -136,7 +136,7 @@ class Parsing_bird_or_no(Base):
     ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
     status_bird = Column(Integer, default=0)#0: not classified 1: classified
 
-    parse_ads = relationship("Parse_ads", backref="parse_bird_or_no")
+    parse_ads = relationship("Parse_ads", backref="classification_1_parse_bird_or_no")
     def insertParse_bird(self, session):
         session.add(self)
         session.commit()
@@ -156,7 +156,7 @@ class MentionedCage(Base):
     status_cage = Column(Integer, default=0)#0: not classified 1: classified
     status_alerte = Column(Integer, default=0)#0:alright 1: contains words with waarant recheck of classification
 
-    parse_ads = relationship("Parse_ads", backref="cage")
+    parse_ads = relationship("Parse_ads", backref="classification_1_cage")
     def insertCage(self, session):
         session.add(self)
         session.commit()
@@ -178,7 +178,7 @@ class Parsing_Psittaciformes_or_no(Base):
     match_common_parrot = Column(Integer, default=0)#0: not classified 1: classified
     mapping_match = Column(String) #en gros les differents matches_regex separée par ;
 
-    parse_ads = relationship("Parse_ads", backref="psittaciformes_or_no")
+    parse_ads = relationship("Parse_ads", backref="classification_1_psittaciformes_or_no")
     #mapping_cites = relationship("Mapping", backref="psittaciformes_or_no")
     def insertPsittaciformes(self, session):
         session.add(self)
@@ -239,11 +239,11 @@ class Regex(Base):
 class Match_Regex_IdMap(Base):
     __tablename__ = 'classification_1_reg_map_match'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    id_re = Column(Integer, ForeignKey("regex.id"))
+    id_re = Column(Integer, ForeignKey("classification_1_regex.id"))
     id_map = Column(Integer, ForeignKey("mapping_cites.id"))
     #pas de relation avec une autre table
-    mapping_cites = relationship("Mapping", backref="reg_map_match")
-    regex = relationship("Regex", backref="reg_map_match")
+    mapping_cites = relationship("Mapping", backref="classification_1_reg_map_match")
+    regex = relationship("Regex", backref="classification_1_reg_map_match")
 
     def insertMatch(self, session):
         session.add(self)
@@ -269,7 +269,7 @@ class Matching_Ads(Base):
     #Presence or not
     cage= Column(Integer)
     status=Column(Integer, default=0)
-    parse_ads = relationship("Parse_ads", backref="matching_ads")
+    parse_ads = relationship("Parse_ads", backref="classification_2_matching_ads")
 
     def insert(self, session):
         session.add(self)
@@ -285,7 +285,7 @@ class Matching_Ads(Base):
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
 
-engine = create_engine('sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db')
+engine = create_engine('sqlite:///DATABASES/project.db')
     #j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier [a faire entre Luisa&autres]
     #engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
     #pour luisa la path est: 'sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db'
