@@ -64,16 +64,17 @@ def get_champs(dic, html_object, doc) :
     try :
         for row in ad :
             #Here we iterate through the vendor information
-            #Avoid bug if does not exist
+            #WARNING : THERE ARE TWO TYPE [CONTACT INFORMATION] VS [POSTED BY] -> No way to handle the difference with
+            #an ID in the tag, need to use the "style" as attribute
+            #VENDOR : POSTED BY Avoid bug if does not exist
             if check_exists_by_xpath(row, "./div/div[@style=\'font-size:14px\']/b", doc, dic) :
-                if row.xpath("./div/div[@style=\'font-size:14px\']/b")[0].text == "Posted By: " :
+                if row.xpath("./div/div[@style=\'font-size:14px\']/b")[0].text:
                     #Left side of the pane concerning the vendor information
                     if check_exists_by_xpath(row, "./div/div/div[@class=\'col-md-3 col-sm-3 col-xs-12 z-ad-func-obj\']", doc, dic) :
                         vendor_left=row.xpath("./div/div/div[@class=\'col-md-3 col-sm-3 col-xs-12 z-ad-func-obj\']")[0]
                         dic["Link Vendor"]=vendor_left.xpath("./div/table/tbody/tr/td/a[@style=\'color: #fff;\']/@href")[0]
                         dic["Pseudo"]=vendor_left.xpath("./div/table/tbody/tr/td/a[@style=\'color: #fff;\']/text()")[0].strip(" ")
                         #Unique xpath at this level to obtain the list of row elements
-                        #vendor_entries=row.xpath("./div[@class=\'col-md-9 col-sm-9 col-xs-12 z-ad-func-obj\']")
                         vendor_entries=row.xpath("./div/div[2]/div[2]/div[@class=\'row\']")
                         for row_vendor in vendor_entries :
                             #The categorie --> Ex : Address/Name/Postal Code
@@ -84,6 +85,7 @@ def get_champs(dic, html_object, doc) :
                                 field=row_vendor.xpath("string(./div[2]/text())").strip(" \n")
                                 if field != "" :
                                     dic[categorie]=field
+           
             #Here the special case of the description
             elif check_exists_by_xpath(row, "./div[@class=\'col-md-4\']/b", doc, dic) :
                 if row.xpath("./div[@class=\'col-md-4\']/b")[0].text == "Description: " :
@@ -273,7 +275,7 @@ if __name__ == '__main__':
     #path_result=r'C:\Users\Jasmin\Documents\Switchdrive\results\getCodes\codes\\'
     path_result='./results/getCodes/codes/'
 
-    for row in session.query(Ads_Codes).filter_by(status=0):
+    for row in session.query(Ads_Codes).filter_by(status=0): #status=0
         #Skip if already exists
         if session.query(exists().where(Parse_ads.ad_id == row.ad_id)).scalar():
             pass
