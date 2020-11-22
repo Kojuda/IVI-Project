@@ -53,6 +53,24 @@ def removeEmptyString(liste):
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~ Project REGEX ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+def word_to_regex(word: str):
+    l = []
+    seperator=''
+    for i in range(0, len(word)):
+        try:
+            l.append('('+dict_alphabet[word[i].lower()]+'){1}')
+        except:
+            if len(l)<4:
+                pass
+            else:
+                l.append("\w")
+    if len (l)>3:
+        res= seperator.join(l)
+        return res
+    else:
+        print(word, None)
+        return None
+
 #Dict of letters with some possibilites of misspelling (Don't consider absence)
 mp_mit ={
     "a" : "[Aa4]{1,2}",
@@ -112,6 +130,58 @@ mp_mit_2 ={
     "z" : "[z]{1,2}"
 }
 
+dict_alphabet = {}
+dict_alphabet['a']='a+|A+|4+'
+dict_alphabet['b']='b+|B+'
+dict_alphabet['c']='c+|C+'
+dict_alphabet['d']='d+|D+'
+dict_alphabet['e']='e+|E+|3+'
+dict_alphabet['f']='f+|F+'
+dict_alphabet['g']='g+|G+'
+dict_alphabet['h']='h+|H+'
+dict_alphabet['i']='i+|I+|1+'
+dict_alphabet['j']='j+|J+'
+dict_alphabet['k']='k+|K+'
+dict_alphabet['l']='l+|L+'
+dict_alphabet['m']='m+|M+'
+dict_alphabet['n']='n+|N+'
+dict_alphabet['o']='o+|O+|0+'
+dict_alphabet['p']='p+|P+'
+dict_alphabet['q']='q+|Q+'
+dict_alphabet['r']='r+|R+'
+dict_alphabet['s']='s+|S+|5+'
+dict_alphabet['t']='t+|T+|7+'
+dict_alphabet['u']='u+|U+'
+dict_alphabet['v']='v+|V+'
+dict_alphabet['w']='w+|W+'
+dict_alphabet['x']='x+|X+'
+dict_alphabet['y']='y+|Y+'
+dict_alphabet['z']='z+|Z+'
+dict_alphabet[' ']='\s+'
+dict_alphabet['.']='\s*'
+dict_alphabet['-']='-*|\s*'
+dict_alphabet[';']='\s*'
+dict_alphabet['\'']='\'*|\s*'
+dict_alphabet['è']='è+|é+|e+|E+'
+dict_alphabet['é']='è+|é+|e+|E+'
+dict_alphabet['à']='à+|a+|á+|A+|4+'
+dict_alphabet['á']='à+|a+|á+|A+|4+'
+dict_alphabet['ç']='ç+|c+|C+'
+
 cage_lexic=["cage", "jail", "enclosure", "cabine", "trap"]
 birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure"]
 bird_denominations=["parrot"]
+
+
+
+if __name__ == '__main__':
+    test_1 = 'hdegegfgfe pakrrot gezdlzted african grey'
+    test = 'african grey'
+    res = word_to_regex(test)
+    list_of_birds_test = ["bird", "ara", "amazon", "amazona", "parrot", "african grey", "macaw", "cockatoo"]
+
+    for i in list_of_birds_test:
+        print(word_to_regex(i))
+    print(res, type(res))
+    print(re.search(res, test_1))
+    #for i in list_of_birds_test:

@@ -133,10 +133,10 @@ class Parse_ads(Base):
 class Parsing_bird_or_no(Base):
     __tablename__ = 'classification_1_parse_bird_or_no'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
+    ad_id = Column(String, unique=True) #ForeignKey("parse_ads.ad_id")
     status_bird = Column(Integer, default=0)#0: not classified 1: classified
 
-    parse_ads = relationship("Parse_ads", backref="classification_1_parse_bird_or_no")
+    #parse_ads = relationship("Parse_ads", backref="classification_1_parse_bird_or_no")
     def insertParse_bird(self, session):
         session.add(self)
         session.commit()
@@ -152,11 +152,11 @@ class Parsing_bird_or_no(Base):
 class MentionedCage(Base):
     __tablename__ = 'classification_1_cage'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
+    ad_id = Column(String, unique=True) #ForeignKey("parse_ads.ad_id")
     status_cage = Column(Integer, default=0)#0: not classified 1: classified
     status_alerte = Column(Integer, default=0)#0:alright 1: contains words with waarant recheck of classification
 
-    parse_ads = relationship("Parse_ads", backref="classification_1_cage")
+    #parse_ads = relationship("Parse_ads", backref="classification_1_cage")
     def insertCage(self, session):
         session.add(self)
         session.commit()
@@ -173,12 +173,12 @@ class Parsing_Psittaciformes_or_no(Base):
     __tablename__ = 'classification_1_psittaciformes_or_no'
     #H: une même annonce ne match pas plus que 10 noms d'oiseaux différents
     id = Column(Integer, primary_key=True, autoincrement=True)
-    ad_id = Column(String, ForeignKey("parse_ads.ad_id"))
+    ad_id = Column(String, unique=True) #ForeignKey("parse_ads.ad_id")
     match_cites_parrot = Column(Integer, default=0)#0: not classified 1: classified
     match_common_parrot = Column(Integer, default=0)#0: not classified 1: classified
     mapping_match = Column(String) #en gros les differents matches_regex separée par ;
 
-    parse_ads = relationship("Parse_ads", backref="classification_1_psittaciformes_or_no")
+    #parse_ads = relationship("Parse_ads", backref="classification_1_psittaciformes_or_no")
     #mapping_cites = relationship("Mapping", backref="psittaciformes_or_no")
     def insertPsittaciformes(self, session):
         session.add(self)
@@ -239,11 +239,11 @@ class Regex(Base):
 class Match_Regex_IdMap(Base):
     __tablename__ = 'classification_1_reg_map_match'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    id_re = Column(Integer, ForeignKey("classification_1_regex.id"))
-    id_map = Column(Integer, ForeignKey("mapping_cites.id"))
+    id_re = Column(Integer) #ForeignKey("classification_1_regex.id")
+    id_map = Column(Integer) #ForeignKey("mapping_cites.id")
     #pas de relation avec une autre table
-    mapping_cites = relationship("Mapping", backref="classification_1_reg_map_match")
-    regex = relationship("Regex", backref="classification_1_reg_map_match")
+    #mapping_cites = relationship("Mapping", backref="classification_1_reg_map_match")
+    #regex = relationship("Regex", backref="classification_1_reg_map_match")
 
     def insertMatch(self, session):
         session.add(self)
@@ -260,7 +260,7 @@ class Match_Regex_IdMap(Base):
 class Matching_Ads(Base):
     __tablename__ = 'classification_2_matching_ads'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    ad_id = Column(String, ForeignKey("parse_ads.ad_id"), unique=True)
+    ad_id = Column(String,  unique=True)#ForeignKey("parse_ads.ad_id")
     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
     ids_matching = Column(String)
@@ -269,7 +269,8 @@ class Matching_Ads(Base):
     #Presence or not
     cage= Column(Integer)
     status=Column(Integer, default=0)
-    parse_ads = relationship("Parse_ads", backref="classification_2_matching_ads")
+
+    #parse_ads = relationship("Parse_ads", backref="classification_2_matching_ads")
 
     def insert(self, session):
         session.add(self)

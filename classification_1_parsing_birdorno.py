@@ -8,7 +8,7 @@ import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, Parsing_bird_or_no
-from spelling_error_mitigation import word_to_regex
+from ressources.regex_tools import word_to_regex
 #logique de ce code: éviter au plus les FN
 #but:estimer la nombre des annonces (en anglais) pour les oiseaux
 
@@ -34,7 +34,7 @@ if __name__ == '__main__':
             # step 1 search in title
             for expression in list_of_birds:
                 # For each defined regular expression
-                res = re.search(expression, row.title)  # search in title
+                res = re.search(str(expression), row.title)  # search in title
                 if res != None:  # if there is a match, go on
                     if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar() == None:  # if there isn't already an entry
                         entry = Parsing_bird_or_no(ad_id=row.ad_id, status_bird=1)
@@ -46,7 +46,7 @@ if __name__ == '__main__':
             for expression in list_of_birds:
                 if row.description != None:
                     try:
-                        res = re.search(expression, row.description)
+                        res = re.search(str(expression), row.description)
                     except:
                         print('unknown error')
                         print(row.ad_id)
@@ -74,7 +74,7 @@ if __name__ == '__main__':
                 # step 1 search in title
                 for expression in list_of_birds:
                     # For each defined regular expression
-                    res = re.search(expression, row.title)  # search in title
+                    res = re.search(str(expression), row.title)  # search in title
                     if res != None:  # if there is a match, go on
                         if status_change:
                             print('change stat')
@@ -84,7 +84,7 @@ if __name__ == '__main__':
                             status_change = True
                             pass
                     try:
-                        res_des = re.search(expression, row.description)
+                        res_des = re.search(str(expression), row.description)
                     except:
                         res_des = None
                     print(res_des.scalar())

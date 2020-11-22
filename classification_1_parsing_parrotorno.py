@@ -8,7 +8,7 @@ import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Parsing_bird_or_no, Mapping, Regex, Match_Regex_IdMap
-from spelling_error_mitigation import word_to_regex
+from ressources.regex_tools import word_to_regex
 list_scientific = []
 status_modified = True #A changer à true si changé spelling erreur mitigation ou table cites + supprimer tables
 
