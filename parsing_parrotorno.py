@@ -113,45 +113,53 @@ if __name__ == '__main__':
 
 
     #SCIENTIFIC: parse database
-
     #connexion = session.query(Mapping.id).scalar()
     #print(connexion)
     #mapping_match_1=mapping_cites.id
 
     # c = 0 #counter to trace vow many ads have status 1 = classified as psittaciforme
-    # for row in session.query(Parse_ads):
-    #     if session.query(Parsing_Psittaciformes_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
+    for row in session.query(Parse_ads):
+        if session.query(Parsing_Psittaciformes_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
     #         print('no entry')
-    #
+    #NOM SCIENTIFIQUE
     #         # step 1 search in title
-    #         for expression in list_scientific:
+            match_scientifique = 0 #default pas de match
+            if match_scientifique == 0:
+                for expression in list_scientific:
     #             # For each defined regular expression
-    #             res = re.search(expression, row.title)  # search in title
-    #             if res != None:  # if there is a match, go on
-    #                 if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar() == None:  # if there isn't already an entry
-    #                     entry = Parsing_Psittaciformes_or_no(ad_id=row.ad_id, match_cites_parrot=1)
-    #                     entry.insertPsittaciformes(session)
-    #                     session.commit()
+                    res = re.search(expression, row.title)
+                    if res!= None:
+                        match_scientifique =1
+                    if row.description != None:
+                        res_des = re.search(expression,row.description)
+                        if res_des!= None:
+                            match_scientifique = 1
+                    # search in title
+    #                if res != None:  # if there is a match, go on
+    #                if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar() == None:  # if there isn't already an entry
+    #                      entry = Parsing_Psittaciformes_or_no(ad_id=row.ad_id, match_cites_parrot=1)
+    #                      entry.insertPsittaciformes(session)
+    #                      session.commit()
     #                     c += 1
-    #                     pass
+    #                      pass
     #
     #
     #         # step 2 search in description
-    #         for expression in list_scientific:
-    #             if row.description != None:
-    #                 try:
-    #                     res = re.search(expression, row.description)
-    #                 except:
+    #          for expression in list_scientific:
+    #              if row.description != None:
+    #                  try:
+    #                      res = re.search(expression, row.description)
+    #                  except:
     #                     print('unknown error')
     #                     print(row.ad_id)
-    #                     res = None
-    #             if res != None:
-    #                 if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar() == None:
+    #                      res = None
+    #              if res != None:
+    #                  if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar() == None:
     #                     print('description')
-    #                     entry = Parsing_Psittaciformes_or_no(ad_id=row.ad_id, match_cites_parrot=1)
-    #                     entry.insertPsittaciformes(session)
-    #                     session.commit()
-    #                     pass
+    #                      entry = Parsing_Psittaciformes_or_no(ad_id=row.ad_id, match_cites_parrot=1)
+    #                      entry.insertPsittaciformes(session)
+    #                      session.commit()
+    #                      pass
     #
     #         # last step if no match add status 0
     #         # if session.query(Parsing_Psittaciformes_or_no.match_cites_parrot).filter_by(ad_id=row.ad_id).scalar()
