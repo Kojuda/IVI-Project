@@ -8,7 +8,7 @@ import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation 
 from ressources.db import Parse_ads, session, Matching_Ads, Mapping 
-from ressources.regex_tools import mp_mit, mp_mit_2, cage_lexic, birds_lexic, bird_denominations, egg_lexic
+from ressources.regex_tools import mp_mit_egg, mp_mit_2, cage_lexic, birds_lexic, bird_denominations, egg_lexic
 os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 
 def re_generator_species() :
@@ -53,18 +53,18 @@ def re_hasCage() :
     """Create a regex according to a dictionnary that will signal the presence of a word
     of this lexic in a text"""
     #Replacement that tolerate misspelling
-    miss_egg=["".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in egg_lexic]
+    miss_cage=["".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in cage_lexic]
     #A regex that matches only if one of cage_lexic word is present
-    reg=f"^(?=.*{'|.*'.join(miss_egg)}).*"
+    reg=f"^(?=.*{'|.*'.join(miss_cage)}).*"
     return reg
 
 def re_hasEgg() :
     """Create a regex according to a dictionnary that will signal the presence of a word
     of this lexic in a text"""
     #Replacement that tolerate misspelling
-    miss_cage=["".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in cage_lexic]
+    miss_egg=["".join([mp_mit_egg[char] if (char in mp_mit_egg.keys())  else char for char in list(word)]) for word in egg_lexic]
     #A regex that matches only if one of cage_lexic word is present
-    reg=f"^(?=.*{'|.*'.join(miss_cage)}).*"
+    reg=f"^(?=.*{'|.*'.join(miss_egg)}).*"
     return reg
 
 def search_re(ad, regexes) :
