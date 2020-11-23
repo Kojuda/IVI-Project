@@ -194,7 +194,7 @@ dict_alphabet['ç']='ç+|c+|C+'
 
 cage_lexic=["cage", "jail", "enclosure", "cabine", "trap", "jadi", "jambul"]
 birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet"]
-egg_lexic=["egg", "cackleberry"]
+egg_lexic=["egg", "cackleberry", "eggs"]
 bird_denominations=["parrot", "cuckatoo", "and", "all", "des", "spp.", "st."]
 
 

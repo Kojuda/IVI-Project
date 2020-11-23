@@ -64,7 +64,8 @@ def re_hasEgg() :
     #Replacement that tolerate misspelling
     miss_egg=["".join([mp_mit_egg[char] if (char in mp_mit_egg.keys())  else char for char in list(word)]) for word in egg_lexic]
     #A regex that matches only if one of cage_lexic word is present
-    reg=f"^(?=.*{'|.*'.join(miss_egg)}).*"
+    #Avoid "veggies" and a space to avoid all words like "eggplant"
+    reg=f"^(?=.*{' |.*[^v]'.join(miss_egg)}).*"
     return reg
 
 def search_re(ad, regexes) :
