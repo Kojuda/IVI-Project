@@ -10,7 +10,7 @@ from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Parsing_bird_or_no, Mapping, Regex, Match_Regex_IdMap
 from ressources.regex_tools import word_to_regex
 list_scientific = []
-status_modified = True #A changer à true si changé spelling erreur mitigation ou table cites + supprimer tables
+status_modified = True #Changer en True si regex_tools ou table mapping_cites changés + supprimer tables
 
 #transformer table mapping_names en REGEX if modifications were made [aliments tables regex et match_regex_idmap
 if status_modified:
@@ -80,34 +80,38 @@ if __name__ == '__main__':
         #if session.query(Parsing_bird_or_no).filter_by(status_bird=1, ad_id=row.ad_id).scalar() != None:
         if session.query(Parsing_Psittaciformes_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
         #         print('no entry')
+
         #NOM SCIENTIFIQUE
-        #         # step 1 search in title
+                # step 1 search in title, description and breed
                 match_scientific = 0 #default pas de match
                 if match_scientific == 0:
                     for expression in list_scientific:
-        #             # For each defined regular expression
-
-                        res = re.search(str(expression), row.title)
-                        if res!= None:
+                        # For each defined regular expression
+                        res_tit = re.search(str(expression), row.title)
+                        if res_tit != None:
                             match_scientific = 1
                         if row.description != None:
                             res_des = re.search(str(expression),row.description)
                             if res_des!= None:
                                 match_scientific = 1
-                    #if match_scientific == 1:
-                        #print(match_scientific, row.ad_id)
+                        if row.breed != None:
+                            res_bre = re.search(str(expression), row.breed)
+                            if res_bre != None:
+                                match_scientific = 1
 
+        #NOM COMMUN
                 match_common = 0 #default pas de match
                 list_match_common = []
                 for regex in session.query(Regex):
                     try:
-                        res_titre = re.search(regex.reg, row.title)
-                        if res_titre != None:
+                        res_title = re.search(regex.reg, row.title)
+                        if res_title != None:
                             match_common = 1
                             if str(regex.id) not in list_match_common:
                                 list_match_common.append(str(regex.id))
                     except:
-                        print('error in re_titre')
+                        print('error in res_title')
+
                     try:
                         res_description = re.search(regex.reg, row.description)
                         if res_description != None:
@@ -116,6 +120,16 @@ if __name__ == '__main__':
                                 list_match_common.append(str(regex.id))
                     except:
                         print('error in res_description')
+
+                    try:
+                        res_breed = re.search(regex.reg, row.breed)
+                        if res_breed != None:
+                            match_common = 1
+                            if str(regex.id) not in list_match_common:
+                                list_match_common.append(str(regex.id))
+                    except:
+                        print('error in res_breed')
+
                 #print(row.ad_id, match_common, list_match_common)
 
                 separator = ';'
