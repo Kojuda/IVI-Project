@@ -192,7 +192,7 @@ dict_alphabet['à']='à+|a+|á+|A+|4+'
 dict_alphabet['á']='à+|a+|á+|A+|4+'
 dict_alphabet['ç']='ç+|c+|C+'
 
-cage_lexic=["cage", "jail", "enclosure", "cabine", "trap"]
+cage_lexic=["cage", "jail", "enclosure", "cabine", "trap", "jadi", "jambul"]
 birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet"]
 egg_lexic=["egg", "cackleberry"]
 bird_denominations=["parrot", "cuckatoo", "and", "all", "des", "spp.", "st."]
