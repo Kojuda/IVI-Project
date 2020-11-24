@@ -12,6 +12,8 @@ from ressources.regex_tools import word_to_regex
 #logique de ce code: éviter au plus les FN
 #but:estimer la nombre des annonces (en anglais) pour les oiseaux
 
+#dict_bag_words
+
 #Goal 1: Decide if ad contains bird
 #Strategy: Look in title for words describing birds with regular expressions
 list_of_birds_test = ["bird","brd","amazon","amazona","parot", "prot", "african grey","macaw","mcw","macw","mcaw","macow","cockato","winged","paraket","lovebird","canary","cnry"] #Global variable which contains re to match

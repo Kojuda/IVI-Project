@@ -271,6 +271,7 @@ class Matching_Ads(Base):
     #Presence or not
     cage= Column(Integer)
     egg=Column(Integer)
+    cites_appendice=Column(Integer)
     status=Column(Integer, default=0)
     #parse_ads = relationship("Parse_ads", backref="matching_ads")
 

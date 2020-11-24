@@ -14,10 +14,12 @@ os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 def re_generator_species() :
     """Create a dictionary {id_species : {common name 1 : regex1, ....}}. These regexes
     will be used to multiples times, so we create them for once for each parsing. We can change
-    the code here to adapt the way of create these regexes."""
-    all_birds={}
+    the code here to adapt the way of create these regexes. The adaption used can be used to create
+    different classification. The classification 2 checks the presence of the words of one common name in
+    the text. The classification 3 considers the order of the word and the proximity."""
+    regex_classification_2={}
+    regex_classification_3={}
     for row in session.query(Mapping) :
-        id = row.id 
         #List of common names
         cns = [_.strip(" ") for _ in row.common_name.split(";") if (len(_.strip(" "))>0)]
         #Add the scientific name
@@ -31,14 +33,22 @@ def re_generator_species() :
         miss_cns=map(lambda list_words : ("".join([mp_mit_2[char] if (char in mp_mit_2.keys())  else char for char in list(word)]) for word in list_words), cns_decomposed)
         #Interpret map object
         miss_cns=[list(_) for _ in list(miss_cns)]
-        dict_regex = {}
+        dict_regex_2 = {}
+        dict_regex_3 = {}
         #Populate the dict with regex according to each name
         for name_decomposed, name in zip(miss_cns, cns) :
-                reg="".join([f"(?=.*{word})" for word in name_decomposed])
-                reg=f"^{reg}.*"
-                dict_regex[name]=reg
-        all_birds[row.id]=dict_regex
-    return all_birds
+
+                reg_2="".join([f"(?=.*{word})" for word in name_decomposed])
+                reg_2=f"^{reg_2}.*"
+                dict_regex_2[name]=reg_2
+
+                reg_3="".join([f"(?=.*{word})" for word in name_decomposed])
+                reg_3=f"^{reg_3}.*"
+                dict_regex_2[name]=reg_3
+
+        regex_classification_2[row.id]=(dict_regex_2, row.annex_number_CITES)
+        regex_classification_3[row.id]=(dict_regex_3, row.annex_number_CITES)
+    return (regex_classification_2, regex_classification_3)
 
 def re_isBird() :
     """Create a regex according to a dictionnary that will signal the presence of a word
@@ -86,6 +96,8 @@ def search_re(ad, regexes) :
     cage=-1
     #egg is mentioned (-1 no check)
     egg=-1
+    #appendice of CITES, it is 0 if there is no match
+    cites=0
     #Check whether it is a bird
     if re.search(re_isBird, text, re.DOTALL) :
         #cage mentionned or not
@@ -118,7 +130,8 @@ def search_re(ad, regexes) :
             regex=json.dumps(re_matches),
             nb_species_matches=nb_match,
             cage=cage,
-            egg=egg
+            egg=egg,
+            cites_appendice=cites
     )
     return entry
 
@@ -144,18 +157,18 @@ if __name__ == '__main__':
     doc.info["cage_regex"]=re_hasCage
     doc.info["isbird_regex"]=re_isBird
 
-
-    for row in session.query(Parse_ads).filter_by(status_vendeur_taken=0):
-        #Skip if already exists
-        if session.query(exists().where(Matching_Ads.ad_id == row.ad_id)).scalar():
-            pass
-        else:
-            entry = search_re(ad=row, regexes=dic_regexes)
-            print(f"{row.ad_id}...\n")
-            doc.addlog(f"Search in ad {row.ad_id}")
-
-            entry.insert(session)
-            # row.update(session)
+    #2 Dict with regexes for the 2 classifications.
+    for dr in dic_regexes :
+        for row in session.query(Parse_ads).filter_by(status_vendeur_taken=0):
+            #Skip if already exists
+            if session.query(exists().where(Matching_Ads.ad_id == row.ad_id)).scalar():
+                pass
+            else:
+                entry = search_re(ad=row, regexes=dr)
+                print(f"{row.ad_id}...\n")
+                doc.addlog(f"Search in ad {row.ad_id}")
+                entry.insert(session)
+                # row.update(session)
 
 
     
