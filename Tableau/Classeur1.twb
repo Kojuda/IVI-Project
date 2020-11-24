@@ -1,0 +1,1416 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20203.20.1110.1623                               -->
+<workbook original-version='18.1' source-build='2020.3.3 (20203.20.1110.1623)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <SavingAnalyticObjects />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='classification_1_psittaciformes+ (Connexions multiples)' inline='true' name='federated.0ik09no04u6tgs16ta7ps16751iv' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='classification_1_psittaciformes_or_no' name='excel-direct.0a16srs0le72t117mhjlu1ee8akk'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='/Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/Tableau/classification_1_psittaciformes_or_no.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+          <named-connection caption='classification_1_reg_map_match' name='excel-direct.11nk8z60hvjhal1h2193o1sudip5'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='/Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/Tableau/classification_1_reg_map_match.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+          <named-connection caption='classification_1_regex' name='excel-direct.1mfm80f1gpeecw17a0k9109k2mxs'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='/Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/Tableau/classification_1_regex.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='excel-direct.0a16srs0le72t117mhjlu1ee8akk' name='classification_1_psittaciformes' table='[classification_1_psittaciformes$]' type='table'>
+          <columns gridOrigin='A1:AD10001:no:A1:AD10001:0' header='yes' outcome='6'>
+            <column datatype='integer' name='id' ordinal='0' />
+            <column datatype='string' name='ad_id' ordinal='1' />
+            <column datatype='integer' name='match_cites_parrot' ordinal='2' />
+            <column datatype='integer' name='match_common_parrot' ordinal='3' />
+            <column datatype='integer' name='mapping_match' ordinal='4' />
+            <column datatype='integer' name='mapping_match_2' ordinal='5' />
+            <column datatype='integer' name='mapping_match_3' ordinal='6' />
+            <column datatype='integer' name='mapping_match_4' ordinal='7' />
+            <column datatype='integer' name='mapping_match_5' ordinal='8' />
+            <column datatype='integer' name='mapping_match_6' ordinal='9' />
+            <column datatype='integer' name='mapping_match_7' ordinal='10' />
+            <column datatype='integer' name='mapping_match_8' ordinal='11' />
+            <column datatype='integer' name='mapping_match_9' ordinal='12' />
+            <column datatype='integer' name='mapping_match_10' ordinal='13' />
+            <column datatype='integer' name='mapping_match_11' ordinal='14' />
+            <column datatype='integer' name='mapping_match_12' ordinal='15' />
+            <column datatype='integer' name='mapping_match_13' ordinal='16' />
+            <column datatype='integer' name='mapping_match_14' ordinal='17' />
+            <column datatype='integer' name='mapping_match_15' ordinal='18' />
+            <column datatype='integer' name='mapping_match_16' ordinal='19' />
+            <column datatype='integer' name='mapping_match_17' ordinal='20' />
+            <column datatype='integer' name='mapping_match_18' ordinal='21' />
+            <column datatype='integer' name='mapping_match_19' ordinal='22' />
+            <column datatype='integer' name='mapping_match_20' ordinal='23' />
+            <column datatype='integer' name='mapping_match_21' ordinal='24' />
+            <column datatype='integer' name='mapping_match_22' ordinal='25' />
+            <column datatype='integer' name='mapping_match_23' ordinal='26' />
+            <column datatype='integer' name='mapping_match_24' ordinal='27' />
+            <column datatype='integer' name='mapping_match_25' ordinal='28' />
+            <column datatype='integer' name='mapping_match_26' ordinal='29' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
+          <relation connection='excel-direct.0a16srs0le72t117mhjlu1ee8akk' name='classification_1_psittaciformes' table='[classification_1_psittaciformes$]' type='table'>
+            <columns gridOrigin='A1:AD10001:no:A1:AD10001:0' header='yes' outcome='6'>
+              <column datatype='integer' name='id' ordinal='0' />
+              <column datatype='string' name='ad_id' ordinal='1' />
+              <column datatype='integer' name='match_cites_parrot' ordinal='2' />
+              <column datatype='integer' name='match_common_parrot' ordinal='3' />
+              <column datatype='integer' name='mapping_match' ordinal='4' />
+              <column datatype='integer' name='mapping_match_2' ordinal='5' />
+              <column datatype='integer' name='mapping_match_3' ordinal='6' />
+              <column datatype='integer' name='mapping_match_4' ordinal='7' />
+              <column datatype='integer' name='mapping_match_5' ordinal='8' />
+              <column datatype='integer' name='mapping_match_6' ordinal='9' />
+              <column datatype='integer' name='mapping_match_7' ordinal='10' />
+              <column datatype='integer' name='mapping_match_8' ordinal='11' />
+              <column datatype='integer' name='mapping_match_9' ordinal='12' />
+              <column datatype='integer' name='mapping_match_10' ordinal='13' />
+              <column datatype='integer' name='mapping_match_11' ordinal='14' />
+              <column datatype='integer' name='mapping_match_12' ordinal='15' />
+              <column datatype='integer' name='mapping_match_13' ordinal='16' />
+              <column datatype='integer' name='mapping_match_14' ordinal='17' />
+              <column datatype='integer' name='mapping_match_15' ordinal='18' />
+              <column datatype='integer' name='mapping_match_16' ordinal='19' />
+              <column datatype='integer' name='mapping_match_17' ordinal='20' />
+              <column datatype='integer' name='mapping_match_18' ordinal='21' />
+              <column datatype='integer' name='mapping_match_19' ordinal='22' />
+              <column datatype='integer' name='mapping_match_20' ordinal='23' />
+              <column datatype='integer' name='mapping_match_21' ordinal='24' />
+              <column datatype='integer' name='mapping_match_22' ordinal='25' />
+              <column datatype='integer' name='mapping_match_23' ordinal='26' />
+              <column datatype='integer' name='mapping_match_24' ordinal='27' />
+              <column datatype='integer' name='mapping_match_25' ordinal='28' />
+              <column datatype='integer' name='mapping_match_26' ordinal='29' />
+            </columns>
+          </relation>
+          <relation connection='excel-direct.1mfm80f1gpeecw17a0k9109k2mxs' name='classification_1_regex' table='[classification_1_regex$]' type='table'>
+            <columns gridOrigin='A1:B403:no:A1:B403:0' header='yes' outcome='6'>
+              <column datatype='integer' name='id' ordinal='0' />
+              <column datatype='string' name='reg' ordinal='1' />
+            </columns>
+          </relation>
+          <relation connection='excel-direct.11nk8z60hvjhal1h2193o1sudip5' name='classification_1_reg_map_match' table='[classification_1_reg_map_match$]' type='table'>
+            <columns gridOrigin='A1:C613:no:A1:C613:0' header='yes' outcome='6'>
+              <column datatype='integer' name='id' ordinal='0' />
+              <column datatype='integer' name='id_re' ordinal='1' />
+              <column datatype='integer' name='id_map' ordinal='2' />
+            </columns>
+          </relation>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <cols>
+          <map key='[ad_id]' value='[classification_1_psittaciformes].[ad_id]' />
+          <map key='[id (classification!1!reg!map!match)]' value='[classification_1_reg_map_match].[id]' />
+          <map key='[id (classification!1!regex)]' value='[classification_1_regex].[id]' />
+          <map key='[id]' value='[classification_1_psittaciformes].[id]' />
+          <map key='[id_map]' value='[classification_1_reg_map_match].[id_map]' />
+          <map key='[id_re]' value='[classification_1_reg_map_match].[id_re]' />
+          <map key='[mapping_match]' value='[classification_1_psittaciformes].[mapping_match]' />
+          <map key='[mapping_match_10]' value='[classification_1_psittaciformes].[mapping_match_10]' />
+          <map key='[mapping_match_11]' value='[classification_1_psittaciformes].[mapping_match_11]' />
+          <map key='[mapping_match_12]' value='[classification_1_psittaciformes].[mapping_match_12]' />
+          <map key='[mapping_match_13]' value='[classification_1_psittaciformes].[mapping_match_13]' />
+          <map key='[mapping_match_14]' value='[classification_1_psittaciformes].[mapping_match_14]' />
+          <map key='[mapping_match_15]' value='[classification_1_psittaciformes].[mapping_match_15]' />
+          <map key='[mapping_match_16]' value='[classification_1_psittaciformes].[mapping_match_16]' />
+          <map key='[mapping_match_17]' value='[classification_1_psittaciformes].[mapping_match_17]' />
+          <map key='[mapping_match_18]' value='[classification_1_psittaciformes].[mapping_match_18]' />
+          <map key='[mapping_match_19]' value='[classification_1_psittaciformes].[mapping_match_19]' />
+          <map key='[mapping_match_20]' value='[classification_1_psittaciformes].[mapping_match_20]' />
+          <map key='[mapping_match_21]' value='[classification_1_psittaciformes].[mapping_match_21]' />
+          <map key='[mapping_match_22]' value='[classification_1_psittaciformes].[mapping_match_22]' />
+          <map key='[mapping_match_23]' value='[classification_1_psittaciformes].[mapping_match_23]' />
+          <map key='[mapping_match_24]' value='[classification_1_psittaciformes].[mapping_match_24]' />
+          <map key='[mapping_match_25]' value='[classification_1_psittaciformes].[mapping_match_25]' />
+          <map key='[mapping_match_26]' value='[classification_1_psittaciformes].[mapping_match_26]' />
+          <map key='[mapping_match_2]' value='[classification_1_psittaciformes].[mapping_match_2]' />
+          <map key='[mapping_match_3]' value='[classification_1_psittaciformes].[mapping_match_3]' />
+          <map key='[mapping_match_4]' value='[classification_1_psittaciformes].[mapping_match_4]' />
+          <map key='[mapping_match_5]' value='[classification_1_psittaciformes].[mapping_match_5]' />
+          <map key='[mapping_match_6]' value='[classification_1_psittaciformes].[mapping_match_6]' />
+          <map key='[mapping_match_7]' value='[classification_1_psittaciformes].[mapping_match_7]' />
+          <map key='[mapping_match_8]' value='[classification_1_psittaciformes].[mapping_match_8]' />
+          <map key='[mapping_match_9]' value='[classification_1_psittaciformes].[mapping_match_9]' />
+          <map key='[match_cites_parrot]' value='[classification_1_psittaciformes].[match_cites_parrot]' />
+          <map key='[match_common_parrot]' value='[classification_1_psittaciformes].[match_common_parrot]' />
+          <map key='[reg]' value='[classification_1_regex].[reg]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[id]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>id</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ad_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[ad_id]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>ad_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LFR_RCH_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>match_cites_parrot</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[match_cites_parrot]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>match_cites_parrot</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>match_common_parrot</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[match_common_parrot]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>match_common_parrot</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_2</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_2]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_2</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_3</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_3]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_3</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_4</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_4]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_4</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_5</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_5]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_5</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_6</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_6]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_6</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_7</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_7]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_7</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_8</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_8]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_8</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_9</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_9]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_9</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_10</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_10]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_10</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_11</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_11]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_11</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_12</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_12]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_12</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_13</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_13]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_13</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_14</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_14]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_14</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_15</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_15]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_15</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_16</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_16]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_16</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_17</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_17]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_17</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_18</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_18]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_18</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_19</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_19]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_19</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_20</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_20]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_20</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_21</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_21]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_21</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_22</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_22]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_22</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_23</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_23]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_23</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_24</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_24]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_24</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_25</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_25]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_25</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mapping_match_26</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mapping_match_26]</local-name>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias>mapping_match_26</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[classification_1_psittaciformes]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>1</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:AD10001:no:A1:AD2147483647:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[id (classification!1!regex)]</local-name>
+            <parent-name>[classification_1_regex]</parent-name>
+            <remote-alias>id</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>reg</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[reg]</local-name>
+            <parent-name>[classification_1_regex]</parent-name>
+            <remote-alias>reg</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LFR_RCH_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[classification_1_regex]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:B403:no:A1:B403:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[id (classification!1!reg!map!match)]</local-name>
+            <parent-name>[classification_1_reg_map_match]</parent-name>
+            <remote-alias>id</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>id_re</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[id_re]</local-name>
+            <parent-name>[classification_1_reg_map_match]</parent-name>
+            <remote-alias>id_re</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>id_map</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[id_map]</local-name>
+            <parent-name>[classification_1_reg_map_match]</parent-name>
+            <remote-alias>id_map</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[classification_1_reg_map_match]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:C613:no:A1:C613:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <_.fcp.ObjectModelTableType.true...column caption='classification_1_psittaciformes' datatype='table' name='[__tableau_internal_object_id__].[classification!1!psittaciformes_354A60645D0C4DF08BE0C9177F7ABFA4]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='classification_1_reg_map_match' datatype='table' name='[__tableau_internal_object_id__].[classification!1!reg!map!match_52397462907C47E9BC00D8688EBB4278]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='classification_1_regex' datatype='table' name='[__tableau_internal_object_id__].[classification!1!regex_35615722944D4434B78EEC082E234252]' role='measure' type='quantitative' />
+      <column caption='Ad Id' datatype='string' name='[ad_id]' role='dimension' type='nominal' />
+      <column caption='Id (Classification!1!Reg!Map!Match)' datatype='integer' name='[id (classification!1!reg!map!match)]' role='dimension' type='ordinal' />
+      <column caption='Id (Classification!1!Regex)' datatype='integer' name='[id (classification!1!regex)]' role='dimension' type='ordinal' />
+      <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
+      <column caption='Id Map' datatype='integer' name='[id_map]' role='dimension' type='ordinal' />
+      <column caption='Id Re' datatype='integer' name='[id_re]' role='dimension' type='ordinal' />
+      <column caption='Mapping Match 01' datatype='integer' name='[mapping_match]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 10' datatype='integer' name='[mapping_match_10]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 11' datatype='integer' name='[mapping_match_11]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 12' datatype='integer' name='[mapping_match_12]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 13' datatype='integer' name='[mapping_match_13]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 14' datatype='integer' name='[mapping_match_14]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 15' datatype='integer' name='[mapping_match_15]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 16' datatype='integer' name='[mapping_match_16]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 17' datatype='integer' name='[mapping_match_17]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 18' datatype='integer' name='[mapping_match_18]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 19' datatype='integer' name='[mapping_match_19]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 20' datatype='integer' name='[mapping_match_20]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 21' datatype='integer' name='[mapping_match_21]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 22' datatype='integer' name='[mapping_match_22]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 23' datatype='integer' name='[mapping_match_23]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 24' datatype='integer' name='[mapping_match_24]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 25' datatype='integer' name='[mapping_match_25]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 26' datatype='integer' name='[mapping_match_26]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 02' datatype='integer' name='[mapping_match_2]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 03' datatype='integer' name='[mapping_match_3]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 04' datatype='integer' name='[mapping_match_4]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 05' datatype='integer' name='[mapping_match_5]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 06' datatype='integer' name='[mapping_match_6]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 07' datatype='integer' name='[mapping_match_7]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 08' datatype='integer' name='[mapping_match_8]' role='measure' type='quantitative' />
+      <column caption='Mapping Match 09' datatype='integer' name='[mapping_match_9]' role='measure' type='quantitative' />
+      <column caption='Match Cites Parrot' datatype='integer' name='[match_cites_parrot]' role='measure' type='quantitative' />
+      <column caption='Match Common Parrot' datatype='integer' name='[match_common_parrot]' role='measure' type='quantitative' />
+      <column caption='Reg' datatype='string' name='[reg]' role='dimension' type='nominal' />
+      <column-instance column='[match_cites_parrot]' derivation='Sum' name='[sum:match_cites_parrot:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[match_common_parrot]' derivation='Sum' name='[sum:match_common_parrot:qk]' pivot='key' type='quantitative' />
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' rowDisplayCount='10' show-aliased-fields='true' show-hidden-fields='true' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:AdhocCluster:1:ok]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>1</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>3</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Suisse&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <analytic-model>
+        <name>
+          <field name='[AnalyticModel:{79449297-2ca3-4228-9428-195f5a327c32}]' />
+        </name>
+        <analytic-model-specifications class='cluster-specifications'>
+          <analysis-fields>
+            <field name='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_cites_parrot:qk]' />
+            <field name='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_common_parrot:qk]' />
+          </analysis-fields>
+          <filter-fields />
+          <lod-fields />
+          <number-of-desired-clusters>0</number-of-desired-clusters>
+          <is-dissagregate>false</is-dissagregate>
+        </analytic-model-specifications>
+        <result-fields />
+      </analytic-model>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='classification_1_psittaciformes' id='classification!1!psittaciformes_354A60645D0C4DF08BE0C9177F7ABFA4'>
+            <properties context=''>
+              <relation connection='excel-direct.0a16srs0le72t117mhjlu1ee8akk' name='classification_1_psittaciformes' table='[classification_1_psittaciformes$]' type='table'>
+                <columns gridOrigin='A1:AD10001:no:A1:AD10001:0' header='yes' outcome='6'>
+                  <column datatype='integer' name='id' ordinal='0' />
+                  <column datatype='string' name='ad_id' ordinal='1' />
+                  <column datatype='integer' name='match_cites_parrot' ordinal='2' />
+                  <column datatype='integer' name='match_common_parrot' ordinal='3' />
+                  <column datatype='integer' name='mapping_match' ordinal='4' />
+                  <column datatype='integer' name='mapping_match_2' ordinal='5' />
+                  <column datatype='integer' name='mapping_match_3' ordinal='6' />
+                  <column datatype='integer' name='mapping_match_4' ordinal='7' />
+                  <column datatype='integer' name='mapping_match_5' ordinal='8' />
+                  <column datatype='integer' name='mapping_match_6' ordinal='9' />
+                  <column datatype='integer' name='mapping_match_7' ordinal='10' />
+                  <column datatype='integer' name='mapping_match_8' ordinal='11' />
+                  <column datatype='integer' name='mapping_match_9' ordinal='12' />
+                  <column datatype='integer' name='mapping_match_10' ordinal='13' />
+                  <column datatype='integer' name='mapping_match_11' ordinal='14' />
+                  <column datatype='integer' name='mapping_match_12' ordinal='15' />
+                  <column datatype='integer' name='mapping_match_13' ordinal='16' />
+                  <column datatype='integer' name='mapping_match_14' ordinal='17' />
+                  <column datatype='integer' name='mapping_match_15' ordinal='18' />
+                  <column datatype='integer' name='mapping_match_16' ordinal='19' />
+                  <column datatype='integer' name='mapping_match_17' ordinal='20' />
+                  <column datatype='integer' name='mapping_match_18' ordinal='21' />
+                  <column datatype='integer' name='mapping_match_19' ordinal='22' />
+                  <column datatype='integer' name='mapping_match_20' ordinal='23' />
+                  <column datatype='integer' name='mapping_match_21' ordinal='24' />
+                  <column datatype='integer' name='mapping_match_22' ordinal='25' />
+                  <column datatype='integer' name='mapping_match_23' ordinal='26' />
+                  <column datatype='integer' name='mapping_match_24' ordinal='27' />
+                  <column datatype='integer' name='mapping_match_25' ordinal='28' />
+                  <column datatype='integer' name='mapping_match_26' ordinal='29' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='classification_1_reg_map_match' id='classification!1!reg!map!match_52397462907C47E9BC00D8688EBB4278'>
+            <properties context=''>
+              <relation connection='excel-direct.11nk8z60hvjhal1h2193o1sudip5' name='classification_1_reg_map_match' table='[classification_1_reg_map_match$]' type='table'>
+                <columns gridOrigin='A1:C613:no:A1:C613:0' header='yes' outcome='6'>
+                  <column datatype='integer' name='id' ordinal='0' />
+                  <column datatype='integer' name='id_re' ordinal='1' />
+                  <column datatype='integer' name='id_map' ordinal='2' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='classification_1_regex' id='classification!1!regex_35615722944D4434B78EEC082E234252'>
+            <properties context=''>
+              <relation connection='excel-direct.1mfm80f1gpeecw17a0k9109k2mxs' name='classification_1_regex' table='[classification_1_regex$]' type='table'>
+                <columns gridOrigin='A1:B403:no:A1:B403:0' header='yes' outcome='6'>
+                  <column datatype='integer' name='id' ordinal='0' />
+                  <column datatype='string' name='reg' ordinal='1' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='[id (classification!1!regex)]' />
+              <expression op='[id_re]' />
+            </expression>
+            <first-end-point object-id='classification!1!regex_35615722944D4434B78EEC082E234252' />
+            <second-end-point object-id='classification!1!reg!map!match_52397462907C47E9BC00D8688EBB4278' />
+          </relationship>
+          <relationship>
+            <expression op='AND'>
+              <expression op='='>
+                <expression op='[mapping_match]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_10]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_11]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_12]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_13]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_14]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_15]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_16]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_17]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_18]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_19]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_2]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_20]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_21]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_22]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_23]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_24]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_25]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_26]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_3]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_4]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_5]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_6]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_7]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_8]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[mapping_match_9]' />
+                <expression op='[id (classification!1!regex)]' />
+              </expression>
+            </expression>
+            <first-end-point object-id='classification!1!psittaciformes_354A60645D0C4DF08BE0C9177F7ABFA4' />
+            <second-end-point object-id='classification!1!regex_35615722944D4434B78EEC082E234252' />
+          </relationship>
+        </relationships>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Feuille 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='classification_1_psittaciformes+ (Connexions multiples)' name='federated.0ik09no04u6tgs16ta7ps16751iv' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0ik09no04u6tgs16ta7ps16751iv'>
+            <column auto-hidden='true' caption='Clusters' datatype='integer' hidden='true' is-adhoc-cluster='true' name='[AdhocCluster:1]' parent-model='[AnalyticModel:{79449297-2ca3-4228-9428-195f5a327c32}]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='-1' value='Données atypiques de cluster' />
+                <alias key='0' value='Pas dans un cluster' />
+                <alias key='1' value='Cluster 1' />
+                <alias key='2' value='Cluster 2' />
+                <alias key='3' value='Cluster 3' />
+                <alias key='4' value='Cluster 4' />
+                <alias key='5' value='Cluster 5' />
+                <alias key='6' value='Cluster 6' />
+                <alias key='7' value='Cluster 7' />
+                <alias key='8' value='Cluster 8' />
+                <alias key='9' value='Cluster 9' />
+                <alias key='10' value='Cluster 10' />
+                <alias key='11' value='Cluster 11' />
+                <alias key='12' value='Cluster 12' />
+                <alias key='13' value='Cluster 13' />
+                <alias key='14' value='Cluster 14' />
+                <alias key='15' value='Cluster 15' />
+                <alias key='16' value='Cluster 16' />
+                <alias key='17' value='Cluster 17' />
+                <alias key='18' value='Cluster 18' />
+                <alias key='19' value='Cluster 19' />
+                <alias key='20' value='Cluster 20' />
+                <alias key='21' value='Cluster 21' />
+                <alias key='22' value='Cluster 22' />
+                <alias key='23' value='Cluster 23' />
+                <alias key='24' value='Cluster 24' />
+                <alias key='25' value='Cluster 25' />
+                <alias key='26' value='Cluster 26' />
+                <alias key='27' value='Cluster 27' />
+                <alias key='28' value='Cluster 28' />
+                <alias key='29' value='Cluster 29' />
+                <alias key='30' value='Cluster 30' />
+                <alias key='31' value='Cluster 31' />
+                <alias key='32' value='Cluster 32' />
+                <alias key='33' value='Cluster 33' />
+                <alias key='34' value='Cluster 34' />
+                <alias key='35' value='Cluster 35' />
+                <alias key='36' value='Cluster 36' />
+                <alias key='37' value='Cluster 37' />
+                <alias key='38' value='Cluster 38' />
+                <alias key='39' value='Cluster 39' />
+                <alias key='40' value='Cluster 40' />
+                <alias key='41' value='Cluster 41' />
+                <alias key='42' value='Cluster 42' />
+                <alias key='43' value='Cluster 43' />
+                <alias key='44' value='Cluster 44' />
+                <alias key='45' value='Cluster 45' />
+                <alias key='46' value='Cluster 46' />
+                <alias key='47' value='Cluster 47' />
+                <alias key='48' value='Cluster 48' />
+                <alias key='49' value='Cluster 49' />
+                <alias key='50' value='Cluster 50' />
+              </aliases>
+            </column>
+            <column caption='Match Cites Parrot' datatype='integer' name='[match_cites_parrot]' role='measure' type='quantitative' />
+            <column caption='Match Common Parrot' datatype='integer' name='[match_common_parrot]' role='measure' type='quantitative' />
+            <column-instance column='[AdhocCluster:1]' derivation='None' is-adhoc-cluster='true' name='[none:AdhocCluster:1:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[match_cites_parrot]' derivation='Sum' name='[sum:match_cites_parrot:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[match_common_parrot]' derivation='Sum' name='[sum:match_common_parrot:qk]' pivot='key' type='quantitative' />
+            <style>
+              <style-rule element='mark'>
+                <encoding attr='color' field='[none:AdhocCluster:1:ok]' type='palette'>
+                  <map to='#4e79a7'>
+                    <bucket>1</bucket>
+                  </map>
+                  <map to='#e15759'>
+                    <bucket>3</bucket>
+                  </map>
+                  <map to='#f28e2b'>
+                    <bucket>2</bucket>
+                  </map>
+                </encoding>
+              </style-rule>
+            </style>
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_cites_parrot:qk]' field-type='quantitative' max='25946' min='0' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_common_parrot:qk]' field-type='quantitative' max='25946' min='0' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0ik09no04u6tgs16ta7ps16751iv].[none:AdhocCluster:1:ok]' />
+            </encodings>
+            <reference-line axis-column='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_cites_parrot:qk]' enable-instant-analytics='true' formula='constant' id='refline2' label-type='automatic' scope='per-table' value='0' value-column='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_cites_parrot:qk]' z-order='1' />
+            <reference-line axis-column='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_common_parrot:qk]' enable-instant-analytics='true' formula='constant' id='refline3' label-type='automatic' scope='per-table' value='0' value-column='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_common_parrot:qk]' z-order='2' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_cites_parrot:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0ik09no04u6tgs16ta7ps16751iv].[none:AdhocCluster:1:ok]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='6' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_common_parrot:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0ik09no04u6tgs16ta7ps16751iv].[none:AdhocCluster:1:ok]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_cites_parrot:qk] + [federated.0ik09no04u6tgs16ta7ps16751iv].[sum:match_common_parrot:qk])</rows>
+        <cols />
+        <percentages enabled='false' mode='row' />
+      </table>
+      <simple-id uuid='{881CF4FC-0033-499C-8075-239FA51F3A87}' />
+    </worksheet>
+    <worksheet name='Feuille 2'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{48740CA3-6882-4B73-9923-CF8DE07D6439}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' name='Feuille 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='170'>
+            <card pane-specification-id='5' param='[federated.0ik09no04u6tgs16ta7ps16751iv].[none:AdhocCluster:1:ok]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0ik09no04u6tgs16ta7ps16751iv].[none:AdhocCluster:1:ok]</field>
+            <field>[federated.0ik09no04u6tgs16ta7ps16751iv].[none:ad_id:nk]</field>
+          </color-one-way>
+        </highlight>
+        <floating-toolbar-visibility value='2' />
+      </viewpoint>
+      <simple-id uuid='{2EE9BF4E-22F4-4927-8DBE-F772F1AD9A74}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Feuille 2'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{C3660C0B-A1C3-49BD-92DB-B59AB0E98997}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='384' name='Feuille 1' width='246'>
+      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
+    </thumbnail>
+    <thumbnail height='384' name='Feuille 2' width='384'>
+      iVBORw0KGgoAAAANSUhEUgAAAYAAAAGACAYAAACkx7W/AAAACXBIWXMAAA7DAAAOwwHHb6hk
+      AAAFXUlEQVR4nO3VMQEAIAzAMMC/5yFjRxMF/XpnZg4AOW87AIAdBgAQZQAAUQYAEGUAAFEG
+      ABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAA
+      UQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBl
+      AABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYA
+      EGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABR
+      BgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUA
+      AFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQ
+      ZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEG
+      ABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAA
+      UQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBl
+      AABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYA
+      EGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABR
+      BgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUA
+      AFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQ
+      ZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEG
+      ABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAA
+      UQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBl
+      AABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYA
+      EGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABR
+      BgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUA
+      AFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQ
+      ZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEG
+      ABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAA
+      UQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBl
+      AABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEGABBlAABRBgAQZQAAUQYA
+      EGUAAFEGABBlAABRBgAQZQAAUQYAEGUAAFEfFxoG/IiMv0YAAAAASUVORK5CYII=
+    </thumbnail>
+  </thumbnails>
+</workbook>
