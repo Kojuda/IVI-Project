@@ -39,11 +39,13 @@ if status_modified:
                             res = None
                         else:
                             if session.query(Regex).filter(Regex.reg==res).scalar()==None and res!= None:
-                                entry = Regex(reg=res)
+                                word=i.strip(';')
+                                entry = Regex(reg=res, word=word)
                                 entry.insertregex(session)
                                 session.commit()
                     elif session.query(Regex).filter(Regex.reg==res).scalar()==None and res!= None: #if entry doesn't exist: create entry in regex database
-                        entry = Regex(reg=res)
+                        word=i.strip(';')
+                        entry = Regex(reg=res, word=word)
                         entry.insertregex(session)
                         session.commit()
                     else: #if no entry pass

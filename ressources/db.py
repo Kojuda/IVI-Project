@@ -222,7 +222,8 @@ class Regex(Base):
     __tablename__ = 'classification_1_regex'
     id = Column(Integer, primary_key=True, autoincrement=True)
     reg = Column(String)
-
+    word = Column(String)
+    
     def insertregex(self, session):
         session.add(self)
         session.commit()

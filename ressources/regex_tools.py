@@ -57,13 +57,16 @@ def word_to_regex(word: str):
     l = []
     separator=''
     for i in range(0, len(word)):
-        try:
-            l.append('('+dict_alphabet[word[i].lower()]+'){1}')
-        except:
-            if len(l)<2:
-                pass
-            else:
-                l.append("\w")
+        if i==';':
+            pass
+        else:
+            try:
+                l.append('('+dict_alphabet[word[i].lower()]+'){1}')
+            except:
+                if len(l)<2:
+                    pass
+                else:
+                    l.append("\w")
     res = separator.join(l)
     return res
 
@@ -73,11 +76,11 @@ def word_to_regex(word: str):
 
 #Dict of letters with some possibilites of misspelling (Don't consider absence)
 mp_mit_egg ={
-    "a" : "[a]{1,2}", 
+    "a" : "[a]{1,2}",
     "b" : "[b]{1,2}",
     "c" : "[c]{1,2}",
     "d" : "[d]{1,2}",
-    "e" : "[e]{1,2}", 
+    "e" : "[e]{1,2}",
     "f" : "[f]{1,2}",
     "g" : "[g]{1,2}",
     "h" : "[h]{1,2}",
