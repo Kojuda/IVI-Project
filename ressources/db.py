@@ -259,7 +259,7 @@ class Match_Regex_IdMap(Base):
         session.delete(self)
         session.commit()
 
-class Matching_Ads(Base):
+class Classification_2_Ads(Base):
     __tablename__ = 'classification_2_matching_ads'
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String,  unique=True)#ForeignKey("parse_ads.ad_id")
@@ -273,7 +273,33 @@ class Matching_Ads(Base):
     egg=Column(Integer)
     cites_appendice=Column(Integer)
     status=Column(Integer, default=0)
-    #parse_ads = relationship("Parse_ads", backref="matching_ads")
+
+    def insert(self, session):
+        session.add(self)
+        session.commit()
+
+    def update(self, session, newStatus=1):
+        self.status = newStatus
+        session.commit()
+
+    def deleteEntry(self, session):
+        session.delete(self)
+        session.commit()
+
+class Classification_3_Ads(Base):
+    __tablename__ = 'classification_3_matching_ads'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ad_id = Column(String,  unique=True)#ForeignKey("parse_ads.ad_id")
+    date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
+    date_updated = Column(DateTime, onupdate=datetime.datetime.now())
+    ids_matching = Column(String)
+    regex = Column(JSON)
+    nb_species_matches= Column(Integer)
+    #Presence or not
+    cage= Column(Integer)
+    egg=Column(Integer)
+    cites_appendice=Column(Integer)
+    status=Column(Integer, default=0)
 
     def insert(self, session):
         session.add(self)
