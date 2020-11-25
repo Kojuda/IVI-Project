@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="734aa4ab-d5fb-4d25-b131-69692661af5e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_description.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_description.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_price.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_price.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classification_1_parsing_parrotorno.py" beforeDir="false" afterPath="$PROJECT_DIR$/classification_1_parsing_parrotorno.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,27 +42,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="db.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ressources/db.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="235" column="35" selection-start-line="235" selection-start-column="35" selection-end-line="235" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parse_price.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/parse_price.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
-              <folding>
-                <element signature="e#0#71#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="classification_1_parsing_birdorno.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/classification_1_parsing_birdorno.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parse_description.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="parse_description.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/parse_description.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
+            <state>
+              <caret lean-forward="true" />
               <folding>
                 <element signature="e#0#101#0" expanded="true" />
               </folding>
@@ -94,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="classification_1_parsing_parrotorno.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="classification_1_parsing_parrotorno.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/classification_1_parsing_parrotorno.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="61" selection-start-line="61" selection-end-line="61" selection-end-column="26" />
+            <state relative-caret-position="272">
+              <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
             </state>
           </provider>
         </entry>
@@ -148,6 +126,7 @@
         <option value="$PROJECT_DIR$/parsing_parrotorno.py" />
         <option value="$PROJECT_DIR$/parse_price.py" />
         <option value="$PROJECT_DIR$/parse_description.py" />
+        <option value="$PROJECT_DIR$/classification_1_parsing_parrotorno.py" />
       </list>
     </option>
   </component>
@@ -350,7 +329,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.39070567" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39070567" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.25601926" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -616,13 +595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ressources/db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="235" column="35" selection-start-line="235" selection-start-column="35" selection-end-line="235" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/parseCodes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -630,17 +602,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classification_1_parsing_birdorno.py">
+    <entry file="file://$PROJECT_DIR$/parse_description.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/classification_1_parsing_parrotorno.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="61" selection-start-line="61" selection-end-line="61" selection-end-column="26" />
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="e#0#101#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -654,13 +622,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/parse_description.py">
+    <entry file="file://$PROJECT_DIR$/ressources/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
-          <folding>
-            <element signature="e#0#101#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="235" column="35" selection-start-line="235" selection-start-column="35" selection-end-line="235" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classification_1_parsing_birdorno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classification_1_parsing_parrotorno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
         </state>
       </provider>
     </entry>

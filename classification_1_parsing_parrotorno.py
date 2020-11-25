@@ -13,7 +13,8 @@ list_scientific = []
 status_modified = True #Changer en True si regex_tools ou table mapping_cites changés + supprimer tables
 
 #transformer table mapping_names en REGEX if modifications were made [aliments tables regex et match_regex_idmap
-if status_modified:
+def make_helper_tables():
+    """creates regex table, regex_id map table """
     for row in session.query(Mapping):
         #print(row.id)
     # traitement scientific name
@@ -58,8 +59,36 @@ if status_modified:
                         entry.insertMatch(session)
                         session.commit()
 
+def make_dictionnary():
+    """creates dictionnary for small multiple"""
+    result_dict = {}
+    for row in session.query(Mapping):
+        result = []
+        #add scientific name
+        result.append(word_to_regex(row.scientific_name_cites))
+        #add common names
+        entry = row.common_name.split('; ')
+        for name in entry:
+            name.lower()
+            list_of_words = name.split(' ')
+            for i in list_of_words:
+                if len(i) <= 2: #let alone small words
+                    pass
+                elif len(i) < 5 and (('\s' in res) or ('\w' in res) or (res == '')):
+                    pass
+                else: #big words - we do something with them: namely
+                    if type(i)==str: #check if string, if not string we just sit idle
+                        if word_to_regex(i) not in result:
+                            result.append(word_to_regex(i))
+        result_dict[row.id]=result
+    return result_dict
+
+
+
 
 if __name__ == '__main__':
+    if status_modified:
+        make_helper_tables()
     #générer list_scientific
     for row in session.query(Mapping):
         a = word_to_regex(row.scientific_name_cites)
