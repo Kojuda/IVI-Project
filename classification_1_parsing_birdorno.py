@@ -16,21 +16,27 @@ from ressources.regex_tools import word_to_regex
 
 #Goal 1: Decide if ad contains bird
 #Strategy: Look in title for words describing birds with regular expressions
-list_of_birds_test = ["bird","brd","amazon","amazona","parot", "prot", "african grey","macaw","mcw","macw","mcaw","macow","cockato","winged","paraket","lovebird","canary","cnry"] #Global variable which contains re to match
-list_of_birds = []
-for i in list_of_birds_test:
-    a = word_to_regex(i)
-    list_of_birds.append(a)
+def create_regex_for_birds(list_of_birds_test):
+    list_of_birds = []
+    for i in list_of_birds_test:
+        a = word_to_regex(i)
+        list_of_birds_test.append(a)
+    return(list_of_birds)
 
 if __name__ == '__main__':
-    path_result = './results/parse/'
+    list_of_birds_test = ["bird", "brd", "amazon", "amazona", "parot", "prot", "african grey", "macaw", "mcw", "macw",
+                          "mcaw", "macow", "cockato", "winged", "paraket", "lovebird", "canary",
+                          "cnry"]  # Global variable which contains re to match
+    list_of_birds = create_regex_for_birds(list_of_birds_test)
     #Documentation
     cT = datetime.datetime.now()
     date_parsing = f"{str(cT.year)}-{str(cT.month)}-{str(cT.day)}_{str(cT.hour)}-{str(cT.minute)}"
     doc = Documentation()
+    path_result = './results/classification/'
     #parse database
     c = 0 #counter to trace vow many ads have status 1 = classified as bird
     for row in session.query(Parse_ads):
+        print('start')
         if session.query(Parsing_bird_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
             print('no entry')
             # step 1 search in title
@@ -66,7 +72,7 @@ if __name__ == '__main__':
                 entry = Parsing_bird_or_no(ad_id=row.ad_id, status_bird=0)
                 entry.insertParse_bird(session)
                 session.commit()
-
+            print('before')
         else:
             print('entry exists')
             #print(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar(), type(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()))
@@ -98,3 +104,6 @@ if __name__ == '__main__':
                             c += 1
                             status_change = True
                             pass
+        print('here')
+        with open(f'./results/classification/documentation/bird_{date_parsing}_documentation.json', 'wb') as f:
+            f.write(str(doc).encode('utf-8'))

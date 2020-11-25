@@ -72,6 +72,10 @@ def make_dictionnary():
             name.lower()
             list_of_words = name.split(' ')
             for i in list_of_words:
+                try:
+                    res = word_to_regex(i)
+                except:
+                    res = None
                 if len(i) <= 2: #let alone small words
                     pass
                 elif len(i) < 5 and (('\s' in res) or ('\w' in res) or (res == '')):
@@ -79,7 +83,7 @@ def make_dictionnary():
                 else: #big words - we do something with them: namely
                     if type(i)==str: #check if string, if not string we just sit idle
                         if word_to_regex(i) not in result:
-                            result.append(word_to_regex(i))
+                            result.append(res)
         result_dict[row.id]=result
     return result_dict
 
@@ -89,6 +93,8 @@ def make_dictionnary():
 if __name__ == '__main__':
     if status_modified:
         make_helper_tables()
+    res = make_dictionnary()
+    print(res)
     #générer list_scientific
     for row in session.query(Mapping):
         a = word_to_regex(row.scientific_name_cites)
@@ -173,3 +179,5 @@ if __name__ == '__main__':
                 entry = Parsing_Psittaciformes_or_no(ad_id=row.ad_id, match_cites_parrot=match_scientific, match_common_parrot=match_common, mapping_match=lmc)
                 entry.insertPsittaciformes(session)
                 session.commit()
+        with open(f'./results/classification/documentation/parrot_{date_parsing}_documentation.json', 'wb') as f:
+            f.write(str(doc).encode('utf-8'))
