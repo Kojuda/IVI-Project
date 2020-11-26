@@ -10,7 +10,7 @@ from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Parsing_bird_or_no, Mapping, Regex, Match_Regex_IdMap
 from ressources.regex_tools import word_to_regex
 list_scientific = []
-status_modified = True #Changer en True si regex_tools ou table mapping_cites changés + supprimer tables
+status_modified = False #Changer en True si regex_tools ou table mapping_cites changés + supprimer tables
 
 #transformer table mapping_names en REGEX if modifications were made [aliments tables regex et match_regex_idmap
 def make_helper_tables():
@@ -65,7 +65,7 @@ def make_dictionnary():
     for row in session.query(Mapping):
         result = []
         #add scientific name
-        result.append(word_to_regex(row.scientific_name_cites))
+        result.append(row.scientific_name_cites.lower())
         #add common names
         entry = row.common_name.split('; ')
         for name in entry:
@@ -82,8 +82,9 @@ def make_dictionnary():
                     pass
                 else: #big words - we do something with them: namely
                     if type(i)==str: #check if string, if not string we just sit idle
-                        if word_to_regex(i) not in result:
-                            result.append(res)
+                        if res != None:
+                            print(i.lower().strip(';'))
+                            result.append(i.lower().strip(';'))
         result_dict[row.id]=result
     return result_dict
 

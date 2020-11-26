@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="734aa4ab-d5fb-4d25-b131-69692661af5e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATABASES/project.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASES/project.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classification_1_parsing_birdorno.py" beforeDir="false" afterPath="$PROJECT_DIR$/classification_1_parsing_birdorno.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/regex_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/regex_tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classification_1_parsing_parrotorno.py" beforeDir="false" afterPath="$PROJECT_DIR$/classification_1_parsing_parrotorno.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,7 +20,7 @@
     <SUITE FILE_PATH="coverage/IVI_Project$parsing_birdorno.coverage" NAME="parsing_birdorno Coverage Results" MODIFIED="1606336123741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IVI_Project$parseCodes.coverage" NAME="parseCodes Coverage Results" MODIFIED="1605281474620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IVI_Project$spelling_error_mitigation.coverage" NAME="spelling_error_mitigation Coverage Results" MODIFIED="1606038563455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/IVI_Project$classification_1_parsing_parrotorno.coverage" NAME="classification_1_parsing_parrotorno Coverage Results" MODIFIED="1606336161855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/IVI_Project$classification_1_parsing_parrotorno.coverage" NAME="classification_1_parsing_parrotorno Coverage Results" MODIFIED="1606406511301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IVI_Project$parsing_parrotorno.coverage" NAME="parsing_parrotorno Coverage Results" MODIFIED="1606045196221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -47,11 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="classification_1_parsing_birdorno.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="classification_1_parsing_birdorno.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/classification_1_parsing_birdorno.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+            <state relative-caret-position="102">
+              <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
               <folding>
                 <element signature="e#133#176#0" expanded="true" />
               </folding>
@@ -82,6 +79,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4063">
               <caret line="243" column="9" selection-start-line="243" selection-start-column="9" selection-end-line="243" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classification_1_parsing_parrotorno.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/classification_1_parsing_parrotorno.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="84" column="39" selection-start-line="84" selection-start-column="39" selection-end-line="84" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -151,10 +157,10 @@
         <option value="$PROJECT_DIR$/parsing_parrotorno.py" />
         <option value="$PROJECT_DIR$/parse_price.py" />
         <option value="$PROJECT_DIR$/parse_description.py" />
-        <option value="$PROJECT_DIR$/classification_1_parsing_parrotorno.py" />
         <option value="$PROJECT_DIR$/ressources/db.py" />
         <option value="$PROJECT_DIR$/ressources/regex_tools.py" />
         <option value="$PROJECT_DIR$/classification_1_parsing_birdorno.py" />
+        <option value="$PROJECT_DIR$/classification_1_parsing_parrotorno.py" />
       </list>
     </option>
   </component>
@@ -202,7 +208,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.classification_1_parsing_birdorno">
+  <component name="RunManager" selected="Python.classification_1_parsing_parrotorno">
     <configuration name="classification_1_parsing_birdorno" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="IVI-Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -327,8 +333,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.classification_1_parsing_birdorno" />
         <item itemvalue="Python.classification_1_parsing_parrotorno" />
+        <item itemvalue="Python.classification_1_parsing_birdorno" />
         <item itemvalue="Python.parse_description" />
         <item itemvalue="Python.parsing_parrotorno" />
         <item itemvalue="Python.db" />
@@ -356,7 +362,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46471602" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.46471602" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.25601926" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -619,13 +625,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classification_1_parsing_parrotorno.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="159" lean-forward="true" selection-start-line="159" selection-end-line="159" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/parse_description.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -652,11 +651,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/classification_1_parsing_birdorno.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+        <state relative-caret-position="102">
+          <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
           <folding>
             <element signature="e#133#176#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classification_1_parsing_parrotorno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="84" column="39" selection-start-line="84" selection-start-column="39" selection-end-line="84" selection-end-column="39" />
         </state>
       </provider>
     </entry>
