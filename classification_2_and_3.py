@@ -151,29 +151,6 @@ def search_re(ad, regexes, classification) :
         )
     return entry
 
-# def create_entry(classification) :
-#     """Create an entry according to the chosen classification"""
-#     if classification=="classification_2" :
-#         entry=Classification_2_Ads(
-#             ad_id=ad.ad_id,
-#             ids_matching=matches,
-#             regex=json.dumps(re_matches),
-#             nb_species_matches=nb_match,
-#             cage=cage,
-#             egg=egg,
-#             cites_appendice=cites
-#         )
-#     elif classification=="classification_3" :
-#         entry=Classification_2_Ads(
-#             ad_id=ad.ad_id,
-#             ids_matching=matches,
-#             regex=json.dumps(re_matches),
-#             nb_species_matches=nb_match,
-#             cage=cage,
-#             egg=egg,
-#             cites_appendice=cites
-#         )
-#     return entry
 
 #GLOBAL (regexes)
 re_hasCage=re_hasCage()

@@ -78,7 +78,7 @@ if __name__ == '__main__':
             #print(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar(), type(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()))
             if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()==0:
                 print('change')
-                status_change = False
+                status_change = True
                 # step 1 search in title
                 for expression in list_of_birds:
                     # For each defined regular expression
