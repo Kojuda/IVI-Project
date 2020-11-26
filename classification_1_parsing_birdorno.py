@@ -18,9 +18,11 @@ from ressources.regex_tools import word_to_regex
 #Strategy: Look in title for words describing birds with regular expressions
 def create_regex_for_birds(list_of_birds_test):
     list_of_birds = []
-    for i in list_of_birds_test:
-        a = word_to_regex(i)
-        list_of_birds_test.append(a)
+    for i in range(len(list_of_birds_test)):
+        a = word_to_regex(list_of_birds_test[i])
+        print(a)
+        list_of_birds.append(a)
+    #print(list_of_birds)
     return(list_of_birds)
 
 if __name__ == '__main__':
@@ -28,6 +30,7 @@ if __name__ == '__main__':
                           "mcaw", "macow", "cockato", "winged", "paraket", "lovebird", "canary",
                           "cnry"]  # Global variable which contains re to match
     list_of_birds = create_regex_for_birds(list_of_birds_test)
+    print(list_of_birds)
     #Documentation
     cT = datetime.datetime.now()
     date_parsing = f"{str(cT.year)}-{str(cT.month)}-{str(cT.day)}_{str(cT.hour)}-{str(cT.minute)}"
@@ -36,9 +39,9 @@ if __name__ == '__main__':
     #parse database
     c = 0 #counter to trace vow many ads have status 1 = classified as bird
     for row in session.query(Parse_ads):
-        print('start')
+        #print('start')
         if session.query(Parsing_bird_or_no.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
-            print('no entry')
+            #print('no entry')
             # step 1 search in title
             for expression in list_of_birds:
                 # For each defined regular expression
@@ -61,7 +64,7 @@ if __name__ == '__main__':
                         res = None
                 if res != None:
                     if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar() == None:
-                        print('description')
+                        #print('description')
                         entry = Parsing_bird_or_no(ad_id=row.ad_id, status_bird=1)
                         entry.insertParse_bird(session)
                         session.commit()
@@ -72,12 +75,12 @@ if __name__ == '__main__':
                 entry = Parsing_bird_or_no(ad_id=row.ad_id, status_bird=0)
                 entry.insertParse_bird(session)
                 session.commit()
-            print('before')
+            #print('before')
         else:
-            print('entry exists')
+            #print('entry exists')
             #print(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar(), type(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()))
             if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()==0:
-                print('change')
+                #print('change')
                 status_change = True
                 # step 1 search in title
                 for expression in list_of_birds:
@@ -85,7 +88,7 @@ if __name__ == '__main__':
                     res = re.search(str(expression), row.title)  # search in title
                     if res != None:  # if there is a match, go on
                         if status_change:
-                            print('change stat')
+                            #print('change stat')
                             Parsing_bird_or_no(ad_id=row.ad_id).update(session)
                             session.commit()
                             c += 1
@@ -95,15 +98,14 @@ if __name__ == '__main__':
                         res_des = re.search(str(expression), row.description)
                     except:
                         res_des = None
-                    print(res_des.scalar())
                     if res_des != None:
                         if status_change:
-                            print('change des')
+                            #print('change des')
                             Parsing_bird_or_no(ad_id=row.ad_id).update(session)
                             session.commit()
                             c += 1
                             status_change = True
                             pass
-        print('here')
+        #print('here')
         with open(f'./results/classification/documentation/bird_{date_parsing}_documentation.json', 'wb') as f:
             f.write(str(doc).encode('utf-8'))

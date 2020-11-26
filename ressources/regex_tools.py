@@ -54,20 +54,21 @@ def removeEmptyString(liste):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~ Project REGEX ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def word_to_regex(word: str):
+    """function used by parse_birds and parse_parrot"""
     l = []
     separator=''
     for i in range(0, len(word)):
         if i==';':
             pass
         else:
+            #print(dict_alphabet[word[i].lower()])
             try:
                 l.append('('+dict_alphabet[word[i].lower()]+'){1}')
             except:
-                if len(l)<2:
-                    pass
-                else:
-                    l.append("\w")
+                if len(l)>4:
+                    l.append('(\w){0,1}')
     res = separator.join(l)
+    #print(res)
     return res
 
     # else:
