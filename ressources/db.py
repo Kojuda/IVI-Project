@@ -384,7 +384,7 @@ class Ads_clean(Base):
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
 
-engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db')
+engine = create_engine('sqlite:///DATABASES/project.db')
     #j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier [a faire entre Luisa&autres]
     #engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
     #pour luisa la path est: 'sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db'
