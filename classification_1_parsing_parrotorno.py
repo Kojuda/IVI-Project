@@ -41,12 +41,12 @@ def make_helper_tables():
                         else:
                             if session.query(Regex).filter(Regex.reg==res).scalar()==None and res!= None:
                                 word=i.strip(';')
-                                entry = Regex(reg=res, word=word)
+                                entry = Regex(reg=res, word=word.lower().strip(';'))
                                 entry.insertregex(session)
                                 session.commit()
                     elif session.query(Regex).filter(Regex.reg==res).scalar()==None and res!= None: #if entry doesn't exist: create entry in regex database
                         word=i.strip(';')
-                        entry = Regex(reg=res, word=word)
+                        entry = Regex(reg=res, word=word.lower().strip(';'))
                         entry.insertregex(session)
                         session.commit()
                     else: #if no entry pass
