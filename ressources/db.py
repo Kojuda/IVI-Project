@@ -335,14 +335,14 @@ class Vendor_analyse(Base):
     redirect_website= Column(String)
     website_deviate = Column(String)
     status_vendeur_taken = Column(Integer, default=0)
-    status_psitasiforme = Column(Integer, default=0)
+    status_bird = Column(Integer)
 
     def insertVendor_analyse(self, session):
         session.add(self)
         session.commit()
 
     def update(self, session, newStatus=1):
-        self.status = newStatus
+        self.status_bird = newStatus
         session.commit()
 
     def deleteEntry(self, session) :
@@ -355,7 +355,7 @@ class Ads_clean(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String, unique=True)
     ad_number = Column(Integer, nullable=False)
-    #id_vendor=Column(Integer,ForeignKey(Vendor_analyse.id))
+    id_vendor=Column(Integer)
     title = Column(String)
     description = Column(String)
     breed = Column(String)
@@ -365,6 +365,7 @@ class Ads_clean(Base):
     secondary_color = Column(String)
     price = Column(Integer)
     currency = Column(String)
+    price_in_dollar = Column(String)
     payment_forms = Column(String)
 
     def insertAds_clean(self, session):
@@ -384,7 +385,7 @@ class Ads_clean(Base):
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
 
-engine = create_engine('sqlite:///DATABASES/project.db')
+engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db')
     #j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier [a faire entre Luisa&autres]
     #engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
     #pour luisa la path est: 'sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db'
