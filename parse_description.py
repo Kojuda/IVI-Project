@@ -132,7 +132,7 @@ def transform_currency(row, montant_f):
                 try:
                     price_final_f = float(montant_f) * float(transform_to_dollar[y])
                 except:
-                    print(montant_f, transform_to_dollar[y])
+                    #print(montant_f, transform_to_dollar[y])
                     price_final_f = montant_f
                 #import pdb;
                 #pdb.set_trace()
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     c=0
     for row in session.query(Parse_ads):
         status_bird = session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()
-        print(status_bird)
+        #print(status_bird)
         if row.description != None:
             email = get_email(row)
             website = get_website(row)
@@ -173,11 +173,13 @@ if __name__ == '__main__':
         real_montant, currency = transform_currency(row, montant)
         #if session.query(Ads_clean).filter_by(ad_id = row.ad_id)!= None:
         vendor_id = session.query(Vendor_analyse.id).filter_by(pseudo=row.pseudo).scalar()
-        print(vendor_id)
+        #print(vendor_id)
         if montant != None:
-            print(montant, real_montant, currency)
+            #print(montant, real_montant, currency)
             if session.query(Ads_clean.id).filter_by(ad_id=row.ad_id).scalar()==None:
                 entry_ad_clean(row, vendor_id, montant, currency, real_montant)
+        else:
+            entry_ad_clean(row, vendor_id, montant, None, None)
 
 
 
