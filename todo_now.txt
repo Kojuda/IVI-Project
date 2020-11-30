@@ -1,0 +1,22 @@
+#ToDo:
+- Danny: Perroquet ou non? [mots spécifiques aux perroquits --> macaw (+), blue-and-gold (-)
+
+- Jasmin: $$$$
+
+Pour small multiples:
+Enlever des regex: mots trop petits [à trois lettres]
+Ajouter les espaces avant/après
+todo: chercher gra
+todo: gerer cockatiel: expliquer les manquants?
+danny dit: trouver l exception difference cl. 1 et cl. 3 pour cockatiel
+
+Question: Mettre en point recherche cage (?)
+
+- Bird or no (POUR TOUS): Canard, poulle, petits-oiseaux, pigeons, etc...
+
+
+___EVAL 2 ____ cas limites
+12649_us
+78575_ca (une des especes en match n'est pas la)
+
+
