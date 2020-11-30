@@ -8,7 +8,7 @@ import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation 
 from ressources.db import Parse_ads, session, Classification_2_Ads, Classification_3_Ads, Mapping 
-from ressources.regex_tools import mp_mit_egg, mp_mit_2, cage_lexic, birds_lexic, useless_words, egg_lexic, stop_names, too_common_words
+from ressources.regex_tools import mp_mit_egg, mp_mit_2, cage_lexic, birds_lexic, useless_words, egg_lexic, stop_names, too_common_words, parrots_lexic, cites_lexic
 os.chdir(os.path.dirname(r"{}".format(str(os.path.abspath(__file__)))))
 
 def re_generator_species() :
@@ -81,6 +81,24 @@ def re_hasEgg() :
     reg=f"^(?=.*{' |.*[^v]'.join(miss_egg)}).*"
     return reg
 
+def re_isParrot() :
+    """Create a regex according to a dictionnary that will signal the presence of a word
+    of this lexic in a text"""
+    #Replacement that tolerate misspelling
+    miss_parrot=["".join([mp_mit_egg[char] if (char in mp_mit_egg.keys())  else char for char in list(word)]) for word in parrot_lexic]
+    #A regex that matches only if one of parrot_lexic word is present
+    reg=f"^(?=.*{'|.*'.join(miss_parrot)}).*"
+    return reg
+
+def re_hasPaper() :
+    """Create a regex according to a dictionnary that will signal the presence of a word
+    of this lexic in a text"""
+    #Replacement that tolerate misspelling
+    miss_paper=["".join([mp_mit_egg[char] if (char in mp_mit_egg.keys())  else char for char in list(word)]) for word in cites_lexic]
+    #A regex that matches only if one of cites_lexic word is present
+    reg=f"^(?=.*{'|.*'.join(miss_paper)}).*"
+    return reg
+
 def search_re(ad, regexes, classification) :
     """For each ad, we search with the regexes in the breed, title and description fields to
     find one common name of a bird in the CITES mapping. The text is analyzed with each regex common name
@@ -95,14 +113,22 @@ def search_re(ad, regexes, classification) :
     re_matches={}
     #number of matches
     nb_match=0
+    #check if this is a parrot
+    parrot=-1
     #cage mentionned (-1 = no check)
     cage=-1
     #egg is mentioned (-1 no check)
     egg=-1
     #appendice of CITES, it is 0 if there is no match
     cites=0
+    #check if the legal requirement or cites papers are mentioned (=legal transaction)
+    paper=-1
     #Check whether it is a bird
     if re.search(re_isBird, text, re.DOTALL) :
+        #parrot mentionned or not
+        parrot=1 if re.search(re_isParrot, text, re.DOTALL) else 0
+        #paper mentionned or not
+        paper=1 if re.search(re_hasPaper, text, re.DOTALL) else 0
         #cage mentionned or not
         cage=1 if re.search(re_hasCage, text, re.DOTALL) else 0
         #egg is mentionned
@@ -147,7 +173,9 @@ def search_re(ad, regexes, classification) :
             nb_species_matches=nb_match,
             cage=cage,
             egg=egg,
-            cites_appendice=cites
+            cites_appendice=cites,
+            parrot=parrot,
+            cites_paper=paper
         )
     return entry
 
@@ -156,6 +184,8 @@ def search_re(ad, regexes, classification) :
 re_hasCage=re_hasCage()
 re_isBird=re_isBird()
 re_hasEgg=re_hasEgg()
+re_hasPaper=re_hasPaper()
+re_isParrot=re_isParrot()
 
 if __name__ == '__main__':
     #Documentation
