@@ -197,7 +197,8 @@ dict_alphabet['á']='à+|a+|á+|A+|4+'
 dict_alphabet['ç']='ç+|c+|C+'
 
 cage_lexic=["cage", "jail", "enclosure", "cabine", "trap", "jadi"]
-birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet", "puteh", "hornbill", "jambul", "shama"]
+birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet", "puteh", "hornbill", "jambul", "shama", "chicken", "ostrich", "poule", "pigeon", "swan", "paon","dove", "duck", "goose", "geese", "aves", "albatross", "aigle", "falcon", "stork", "seagull", "penguin", "eagle", "aviary", "auk", "owl", "colibri", "flamingo", "lovebird", "canary", "emu", "hen", "ibis", "kiwi", "crow", "raven", "peacock", "heron", "toucan", "turkey" ,"woodpecker", "quetzal", "puffin", "moa", "leghorn", "magpie", "junco", "kildeer", "hawk", "vulture", "egret", "grouse", "fowl", "cuckoo", "cormorant", "flicker", "wren"]
+parrots_lexic=["macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "parrotlet"]
 egg_lexic=["egg", "cackleberry", "eggs"]
 useless_words=["and", "all", "des", "spp.", "st."]
 stop_names=["Little Blue Macaw", "little blue macaw"]
