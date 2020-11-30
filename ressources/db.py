@@ -266,11 +266,13 @@ class Classification_2_Ads(Base):
     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
     ids_matching = Column(String)
+    parrot=Column(Integer)
     regex = Column(JSON)
     nb_species_matches= Column(Integer)
     #Presence or not
     cage= Column(Integer)
     egg=Column(Integer)
+    cites_paper=Column(Integer)
     cites_appendice=Column(Integer)
     status=Column(Integer, default=0)
 
@@ -293,11 +295,13 @@ class Classification_3_Ads(Base):
     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
     ids_matching = Column(String)
+    parrot=Column(Integer)
     regex = Column(JSON)
     nb_species_matches= Column(Integer)
     #Presence or not
     cage= Column(Integer)
     egg=Column(Integer)
+    cites_paper=Column(Integer)
     cites_appendice=Column(Integer)
     status=Column(Integer, default=0)
 

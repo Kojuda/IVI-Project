@@ -40,8 +40,8 @@ def re_generator_species() :
         dict_regex_3 = {}
         #Populate the dict with regex according to each name
         for name_decomposed, name in zip(miss_cns, cns) :
-                #Regex to only find the words in the text
-                reg_2="".join([f"(?=.*{word})" for word in name_decomposed])
+                #Regex to only find the words in the text. Thus we don't want another letter before to avoid matching "reared" searching for "red"
+                reg_2="".join([f"(?=.*[^0-9a-zÀ-ÿ]{word})" for word in name_decomposed])
                 reg_2=f"^{reg_2}.*"
                 dict_regex_2[name]=reg_2
                 #Regex to find the words in a specific order in a specific proximity

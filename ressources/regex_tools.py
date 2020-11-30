@@ -154,6 +154,7 @@ mp_mit_2 ={
     "ã" : "[ãåàaá]{1,2}",
     "ù" : "[úùûüu]{1,2}",
     "ê" : "[èéêe]{1,2}",
+    "ï" : "[iïíì]{1,2}",
     "(" : "",
     ")" : ""
 }
@@ -197,12 +198,13 @@ dict_alphabet['á']='à+|a+|á+|A+|4+'
 dict_alphabet['ç']='ç+|c+|C+'
 
 cage_lexic=["cage", "jail", "enclosure", "cabine", "trap", "jadi"]
-birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet", "puteh", "hornbill", "jambul", "shama", "chicken", "ostrich", "poule", "pigeon", "swan", "paon","dove", "duck", "goose", "geese", "aves", "albatross", "aigle", "falcon", "stork", "seagull", "penguin", "eagle", "aviary", "auk", "owl", "colibri", "flamingo", "lovebird", "canary", "emu", "hen", "ibis", "kiwi", "crow", "raven", "peacock", "heron", "toucan", "turkey" ,"woodpecker", "quetzal", "puffin", "moa", "leghorn", "magpie", "junco", "kildeer", "hawk", "vulture", "egret", "grouse", "fowl", "cuckoo", "cormorant", "flicker", "wren"]
-parrots_lexic=["macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "parrotlet"]
+birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet", "puteh", "hornbill", "jambul", "shama", "chicken", "ostrich", "poule", "pigeon", "swan", "paon","dove", "duck", "goose", "geese", "aves", "albatross", "aigle", "falcon", "stork", "seagull", "penguin", "eagle", "aviary", "auk", "owl", "colibri", "flamingo", "lovebird", "canary", "emu", "hen", "ibis", "kiwi", "crow", "raven", "peacock", "heron", "toucan", "turkey" ,"woodpecker", "quetzal", "puffin", "moa", "leghorn", "magpie", "junco", "kildeer", "hawk", "vulture", "egret", "grouse", "fowl", "cuckoo", "cormorant", "flicker", "wren", "chick","hyacynth", "nuquigualda", "psittacus", "psittacidae", "papagaio", "jako", "pstittacus", "guacamayo", "	psittaciforme", "guacamayito", "spix", "parot", "kakariki", "periquito", "lorito", "maracana", "peroked", "pearoid", "papagalul", "conure", "kakapu", "inseparable", "kokketiel","cocatiel", "cockatiel", "calopsitte"]
+parrots_lexic=["macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori","lory", "african grey", "parrotlet", "hyacynth", "nuquigualda", "psittacus", "psittacidae", "papagaio", "jako", "pstittacus", "guacamayo", "	psittaciforme", "guacamayito", "spix", "parot", "kakariki", "periquito", "lorito", "maracana", "peroked", "pearoid", "papagalul", "conure", "kakapu", "inseparable", "kokketiel","cocatiel", "cockatiel", "calopsitte", "plucker", "cyclopsittini", "coryllis", "eclectus", "caïques", "pione", "papegeai", "touis", "strigops", "papegeai", "palette", "nestor", "loriquets", "micropsittes", "corella", "budgerigar"]
 egg_lexic=["egg", "cackleberry", "eggs"]
 useless_words=["and", "all", "des", "spp.", "st."]
 stop_names=["Little Blue Macaw", "little blue macaw"]
 too_common_words=["parrot", "cuckatoo"]
+cites_lexic=["cites", "registration paper", "legal requirement", "transaction paper"]
 
 
 
