@@ -85,7 +85,7 @@ def re_isParrot() :
     """Create a regex according to a dictionnary that will signal the presence of a word
     of this lexic in a text"""
     #Replacement that tolerate misspelling
-    miss_parrot=["".join([mp_mit_egg[char] if (char in mp_mit_egg.keys())  else char for char in list(word)]) for word in parrot_lexic]
+    miss_parrot=["".join([mp_mit_egg[char] if (char in mp_mit_egg.keys())  else char for char in list(word)]) for word in parrots_lexic]
     #A regex that matches only if one of parrot_lexic word is present
     reg=f"^(?=.*{'|.*'.join(miss_parrot)}).*"
     return reg
@@ -96,7 +96,7 @@ def re_hasPaper() :
     #Replacement that tolerate misspelling
     miss_paper=["".join([mp_mit_egg[char] if (char in mp_mit_egg.keys())  else char for char in list(word)]) for word in cites_lexic]
     #A regex that matches only if one of cites_lexic word is present
-    reg=f"^(?=.*{'|.*'.join(miss_paper)}).*"
+    reg=f"^(?=.*{'|.*[^0-9a-zÀ-ÿ]'.join(miss_paper)}).*"
     return reg
 
 def search_re(ad, regexes, classification) :
