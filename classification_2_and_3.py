@@ -221,5 +221,5 @@ if __name__ == '__main__':
 
     
         #Write the doc several time to lost the documentation whether the script fails.
-        with open(f'./results/classification/documentation/{date_parsing}_documentation.json', 'wb') as f:
+        with open(f'./results/classification_2_3/documentation/{date_parsing}_documentation.json', 'wb') as f:
             f.write(str(doc).encode('utf-8'))
