@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-# coding=utf-8
-# author: T. Pineau
-# adapte par: Danny Kohler, Luisa Rodrigues, Jasmin Wyss
 # creation: 06.10.2020
 
 
@@ -389,11 +386,11 @@ class Ads_clean(Base):
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
 
-engine = create_engine('sqlite:///DATABASES/project.db')
+engine = create_engine('sqlite:///results/DATABASES/project.db')
     #j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier [a faire entre Luisa&autres]
     #engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
     #pour luisa la path est: 'sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db'
-    #engine = create_engine('sqlite:///DATABASES/project.db') #, echo=True pour les log
+    #engine = create_engine('sqlite:///results/DATABASES/project.db') #, echo=True pour les log
 Base.metadata.create_all(engine) #Create the database if it does not exist
 Session = sessionmaker(bind=engine)
 session = Session()

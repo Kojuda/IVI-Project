@@ -61,19 +61,13 @@ def word_to_regex(word: str):
         if i==';':
             pass
         else:
-            #print(dict_alphabet[word[i].lower()])
             try:
                 l.append('('+dict_alphabet[word[i].lower()]+'){1}')
             except:
                 if len(l)>4:
                     l.append('(\w){0,1}')
     res = separator.join(l)
-    #print(res)
     return res
-
-    # else:
-    #     print(word, None)
-    #     return None
 
 #Dict of letters with some possibilites of misspelling (Don't consider absence)
 mp_mit_egg ={
@@ -208,16 +202,3 @@ too_common_words=["parrot", "cuckatoo"]
 cites_lexic=["cites", "registration paper", "legal requirement", "transaction paper"]
 
 
-
-
-# if __name__ == '__main__':
-#     test_1 = 'hdegegfgfe pakrrot gezdlzted african grey'
-#     test = 'african grey'
-#     res = word_to_regex(test)
-#     list_of_birds_test = ["bird", "ara", "amazon", "amazona", "parrot", "african grey", "macaw", "cockatoo"]
-#
-#     for i in list_of_birds_test:
-#         print(word_to_regex(i))
-#     print(res, type(res))
-#     print(re.search(res, test_1))
-#     #for i in list_of_birds_test:

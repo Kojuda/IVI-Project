@@ -1,8 +1,3 @@
-from sqlalchemy import create_engine #pip install sqlalchemy
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
-from sqlalchemy.orm import relationship
 import re
 
 
