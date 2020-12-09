@@ -5,13 +5,13 @@
 avec sqlalchemy. Les colonnes et leur contraintes, le nom des tables et les fonctions pour
 interagir avec sont notamment définis dans la ressource."""
 
-import datetime, json
+import datetime
 from sqlalchemy import create_engine #pip install sqlalchemy
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
-from sqlalchemy import MetaData, JSON, Table
+from sqlalchemy import JSON
 
 
 #~~~~~~~~~~~~~~~~~~~~~Create de base~~~~~~~~~~~~~~~~~~~~~
@@ -90,55 +90,52 @@ class Ads_Codes(Base):
 
 
 class Parse_ads(Base):
-    """Table containing the raw parsed field of the ads from the client code.
-    Table linked to the table Ads_Code by the ad_id"""
-     
-    __tablename__='parse_ads'
-    id=Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String)
-    date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
-    date_updated = Column(DateTime, onupdate=datetime.datetime.now())
-    ad_id = Column(String, ForeignKey("ads_codes.ad_id"), unique=True)
-    ad_number = Column(Integer, nullable=False)
-    category = Column(String)
-    description = Column(String)
-    breed = Column(String)
-    age = Column(Integer)
-    sex = Column(String)
-    primary_color = Column(String)
-    secondary_color = Column(String)
-    advertiser = Column(String)
-    price = Column(Integer)
-    payment_forms = Column(String)
-    estimated_shipping = Column(String)
-    pseudo = Column(String)
-    contact_information = Column(String)
-    name = Column(String)
-    company=  Column(String)
-    zip = Column(Integer)
-    city = Column(String)
-    state = Column(String)
-    county = Column(String)
-    country = Column(String)
-    region = Column(String)
-    province = Column(String)
-    email = Column(String)
-    phone = Column(Integer)
-    redirect_website= Column(String)
-    status_vendeur_taken = Column(Integer, default=0)
+<<<<<<< HEAD
+     """Table containing the raw parsed field of the ads from the client code. Table linked to the table Ads_Code by the ad_id"""
+     __tablename__='parse_ads'
+     id = Column(Integer, primary_key=True, autoincrement=True)
+     title = Column(String)
+     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
+     date_updated = Column(DateTime, onupdate=datetime.datetime.now())
+     ad_id = Column(String, ForeignKey("ads_codes.ad_id"), unique=True)
+     ad_number = Column(Integer, nullable=False)
+     category = Column(String)
+     description = Column(String)
+     breed = Column(String)
+     age = Column(Integer)
+     sex = Column(String)
+     primary_color = Column(String)
+     secondary_color = Column(String)
+     advertiser = Column(String)
+     price = Column(Integer)
+     payment_forms = Column(String)
+     estimated_shipping = Column(String)
+     pseudo = Column(String)
+     contact_information = Column(String)
+     name = Column(String)
+     company=  Column(String)
+     zip = Column(Integer)
+     city = Column(String)
+     state = Column(String)
+     county = Column(String)
+     country = Column(String)
+     region = Column(String)
+     province = Column(String)
+     email = Column(String)
+     phone = Column(Integer)
 
-    ads_codes = relationship("Ads_Codes", backref="parse_ads")
-    def insertParse_ads(self, session):
-        session.add(self)
-        session.commit()
-
-    def update(self, session, newStatus=1):
-        self.status = newStatus
-        session.commit()
-
-    def deleteEntry(self, session) :
-        session.delete(self)
-        session.commit()
+     redirect_website= Column(String)
+     status_vendeur_taken = Column(Integer, default=0)
+     ads_codes = relationship("Ads_Codes", backref="parse_ads")
+     def insertParse_ads(self, session):
+         session.add(self)
+         session.commit()
+     def update(self, session, newStatus=1):
+         self.status = newStatus
+         session.commit()
+     def deleteEntry(self, session) :
+         session.delete(self)
+         session.commit()
 
 class Parsing_bird_or_no(Base):
     """Table containing the status about the presence of birds
@@ -187,8 +184,8 @@ class MentionedCage(Base):
 
 class Parsing_Psittaciformes_or_no(Base):
     """Table containing the status about the presence of parrots
-    in the ads according to the classification 1. Show the list of 
-    matched words according to a lexic about parrots and the CITES 
+    in the ads according to the classification 1. Show the list of
+    matched words according to a lexic about parrots and the CITES
     specices."""
 
     __tablename__ = 'classification_1_psittaciformes_or_no'
@@ -215,7 +212,7 @@ class Parsing_Psittaciformes_or_no(Base):
 
 class Mapping(Base):
     """The table provides the list of parrot species from CITES according
-    to their appendice. Thus a list of common names has been added manually 
+    to their appendice. Thus a list of common names has been added manually
     per species to perform the classification."""
 
     __tablename__ = 'mapping_cites'
@@ -265,7 +262,7 @@ class Regex(Base):
 
 
 class Match_Regex_IdMap(Base):
-    """Table containing the link between the matched regexes of the 
+    """Table containing the link between the matched regexes of the
     classification 1 and the CITES species from the mapping."""
 
     __tablename__ = 'classification_1_reg_map_match'
@@ -430,7 +427,10 @@ class Ads_clean(Base):
 #~~~~~~~~~~~~~~~~~~~~~Connect the database~~~~~~~~~~~~~~~~~~~~~
 
 
-engine = create_engine('sqlite:///results/DATABASES/project.db')
+engine = create_engine('sqlite:///C://Users//Jasmin//switchdrive//DATABASES//project.db')
+#change for others...
+#relative path: 'sqlite:///results/DATABASES/project.db'
+# Jasmin's machine: 'sqlite://C://Users//Jasmin//switchdrive//DATABASES//project.db'
 Base.metadata.create_all(engine) #Create the database if it does not exist
 Session = sessionmaker(bind=engine)
 session = Session()
