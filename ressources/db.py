@@ -90,11 +90,11 @@ class Ads_Codes(Base):
 
 
 class Parse_ads(Base):
-     """Table containing the raw parsed field of the ads from the client code.
-     Table linked to the table Ads_Code by the ad_id"""
-
+    """Table containing the raw parsed field of the ads from the client code.
+    Table linked to the table Ads_Code by the ad_id"""
+     
     __tablename__='parse_ads'
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id=Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String)
     date_created = Column(DateTime, default=datetime.datetime.now(), nullable=False)
     date_updated = Column(DateTime, onupdate=datetime.datetime.now())

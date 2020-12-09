@@ -134,7 +134,7 @@ dmypy.json
 .DS_Store
 
 
-/results
+/result*
 /DATABASES/CITES
 /DATABASES
 C:\Users\Jasmin\Documents\GitHub\IVI-Project\DATABASES\project.db

@@ -23,7 +23,7 @@ from math import ceil
 from ressources.webdriver import Chrome, Firefox # fichier selenium_driver.py à placer dans le même dossier que votre script
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressource
 from ressources.db import session, Country, Urls_ads
-from ressources.project_utils import mapping_countries, map_country
+from ressources.project_utils import mapping_countries, map_country, get_abr_country
 
 ADS_PER_PAGE=20
 
@@ -36,7 +36,7 @@ def check_exists_by_xpath(webelement, xpath):
         # wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
         webelement.find_element_by_xpath(xpath)
     except NoSuchElementException as e:
-        doc.adderrorlog(e)
+        doc.adderrorlog(str(e))
         # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
         with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
             f.write(str(doc).encode('utf-8'))
@@ -155,7 +155,6 @@ def getads(browser, session, pages=20, update=True) :
     added_ad=0
     #Get the current country
     country= map_country(browser.driver.current_url)
-    abr_country=get_abr_country(url) #To create the ad_id later
     #Check we are updating
     print(f"{country} : Updating the ads") if not check_update(browser, session) else None
     doc.addlog(f"{country} : Updating the ads")
@@ -219,7 +218,7 @@ def getads(browser, session, pages=20, update=True) :
                     else :
                         #Refresh the counter since an entry has been added
                         counter_not_new=0
-                        entry=Urls_ads(url=url,ad_id=f"{ad_number}_{abr_country}", ad_number=int(ad_number), country_id=country)
+                        entry=Urls_ads(url=url,ad_id=f"{ad_number}_{get_abr_country(url)}", ad_number=int(ad_number), country_id=country)
                         #Add the entry in the database
                         entry.insertURL(session)
                         added_ad+=1

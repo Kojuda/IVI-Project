@@ -10,7 +10,7 @@ Software.
 
 Les sous-parties suivantes expliquent la répartition des données dans le dossier et la fonction des scripts. 
 
-Les dépendances nécessaires : sqlalchemy, lxml, matlabplotlib, pandas, pipreqs, selenium, pysocks, requests, seaborn.
+Les dépendances nécessaires : sqlalchemy, lxml, matlabplotlib, pandas, pipreqs, selenium, pysocks, requests, seaborn, dns.
 
 
 Ordres des scripts pour récolter les données (V=Veille possible/Interruption possible) :
