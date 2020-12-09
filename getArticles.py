@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # coding=utf-8
-# author: L. Rodrigues
-# creation: 15.10.2020
+
+"""But : ce code parcourt l'ensemble des annonces d'oiseaux de chaque pays de Adpost.com en enregistrant le code client
+et le screenshot de chaque annonce. Chaque capture est enregistrée dans la base de données SQL, ce qui permet de continuer
+l'extraction via un status. Cela permet aussi de faire le lien entre l'identifiant d'une annonce avec le nom du fichier 
+contenant le code sur le disque et le nom du screenshot."""
+
 
 import time, json, sys, os, subprocess, re, csv, random
 from lxml import html #pip install lxml cssselect
@@ -17,49 +21,37 @@ from math import ceil
 
 from ressources.webdriver import Chrome, Firefox # fichier selenium_driver.py à placer dans le même dossier que votre script
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressource
-from ressources.db import *
+from ressources.db import session, Country
 from ressources.project_utils import mapping_countries, map_country
 
 ADS_PER_PAGE=20
 
 
 def check_exists_by_xpath(webelement, xpath): 
-    """Check whether exist"""
+    """Check whether the element exist"""
 
     try:
         # wait =WebDriverWait(browser.driver, 20)
         # wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
         webelement.find_element_by_xpath(xpath)
-    # except TimeoutException as e:
-    #     print(f"{e}\n")
-    #     doc.adderrorlog(f"{e}\n")
-    #     # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
-    #     with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
-    #         f.write(str(doc).encode('utf-8'))
-    #     #Timeout because there is no more next button, break the loop
-    #     return False
-    except NoSuchElementException:
+    except NoSuchElementException as e:
+        doc.adderrorlog(e)
+        # ~~~~~~~~~~~~~~~ Documentation - enregistrement (overwritten) ~~~~~~~~~~~~~~~ #
+        with open(f'./results/getArticles/{date_extraction}_{filename_prefix}_documentation.json', 'wb') as f:
+            f.write(str(doc).encode('utf-8'))
         return False
     return True
 
 def saveData(browser, path):
-    '''Fonction pour l'exemple qui enregistre le code client, la capture d'écran et code serveur'''
+    '''Function that save the client code and screenshot the page'''
 
     browser.clientCode(path+'_clientCode.html')
     browser.screenshot(path+'_screenshot.png', width=1080) #on fixe la largeur de la fenêtre avec width
-    
-    #TODO : Trouver un moyen de prendre le code serveur et retourner en arrière sinon le script marche pas
-    #browser.serverCode(path+'_serverCode.html')
-    
-    #Possibles solutions
-
-    #browser.driver.back()
-    #browser.driver.execute_script("window.history.go(-1)")
-
+  
 def resume_extraction(browser, session, pages) :
     """Check if the first ad of the page is in the database. Otherwise pass n pages per n pages until the first new ad
     and then go back n pages further. The purpose is to locate the interval of n pages where the script has stopped.    
-    This function has been made because there is no way to select a specific page on the website or go n pages further"""
+    This function has been made because there is no way to select a specific page on the website or go n pages further (See the UPDATE WARNING in the main)"""
 
     #Obtain the total number of pages for this country at this moment, the purpose is to avoid reaching the last page
     wait =WebDriverWait(browser.driver, 90)
@@ -226,10 +218,12 @@ def getads(browser, session, pages=20, update=True) :
                         #Refresh the counter since an entry has been added
                         counter_not_new=0
                         entry=Urls_ads(url=url, ad_number=int(ad_number), country_id=country)
+                        #Add the entry in the database
                         entry.insertURL(session)
                         added_ad+=1
                         print(f"{country} : Ad added (Tot : {added_ad})\n")
                         doc.addlog(f"{country} : Ad added (Tot : {added_ad})\n")
+            #Since the code is running a long time, sometimes we have a "stale element"
             except StaleElementReferenceException as e:
                 print(f"{e}\n")
                 doc.adderrorlog(f"{e}\n")
@@ -272,7 +266,7 @@ if __name__ == '__main__':
     doc = Documentation(driver=browser.driver)
 
     #~~~~~~~~~~~~~~~ Catch'em all ~~~~~~~~~~~~~~~#
-    """REMOVE TO UPDATE THE COUNTRY => That's the only solution you can't go to the end of the ads' list
+    """REMOVE STRING TO UPDATE THE COUNTRY => That's the only solution you can't go to the end of the ads' list
     and you can't select a specific page AND you can't sort by age (Advanced search doesn't work at the moment)
     For this reason, the code contains a great amount of try/except since we need to go across all pages manually, 
     this increases the chance of a bug and we need to handle them
