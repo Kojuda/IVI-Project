@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 # coding=utf-8
-# author: L.Lopez and D.Kohler
-# creation: 25.10.2020
-# But: parser le code client des publications de vente
+
+"""Le script itère à travers la base de données pour parser les données de tous les codes clients récoltés sous les 
+différents répertoires de la plateforme Adpost.com. Les données sont stockées dans la table "parse_codes" """
 
 import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation 
 from ressources.db import Parse_ads, session, Ads_Codes
 import lxml.html
-# import pdb
-# import pdb; pdb.set_trace()
 
 champs = ['Reply to Ad','Category', 'Ad Number','Date Posted','Description', 'Breed','Age', 'Sex','Primary Color', 'Secondary Color','Advertiser','Price','Payment Forms','Estimated Shipping','Posted By','Contact Information','Name', 'Company', 'Address', 'Postal Code',\
 'Zip Code', 'Post Code', 'State > District', 'State > City','City', 'State > County','Province > County', 'Province > City','Region > County','County','Region', 'State > Metro', 'Country', 'Phone', 'Email','Forum']
 
+#Global variable of all the possible fields. A copy of that is used to store
+#the parsed information.
 dict_champ = {'Title' : None, 'Category' : None, 'Ad Number' : None,
 'Date Posted' : None,'Description' : None, 'Breed' : None,
 'Age' : None, 'Sex' : None,'Primary Color' : None,
@@ -64,9 +64,6 @@ def get_champs(dic, html_object, doc) :
     try :
         for row in ad :
             #Here we iterate through the vendor information
-            #WARNING : THERE ARE TWO TYPE [CONTACT INFORMATION] VS [POSTED BY] -> No way to handle the difference with
-            #an ID in the tag, need to use the "style" as attribute
-            #VENDOR : POSTED BY Avoid bug if does not exist
             if check_exists_by_xpath(row, "./div/div[@style=\'font-size:14px\']/b", doc, dic) :
                 if row.xpath("./div/div[@style=\'font-size:14px\']/b")[0].text:
                     #Left side of the pane concerning the vendor information
@@ -104,13 +101,13 @@ def get_champs(dic, html_object, doc) :
                 if categorie in dic.keys() :
                     #Get the entry of this categorie
                     if check_exists_by_xpath(row, "./div[2]", doc, dic) :
-                        #field=row.xpath("./div[@class=\'col-md-8 col-sm-7 col-xs-6 z-ad-func-obj\']/text()")[0].strip(" ")
                         field=row.xpath("string(./div[2])").strip(" \t\n")
                     if field != "" :
                         dic[categorie]=field
                     #Allow to check if a field has been assigned without the 2 conditions are True
                     field="ERROR"
             else :
+                #Empty row
                 print("Pass\n")
     except :
         tmp=dic["Ad Number"]
@@ -119,6 +116,9 @@ def get_champs(dic, html_object, doc) :
     return dic
 
 def create_entry(dic, entry_ads_codes) :
+    """Function to create an SQL entry according to the dict fulfills with
+    the parsed information and the raw line from the SQL database we're iterating
+    through. """
     entry = Parse_ads(
         title = dic["Title"],
         ad_id = entry_ads_codes.ad_id,
@@ -265,25 +265,28 @@ def get_province(dic) :
 
 
 if __name__ == '__main__':
-    #to do it in all the files of client code
 
     #Documentation
     cT = datetime.datetime.now()
     date_parsing = f"{str(cT.year)}-{str(cT.month)}-{str(cT.day)}_{str(cT.hour)}-{str(cT.minute)}"
     doc = Documentation()
    
-    #path_result=r'C:\Users\Jasmin\Documents\Switchdrive\results\getCodes\codes\\'
     path_result='./results/getCodes/codes/'
 
+    #Iterate through client codes
     for row in session.query(Ads_Codes).filter_by(status=0): #status=0
         #Skip if already exists
         if session.query(exists().where(Parse_ads.ad_id == row.ad_id)).scalar():
             pass
         else:
+            #Copy the global variable containing the fields in the ad
             dic_champs=dict_champ.copy()
             filename=row.client_code
+            #Set it up to use later
             dic_champs["Ad Number"]=row.ad_number
+            #Obtain the HTML object
             objet = lxml.html.parse(f"{path_result}{filename}").getroot()
+            #The main function that parses the HTML object
             dic_champs = get_champs(dic_champs, objet, doc)
             entry = create_entry(dic_champs, row)
 
@@ -291,193 +294,6 @@ if __name__ == '__main__':
             entry.insertParse_ads(session)
             row.update(session)
 
-
-    #before: f'./results/parseCodes/documentation/
-    # for jasmin: f'C:/Users/Jasmin/Documents/Switchdrive/results/getCodes/documentation/'
         #Write the doc several time to lost the documentation whether the script fails.
         with open(f'./results/parseCodes/documentation/{date_parsing}_documentation.json', 'wb') as f:
                     f.write(str(doc).encode('utf-8'))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # driver = webdriver.Firefox(executable_path=r"webdrivers/geckodriver")
-    # set=driver.get("https://www.adpost.com/uk/pets/81040/")
-    # balise_b = driver.find_element_by_xpath("//b")
-    # test = balise_b.find_element_by_xpath("./..").find_element_by_xpath("//div").text
-    # test = test.strip()
-    # test = test.replace("\n"," ").replace(": "," ").replace("click above for more info on this user","").replace("Please quote Adpost when calling","").replace("click to view 1 more image","").replace("click to view 2 more images","")
-    # #import pdb; pdb.set_trace()
-
-
-
-
-    
-
-    # list_mot = ['Reply to Ad','Category', 'Ad Number','Date Posted','Description', 'Breed','Age ', 'Sex','Primary Color', 'Secondary Color','Advertiser','Price','Payment Forms','Estimated Shipping','Posted By','Contact Information','Name', 'Company', 'Address', 'Postal Code',\
-    # 'Zip Code', 'Post Code', 'State > District', 'State > City','City', 'State > County','Province > County', 'Province > City','Region > County','County','Region', 'State > Metro', 'Country', 'Phone', 'Email','Forum']
-
-    # clean_list = [x for x in list_mot if x in test] #comprehensive list / liste de mot réelleemnt présent sur la page parmi toutes les possibilités de list_mot
-
-    # if 'Province > City' in test or 'State > City' in test:
-    #     clean_list.remove('City')
-
-    # if 'Region > County' in test or 'State > County' in test or 'Province > County' in test:
-    #     clean_list.remove('County')
-    #     clean_list.remove('Region')
-
-
-    # parse_data = {}
-    # #Récupérer les mots au milieu des termes de clean_list en utilisant regex
-    # for idx, ele in enumerate(clean_list):
-    #     if idx == len(clean_list)-1:
-    #         break
-    #     else:
-    #         regex_ = "{}(.*){}".format(ele, clean_list[idx+1])
-    #         #import pdb; pdb.set_trace()
-    #         tag = re.search(regex_, test).group(1)
-    #         #import pdb; pdb.set_trace()
-    #         parse_data[ele] = tag
-    #         test = test.replace(tag, "")
-
-
-
-    # """
-    # rechercher le numéro de téléphone, l'adresse email ainsi qu'un site web dans le champ "Description" et ajout de ces informations au dictionnairepartie pour extraire le mail, le phone et website de la description
-
-    # description = parse_data.get('Description')
-    # email, phone, website = None, None, None
-    # if description:
-
-    #     email_regex = re.search(r"((?:[a-z0-9!#$%&'*+\=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))",description)
-    #     if email_regex:
-    #         email = email_regex.group(1)
-    #         print (email)
-
-    #     phone_regex = re.search(r"(((?:\+|00)[17](?: |\-)?|(?:\+|00)[1-9]\d{0,2}(?: |\-)?|(?:\+|00)1\-\d{3}(?: |\-)?)?(0\d|\([0-9]{3}\)|[1-9]{0,3})(?:((?: |\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\-)[0-9]{3}(?: |\-)[0-9]{4})|([0-9]{7})))",description)
-    #     if phone_regex:
-    #         phone = phone_regex.group(1)
-    #         print (phone)
-
-    #     website_regex = re.search(r"((https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}))",description)
-    #     if website_regex:
-    #         website = website_regex.group(1)
-    #         print (website)
-
-
-    #     parse_data['Email'] = email
-    #     parse_data['phone'] = phone
-    #     parse_data['redirect_website'] = website
-    #     del parse_data['Description']
-    #     """
-
-    # new_key = "title"
-    # old_key = "Reply to Ad"
-    # parse_data[new_key]= parse_data.pop(old_key)
-    # new_key = "category"
-    # old_key = "Category"
-    # parse_data[new_key]= parse_data.pop(old_key)
-
-
-
-
-    # state = ('State > District', 'State > City','State > County','Province > County','Province > City', 'Region > County', 'Region','County', 'State > Metro')
-    # for x in state:
-    #     if x in parse_data:
-    #         parse_data["State"] =parse_data.pop(x)
-
-    # zip_code = ("Postal Code", "Zip Code", "Post Code")
-    # for y in zip_code:
-    #     if y in parse_data:
-    #         parse_data["Zip Code"] =parse_data.pop(y)
-
-    # posted_by = ("Posted By", "Contact Information")
-    # for z in posted_by:
-    #     if z in parse_data:
-    #         parse_data["Posted By"] =parse_data.pop(z)
-
-
-
-
-
-
-    # """
-    # print (parse_data)
-    # if parse_data['Email'] == None or parse_data['phone'] == None or parse_data['redirect_website'] == None :
-    #     del parse_data['Email']
-    #     del parse_data['phone']
-    #     del parse_data['redirect_website']
-
-    #     #parse_data[new_key]= parse_data.pop(old_key)
-    #     parse_data['Email'] = 'none'
-    #     parse_data['phone'] = 'none'
-    #     parse_data['redirect_website'] = 'none'
-    # """
-
-
-
-
-
-
-    # # partie sqlite
-    # # Mettre à none les valeurs vide
-    # list_database = ['title','category','Ad Number','Date Posted','Description','Breed','Age ','Sex','Primary Color','Secondary Color','Advertiser','Price', 'Payment Forms','Estimated Shipping','Posted By','Name','Zip Code','City','State','Country','Email','phone']
-    # for mot in list_database:
-    #     if mot not in parse_data:
-    #         parse_data[mot] = 'none'
-    # #import pdb; pdb.set_trace()
-
-
-
-    # Parse_ads(title=parse_data.get('title'), category = parse_data.get('category'), ad_number = parse_data.get('Ad Number'), date_posted = parse_data.get('Date Posted'),description= parse_data.get('Description'), breed = parse_data.get('Breed'), age= parse_data.get('Age '), sex= parse_data.get('Sex'), primary_color = parse_data.get('Primary Color'),\
-    # secondary_color= parse_data.get('Secondary Color'), advertiser= parse_data.get('Advertiser'), price= parse_data.get('Price'), payment_forms= parse_data.get('Payment Forms'), estimated_shipping= parse_data.get('Estimated Shipping'), posted_by = parse_data.get('Posted By'),\
-    # name= parse_data.get('Name'), zip= parse_data.get('Zip Code'), city= parse_data.get('City'), state= parse_data.get('State'), country= parse_data.get('Country'), email= parse_data.get('Email'),phone = parse_data.get('phone')).insertParse_ads(session)
-
-    # #import pdb; pdb.set_trace()

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-"""But : ce code parcourt l'ensemble des annonces d'oiseaux de chaque pays de Adpost.com en enregistrant le code client
+"""Ce code parcourt l'ensemble des annonces d'oiseaux de chaque pays de Adpost.com en enregistrant le code client
 et le screenshot de chaque annonce. Chaque capture est enregistrée dans la base de données SQL, ce qui permet de continuer
 l'extraction via un status. Cela permet aussi de faire le lien entre l'identifiant d'une annonce avec le nom du fichier 
 contenant le code sur le disque et le nom du screenshot."""

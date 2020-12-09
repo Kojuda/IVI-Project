@@ -27,15 +27,29 @@ Les dépendances nécessaires : sqlalchemy, lxml, matlabplotlib, pandas, pipreqs
 
 ~~~~~~~~~~~~~~~~~~ SCRIPTS ~~~~~~~~~~~~~~~~~~
     ##########      getCountries.py     ##########
+
+        Simple script qui extrait les quelques liens correspondant aux différents pays de Adpost.com Les données
+        sont stockées dans la table "country"
+    
     ##########      getArticles.py      ##########
 
-    But : ce code parcourt l'ensemble des annonces d'oiseaux de chaque pays de Adpost.com en enregistrant le code client
-    et le screenshot de chaque annonce. Chaque capture est enregistrée dans la base de données SQL, ce qui permet de continuer
-    l'extraction via un status. Cela permet aussi de faire le lien entre l'identifiant d'une annonce avec le nom du fichier 
-    contenant le code sur le disque et le nom du screenshot.
+        Ce code parcourt l'ensemble des annonces d'oiseaux de chaque pays de Adpost.com en enregistrant le code client
+        et le screenshot de chaque annonce. Chaque capture est enregistrée dans la base de données SQL, ce qui permet de continuer
+        l'extraction via un status. Cela permet aussi de faire le lien entre l'identifiant d'une annonce avec le nom du fichier 
+        contenant le code sur le disque et le nom du screenshot. Les données sont stockées dans la table "ads_code"
     
     ##########      getCodes.py     ##########
+
+        Ce script parcourt les urls des annonces récoltées dans la base de données dans la table "urls_ades"
+        pour extraire les codes clients des annonces ainsi que le screenshot de ces dernières. Les noms des codes
+        extraits sont stockés dans la table "ads_codes" et les données comprenant les codes clients et les screenshots
+        sont stockées dans le sous-répertoire de "results" concernant ce script.
+        
     ##########      parseCodes.py     ##########
+
+        Le script itère à travers la base de données pour parser les données de tous les codes clients récoltés sous les
+        différents répertoires de la plateforme Adpost.com. Les données sont stockées dans la table "parse_codes"
+
     ##########      parseDirty.py     ##########
     ##########      repair_db.py     ##########
     ##########      classification_1_parsing_birdorno.py     ##########

@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding=utf-8
-# author: D. Kohler, L. Rodrigues
-# creation: 15.10.2020
+
+
+"""Simple script qui extrait les quelques liens correspondant aux différents pays de Adpost.com. Les données
+sont stockées dans la table "country" """
 
 #On importe nos deux scripts de documentation et de webdriver
 import time, json, sys, os, subprocess, re, csv
@@ -57,5 +59,3 @@ if __name__ == '__main__':
     with open('./results/getcountries/documentation.json', 'wb') as f:
         f.write(str(doc).encode('utf-8'))
 
-    # ~~~~~~~~~~~~~~~ Fermeture du port de Tor ~~~~~~~~~~~~~~~ #
-    #tor_process.kill()
