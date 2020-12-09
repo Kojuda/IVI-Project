@@ -201,7 +201,8 @@ if __name__ == '__main__':
     doc = Documentation()
  
     path_result='./results/calssification/'
-    #Vendeur taken en attendant
+    #Create the directory
+    os.makedirs(os.path.dirname("./results/classification_2_3/documentation/"), exist_ok=True)
 
 
     #~~~~~~~~~~~~~~ Create Regexes ~~~~~~~~~~~~~~
@@ -214,7 +215,7 @@ if __name__ == '__main__':
     #2 Dict with regexes for the 2 classifications.
     for dr, classification in zip(dic_regexes, (Classification_2_Ads, Classification_3_Ads)) :
         
-        for row in session.query(Parse_ads).filter_by(status_vendeur_taken=0):
+        for row in session.query(Parse_ads): 
             #Skip if already exists
             if session.query(exists().where(classification.ad_id == row.ad_id)).scalar():
                 pass
@@ -223,7 +224,6 @@ if __name__ == '__main__':
                 print(f"{row.ad_id}...\n")
                 doc.addlog(f"Search in ad {row.ad_id}")
                 entry.insert(session)
-                # row.update(session)
 
 
     

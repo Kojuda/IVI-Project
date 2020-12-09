@@ -272,6 +272,9 @@ if __name__ == '__main__':
     doc = Documentation()
    
     path_result='./results/getCodes/codes/'
+    
+    #Create the directory
+    os.makedirs(os.path.dirname("./results/parseCodes/documentation/"), exist_ok=True)
 
     #Iterate through client codes
     for row in session.query(Ads_Codes).filter_by(status=0): #status=0

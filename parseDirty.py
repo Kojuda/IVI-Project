@@ -156,6 +156,7 @@ def entry_ad_clean(row, id_vendor, price, currency, price_in_dollar):
 
 if __name__ == '__main__':
     c=0
+    
     for row in session.query(Parse_ads):
         status_bird = session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()
         #print(status_bird)

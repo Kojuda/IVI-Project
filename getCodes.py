@@ -9,7 +9,7 @@ sont stockées dans le sous-répertoire de "results" concernant ce script.
 """
 
 
-import time, json, random
+import time, json, random, os
 from sqlalchemy.sql import exists
 from ressources.webdriver import Firefox #fichier selenium_driver.py à placer dans le même dossier que votre script
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressources
@@ -31,6 +31,10 @@ if __name__ == '__main__':
     filename_prefix="getCodes"
 
     doc = Documentation()
+
+    #Create the directory
+    os.makedirs(os.path.dirname("./results/getCodes/documentation/"), exist_ok=True)
+    os.makedirs(os.path.dirname("./results/getCodes/codes/"), exist_ok=True)
     # ~~~~~~~~~~~~~~~ Début Selenium ~~~~~~~~~~~~~~~ #
     browser = Firefox(tor=False, headless=True)
 
