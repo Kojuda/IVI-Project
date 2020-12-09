@@ -14,8 +14,6 @@ from sqlalchemy import MetaData, JSON, Table
 #~~~~~~~~~~~~~~~~~~~~~Create de base~~~~~~~~~~~~~~~~~~~~~
 Base = declarative_base()
 
-
-
 #~~~~~~~~~~~~~~~~~~~~~PROJET~~~~~~~~~~~~~~~~~~~~~
 
 class Country(Base) :
@@ -200,8 +198,6 @@ class Mapping(Base):
     annex_number_CITES = Column(Integer)
     order = Column(String)
     family = Column(String)
-    #pas de relation avec une autre table
-    #parse_ads = relationship("Parse_ads", backref="psittaciformes_or_no")
 
     def insert(self, session):
         session.add(self)
@@ -266,7 +262,6 @@ class Classification_2_Ads(Base):
     parrot=Column(Integer)
     regex = Column(JSON)
     nb_species_matches= Column(Integer)
-    #Presence or not
     cage= Column(Integer)
     egg=Column(Integer)
     cites_paper=Column(Integer)
@@ -295,7 +290,6 @@ class Classification_3_Ads(Base):
     parrot=Column(Integer)
     regex = Column(JSON)
     nb_species_matches= Column(Integer)
-    #Presence or not
     cage= Column(Integer)
     egg=Column(Integer)
     cites_paper=Column(Integer)

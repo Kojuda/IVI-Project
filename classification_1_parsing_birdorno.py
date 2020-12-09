@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # coding=utf-8
-# author: J.Wyss
-# creation: 13.11.2020
-# But: parser le code client des publications de vente
 
-import time, json, random, re, datetime, os
+"""
+Ce script fait partie de la première classification. Le but est de classer les annonces selon
+si elles mentionnent la présence d'oiseaux ou non. Selon des termes majoritairement anglais. Les
+résults sont stockés dans la table "classification_1_parse_bird_or_no"
+"""
+
+import time, json, re, datetime
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, Parsing_bird_or_no
 from ressources.regex_tools import word_to_regex
-#logique de ce code: éviter au plus les FN
-#but:estimer la nombre des annonces (en anglais) pour les oiseaux
 
-#dict_bag_words
 
 #Goal 1: Decide if ad contains bird
 #Strategy: Look in title for words describing birds with regular expressions

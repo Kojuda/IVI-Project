@@ -9,7 +9,7 @@ pour vérifier l'état de leur extraction. Les données sont stockées dans la t
 """
 
 
-import time, json, re, csv, random, datetime
+import time, json, re, random, datetime
 from lxml import html #pip install lxml cssselect
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, WebDriverException, StaleElementReferenceException, NoSuchWindowException, TimeoutException

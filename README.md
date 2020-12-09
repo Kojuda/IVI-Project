@@ -10,7 +10,32 @@ Software.
 
 Les sous-parties suivantes expliquent la répartition des données dans le dossier et la fonction des scripts. 
 
-Les dépendances nécessaires : sqlalchemy, lxml, matlabplotlib, pandas, pipreqs, selenium, pysocks, requests.
+Les dépendances nécessaires : sqlalchemy, lxml, matlabplotlib, pandas, pipreqs, selenium, pysocks, requests, seaborn.
+
+
+Ordres des scripts pour récolter les données (V=Veille possible/Interruption possible) :
+
+    -> getCountries.py -> getArticles.py (V) -> getCodes.py (V)
+
+Ordres des scripts pour parser les données :
+
+    Baseline :
+        -> parseCodes.py -> parseDirty.py
+    Classification 1 :
+        -> classification_1_parsing_birdorno.py -> classification_1_Cage.py -> classification_1_parsing_parrotorno.py
+    Classification 2 et 3 :
+        -> classification_2_and_3.py
+
+Ordres des scripts pour l'analyse si disponible en script :
+
+    Evaluation classification 2 et 3 :
+        classification_2_and_3_evaluation.ipynb
+    Visualisation classification 1 :
+        classification_1_visualisation.ipynb
+    Prétraitement pour Tableau Software :
+        classification_to_analysis.ipynb
+
+
 
 ~~~~~~~~~~~~~~~~~~ RESSOURCES ~~~~~~~~~~~~~~~~~~
 
@@ -63,11 +88,62 @@ Les dépendances nécessaires : sqlalchemy, lxml, matlabplotlib, pandas, pipreqs
         le numéro de l'annonce s'est révélé être unique uniquement pour un répertoire de la plateforme concernant un pays.
 
     ##########      classification_1_parsing_birdorno.py     ##########
+
+        Ce script fait partie de la première classification. Le but est de classer les annonces selon
+        si elles mentionnent la présence d'oiseaux ou non. Selon des termes majoritairement anglais. Les
+        résults sont stockés dans la table "classification_1_parse_bird_or_no
+
     ##########      classification_1_parsing_parrotorno.py     ##########
+
+        Ce script fait partie de la première classification. Il permet d'établir la liste des mots recherchés
+        dans une annonce et d'établir si ces mots font partie du lexique concernant les psittaciforems et/ou si
+        ces mots font parties du lexique des espèces CITES de la table "mapping_cites". Les données sont stockées
+        dans la table "classification_1_psittaciformes_or_no" (matches par annonce), "classification_1_regex" 
+        (expressions régulières utilisées lors du script) et "classification_1_reg_map_match" (correspondance 
+        entre une expression régulière/mot et une espèce de la table "mapping_cites") 
+
     ##########      classification_1_Cage.py     ##########
+
+        Ce script fait partie de la première classification. Il cherche à établir la présence
+        de cage dans les annonces qui contriburait au taux de faux-positifs. Les résultats sont 
+        stockés dans la table "classification_1_cage"
+
     ##########      classification_2_and_3.py     ##########
+
+        Ce script permet de faire la classification 2 et 3 en fonction des champs de texte des 
+        annonces. Il génère des expressions régulières pour notamment détecter la mention d'oiseaux,
+        la mention de perroquets, la mention des espèces de la table "mapping_cites", la mention de cages,
+        la mention d'oeufs et la mention des papiers de regristrations CITES. L'assignation des espèces 
+        est fait en créant une expression régulière en fonction des divers noms communs existants pour une
+        espèce. La différence entre la classification 2 et 3 est la disposition des mots, respectivement 
+        désordonnée et ordonnée selon le nom commun choisi. Les résultats sont stockées dans les tables 
+        "classification_2_matching_ads" et "classification_3_matching_ads"
+
     ##########      classification_2_and_3_evaluation.ipynb     ##########
+
+        Ce script permet de créer des sous-échantillons des classifications 2 et 3 avec une pondération
+        suivant la règle log(1/sum(freq(assignation))) qui permet d'obtenir les assignations d'espèces rares
+        dans une quantité plus raisonnable tout en rendant le tirage d'assignation très fréquentes proportionnel
+        à leur apparition. Cela permet d'évaluer de manière plus complète les cas particulier de la classification
+        avec un petit échantillon labelisé à la main. Le script évalue les statistiques d'évaluation une fois que 
+        les tables sont remplies à la main pour mettre le score de classement de chaque annonce.
+
     ##########      classification_to_analysis.ipynb     ##########
+
+        Ce script permet d'effectuer un prétraitement sur les résultats de la classification 2 et 3 afin
+        d'être facilement utilisables par Tableau Software. Notamment, il sépare l'ensemble des espèces
+        ayant eu un match par annonce en colonnes, puis les stack pour pouvoir avoir une ligne par match 
+        spécifique. Sans cela, le trop grand nombre de colonnes n'est pas bien exploité par Tableau Software
+        et il ne peut pas créer de relation entre les labels des colonnes et les valeurs d'une colonne entre
+        2 tables. De plus, il permet de créer une table de la classification 1 au format "bag of words" utilisé
+        pour la visualisation au format "small multiples" par le script "classification_1_visualisation.ipynb" 
+        Les résultats sont stockés dans la table "classification_1_analysis", "classification_2_analysis"
+        et "classification_3_analysis"
+
+    ##########      classification_1_visualisation.ipynb     ##########
+
+        Ce script permet de visualiser les occurrences des mots par espèce selon la classification 1 au format
+        "small multiples". Les résultats sont sous la forme d'une image dans le répertoire /results/graphes
 
 
 ~~~~~~~~~~~~~~~~~~ FOLDERS ~~~~~~~~~~~~~~~~~~

@@ -1,8 +1,15 @@
 #!/usr/bin/env python
 # coding=utf-8
-# author: D.Kohler
-# creation: 25.10.2020
-# But: classer les oiseaux par leur race
+
+"""
+Ce script permet de faire la classification 2 et 3 en fonction des champs de texte des 
+annonces. Il génère des expressions régulières pour notamment détecter la mention d'oiseaux,
+la mention de perroquets, la mention des espèces de la table "mapping_cites", la mention de cages,
+la mention d'oeufs et la mention des papiers de regristrations CITES. L'assignation des espèces 
+est fait en créant une expression régulière en fonction des divers noms communs existants pour une
+espèce. La différence entre la classification 2 et 3 est la disposition des mots, respectivement 
+désordonnée et ordonnée selon le nom commun choisi.
+"""
 
 import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists

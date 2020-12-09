@@ -11,7 +11,7 @@ sont stockées dans le sous-répertoire de "results" concernant ce script.
 
 import time, json, random
 from sqlalchemy.sql import exists
-from ressources.webdriver import Chrome, Firefox #fichier selenium_driver.py à placer dans le même dossier que votre script
+from ressources.webdriver import Firefox #fichier selenium_driver.py à placer dans le même dossier que votre script
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressources
 from ressources.db import * #fichier db.py  qui se trouve dans le dossier ressources
 from selenium.common.exceptions import TimeoutException

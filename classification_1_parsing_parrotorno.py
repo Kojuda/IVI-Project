@@ -4,6 +4,13 @@
 # creation: 20.11.2020
 # But: parmis les oiseaux, psittaciformes (plupart perroquets) ou pas?
 
+"""Ce script fait partie de la première classification. Il permet d'établir la liste des mots recherchés
+dans une annonce et d'établir si ces mots font partie du lexique concernant les psittaciforems et/ou si
+ces mots font parties du lexique des espèces CITES de la table "mapping_cites". Les données sont stockées
+dans la table "classification_1_psittaciformes_or_no" (matches par annonce), "classification_1_regex" 
+(expressions régulières utilisées lors du script) et "classification_1_reg_map_match" (correspondance 
+entre une expression régulière/mot et une espèce de la table "mapping_cites") """
+
 import time, json, random, re, datetime, os
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation
@@ -11,6 +18,36 @@ from ressources.db import session, Parse_ads, Parsing_Psittaciformes_or_no, Pars
 from ressources.regex_tools import word_to_regex
 list_scientific = []
 status_modified = False #Changer en True si regex_tools ou table mapping_cites changés + supprimer tables
+
+
+def make_dictionnary():
+    """Creates dictionnary for small multiple (Script classification_1_visualisation"""
+    result_dict = {}
+    for row in session.query(Mapping):
+        result = []
+        #add scientific name
+        result.append(row.scientific_name_cites.lower())
+        #add common names
+        entry = row.common_name.split('; ')
+        for name in entry:
+            name.lower()
+            list_of_words = name.split(' ')
+            for i in list_of_words:
+                try:
+                    res = word_to_regex(i)
+                except:
+                    res = None
+                if len(i) <= 2: #let alone small words
+                    pass
+                elif len(i) < 5 and (('\s' in res) or ('\w' in res) or (res == '')):
+                    pass
+                else: #big words - we do something with them: namely
+                    if type(i)==str: #check if string, if not string we just sit idle
+                        if res != None:
+                            print(i.lower().strip(';'))
+                            result.append(i.lower().strip(';'))
+        result_dict[row.id]=result
+    return result_dict
 
 #transformer table mapping_names en REGEX if modifications were made [aliments tables regex et match_regex_idmap
 def make_helper_tables():
@@ -58,38 +95,6 @@ def make_helper_tables():
                         entry = Match_Regex_IdMap(id_re=requested_re, id_map=row.id)
                         entry.insertMatch(session)
                         session.commit()
-
-def make_dictionnary():
-    """creates dictionnary for small multiple"""
-    result_dict = {}
-    for row in session.query(Mapping):
-        result = []
-        #add scientific name
-        result.append(row.scientific_name_cites.lower())
-        #add common names
-        entry = row.common_name.split('; ')
-        for name in entry:
-            name.lower()
-            list_of_words = name.split(' ')
-            for i in list_of_words:
-                try:
-                    res = word_to_regex(i)
-                except:
-                    res = None
-                if len(i) <= 2: #let alone small words
-                    pass
-                elif len(i) < 5 and (('\s' in res) or ('\w' in res) or (res == '')):
-                    pass
-                else: #big words - we do something with them: namely
-                    if type(i)==str: #check if string, if not string we just sit idle
-                        if res != None:
-                            print(i.lower().strip(';'))
-                            result.append(i.lower().strip(';'))
-        result_dict[row.id]=result
-    return result_dict
-
-
-
 
 if __name__ == '__main__':
     if status_modified:

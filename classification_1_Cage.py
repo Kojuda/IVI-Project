@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # coding=utf-8
-# author: J.Wyss
-# creation: 17.11.2020
-# But: parser le code client des publications de vente
 
-import time, json, random, re, datetime, os
+"""
+Ce script fait partie de la première classification. Il cherche à établir la présence
+de cage dans les annonces qui contriburait au taux de faux-positifs. Les résultats sont 
+stockés dans la table "classification_1_cage"
+"""
+
+import time, re, datetime
 from sqlalchemy.sql import exists
 from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, MentionedCage
