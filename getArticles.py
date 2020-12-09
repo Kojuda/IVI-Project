@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-"""Ce code parcourt l'ensemble des annonces d'oiseaux de chaque pays de Adpost.com en enregistrant le code client
-et le screenshot de chaque annonce. Chaque capture est enregistrée dans la base de données SQL, ce qui permet de continuer
-l'extraction via un status. Cela permet aussi de faire le lien entre l'identifiant d'une annonce avec le nom du fichier 
-contenant le code sur le disque et le nom du screenshot."""
+"""
+Ce code parcourt l'ensemble des pages d'annonces d'oiseaux de chaque pays de Adpost.com en prélevant les urls et en
+enregistrant le code client et le screenshot de la première page visionnée par le webdriver pour documenter la structure
+du site au moment du crawling. Les urls sont sauvegardé dans la base de données SQL avec status destiné à un autre script
+pour vérifier l'état de leur extraction. Les données sont stockées dans la table "urls_ads"
+"""
 
 
-import time, json, sys, os, subprocess, re, csv, random
+import time, json, re, csv, random, datetime
 from lxml import html #pip install lxml cssselect
-import time, datetime
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, WebDriverException, StaleElementReferenceException, NoSuchWindowException, TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
@@ -21,7 +22,7 @@ from math import ceil
 
 from ressources.webdriver import Chrome, Firefox # fichier selenium_driver.py à placer dans le même dossier que votre script
 from ressources.documentation import Documentation # fichier documentation.py qui se trouve dans le dossier ressource
-from ressources.db import session, Country
+from ressources.db import session, Country, Urls_ads
 from ressources.project_utils import mapping_countries, map_country
 
 ADS_PER_PAGE=20
@@ -154,6 +155,7 @@ def getads(browser, session, pages=20, update=True) :
     added_ad=0
     #Get the current country
     country= map_country(browser.driver.current_url)
+    abr_country=get_abr_country(url) #To create the ad_id later
     #Check we are updating
     print(f"{country} : Updating the ads") if not check_update(browser, session) else None
     doc.addlog(f"{country} : Updating the ads")
@@ -217,7 +219,7 @@ def getads(browser, session, pages=20, update=True) :
                     else :
                         #Refresh the counter since an entry has been added
                         counter_not_new=0
-                        entry=Urls_ads(url=url, ad_number=int(ad_number), country_id=country)
+                        entry=Urls_ads(url=url,ad_id=f"{ad_number}_{abr_country}", ad_number=int(ad_number), country_id=country)
                         #Add the entry in the database
                         entry.insertURL(session)
                         added_ad+=1

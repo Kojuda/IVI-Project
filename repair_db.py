@@ -1,3 +1,7 @@
+"""
+Ce script a servi à corriger la table des urls de la base de données pour rajouter un identifiant unique car
+le numéro de l'annonce s'est révélé être unique uniquement pour un répertoire de la plateforme concernant un pays.
+"""
 
 import  json
 from sqlalchemy.sql import exists
@@ -5,9 +9,10 @@ from ressources.documentation import Documentation # fichier documentation.py qu
 from ressources.db import *
 from ressources.project_utils import get_abr_country
 
-"""This module is used to repair the database where the ad_number was used as unique id without taking
-the country into account"""
 def copy_Ads_Codes() :
+    """Function used to copy the ancient table to the new one with 
+    the new field ad_id. The object "tmp" does not exist anymore in the
+    db.py ressource."""
     for i in session.query(Ads_Codes):
         if session.query(exists().where(Ads_Codes_tmp.ad_number == i.ad_number)).scalar():
             pass
@@ -29,6 +34,9 @@ def copy_Ads_Codes() :
 
 
 def copy_Urls_Ads() :
+    """Function used to copy the ancient table to the new one with 
+    the new field ad_id. The object "tmp" does not exist anymore in the
+    db.py ressource."""
     for i in session.query(Urls_ads):
         # if session.query(exists().where(Urls_ads_tmp.ad_number == i.ad_number)).scalar():
         #     pass

@@ -1,3 +1,10 @@
+
+"""
+Ce script permet de prendre les données brutes parsées dans la table "parse_ads" pour parser cette fois le texte de 
+l'annonce est retiré des informations pertinentes. Certains champs sont aussi rendus plus propres afin de pouvoir être
+manipulés par un outil d'analyse. (e.g. le champ concernent l'argent)
+"""
+
 from ressources.db import session, Parse_ads, Vendor_analyse, Ads_clean, Parsing_Psittaciformes_or_no, Parsing_bird_or_no
 import re
 import pdb
