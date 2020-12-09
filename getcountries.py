@@ -46,6 +46,9 @@ if __name__ == '__main__':
     doc = Documentation(driver=browser.driver)
     # Vous pouvez compléter l'objet doc avec les urls parcourues et les manipulations effectuées!
 
+    # Create the folder
+    os.makedirs(os.path.dirname("./results/getcountries/"), exist_ok=True)
+
     url = 'https://www.adpost.com'
     browser.driver.get(url)
     saveData(browser, filename_prefix='./results/getcountries/adpost')

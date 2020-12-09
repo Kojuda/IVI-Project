@@ -9,7 +9,7 @@ pour vérifier l'état de leur extraction. Les données sont stockées dans la t
 """
 
 
-import time, json, re, random, datetime
+import time, json, re, random, datetime, os
 from lxml import html #pip install lxml cssselect
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, WebDriverException, StaleElementReferenceException, NoSuchWindowException, TimeoutException
@@ -262,7 +262,8 @@ if __name__ == '__main__':
      #~~~~~~~~~~~~~~~ Configuration ~~~~~~~~~~~~~~~#
     filename_prefix = 'urlArticles'
     path = f'./results/getArticles/{date_extraction}_'
-
+    #Create the directory
+    os.makedirs(os.path.dirname("./results/getArticles/"), exist_ok=True)
     browser = Firefox(tor=False, headless=False)
     doc = Documentation(driver=browser.driver)
 
@@ -275,9 +276,10 @@ if __name__ == '__main__':
     
     UPDATE WARNING : Le code peut être grandement amélioré car le numéro de page dans l'URL est visible si l'on clique
     sur le bouton pour développer plus d'annonce. Le code ici ne prenait pas cela en compte. Il n'a pas été amélioré car 
-    le crawling avait déjà été fait et le présent code peut extraire les données à mettre à jour."""
+    le crawling avait déjà été fait et le présent code peut extraire les données à mettre à jour.
+    Ici malheureusement, il faut être sûr d'avoir toutes les annonces jusqu'à la dernière page avant de pouvoir faire de la veille."""
 
-    completed_countries=["UNITED STATES", "CANADA", "UNITED KINGDOM", "IRELAND", "AUSTRALIA", "NEW ZEALAND", "MALAYSIA", "INDONESIA", "HONG KONG", "INDIA", "SINGAPORE"] #REMOVE TO UPDATE
+    completed_countries=[]#["UNITED STATES", "CANADA", "UNITED KINGDOM", "IRELAND", "AUSTRALIA", "NEW ZEALAND", "MALAYSIA", "INDONESIA", "HONG KONG", "INDIA", "SINGAPORE", "PHILIPPINES"] #REMOVE TO UPDATE
     for row in session.query(Country).all():
         url = row.url
 
