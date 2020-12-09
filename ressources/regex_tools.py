@@ -3,6 +3,12 @@
 # authors: T. Pineau
 # creation: 21.09.2020
 
+"""
+Ressources fournissant des functions utiles pour l'ensemble des travaux sur les expressions régulières. De plus, 
+l'ensemble des lexiques et dictionnaires utilisés pour générer les expressions régulières pour transformer
+des caractères dans une chaîne sont stockés dans ce module.
+"""
+
 import re
 # Pour tester les expéressions régulières: https://regex101.com/
 
@@ -110,7 +116,7 @@ mp_mit_egg ={
     "(" : "",
     ")" : ""
 }
-
+#Dict of letters with some possibilites of misspelling (Don't consider absence)
 mp_mit_2 ={
     "a" : "[ae4]{1,2}", #grey
     "b" : "[b]{1,2}",
@@ -192,6 +198,7 @@ dict_alphabet['à']='à+|a+|á+|A+|4+'
 dict_alphabet['á']='à+|a+|á+|A+|4+'
 dict_alphabet['ç']='ç+|c+|C+'
 
+#All of the lexics used to generate regexes.
 cage_lexic=["cage", "jail", "enclosure", "cabine", "trap", "jadi"]
 birds_lexic=["bird", "macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori", "african grey", "conure", "parrotlet", "puteh", "hornbill", "jambul", "shama", "chicken", "ostrich", "poule", "pigeon", "swan", "paon","dove", "duck", "goose", "geese", "aves", "albatross", "aigle", "falcon", "stork", "seagull", "penguin", "eagle", "aviary", "auk", "owl", "colibri", "flamingo", "lovebird", "canary", "emu", "hen", "ibis", "kiwi", "crow", "raven", "peacock", "heron", "toucan", "turkey" ,"woodpecker", "quetzal", "puffin", "moa", "leghorn", "magpie", "junco", "kildeer", "hawk", "vulture", "egret", "grouse", "fowl", "cuckoo", "cormorant", "flicker", "wren", "chick","hyacynth", "nuquigualda", "psittacus", "psittacidae", "papagaio", "jako", "pstittacus", "guacamayo", "	psittaciforme", "guacamayito", "spix", "parot", "kakariki", "periquito", "lorito", "maracana", "peroked", "pearoid", "papagalul", "conure", "kakapu", "inseparable", "kokketiel","cocatiel", "cockatiel", "calopsitte"]
 parrots_lexic=["macaw", "amazon", "parrot", "parakeet", "macaw", "ara", "cacato", "perruche","kakapo", "cockatoo", "lorikeet", "lori","lory", "african grey", "parrotlet", "hyacynth", "nuquigualda", "psittacus", "psittacidae", "papagaio", "jako", "pstittacus", "guacamayo", "	psittaciforme", "guacamayito", "spix", "parot", "kakariki", "periquito", "lorito", "maracana", "peroked", "pearoid", "papagalul", "conure", "kakapu", "inseparable", "kokketiel","cocatiel", "cockatiel", "calopsitte", "plucker", "cyclopsittini", "coryllis", "eclectus", "caïques", "pione", "papegeai", "touis", "strigops", "papegeai", "palette", "nestor", "loriquets", "micropsittes", "corella", "budgerigar", "lovebird"]

@@ -4,6 +4,11 @@
 # creation: 06.10.2020
 # modifications: Fonctions mis à disposition par Q.Rossy
 # modification: 19.10.2020
+
+"""
+Ressource permettant d'utiliser les webdrivers pour faire du crawling avec plusieurs fonctions utiles.
+"""
+
 import sys, os, datetime, pickle
 from selenium import webdriver #pip install selenium
 from selenium.webdriver.support.ui import WebDriverWait

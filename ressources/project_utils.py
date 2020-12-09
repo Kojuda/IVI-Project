@@ -1,7 +1,10 @@
 import re
 
 
-
+"""
+Ressource permettant d'utiliser des fonctions courantes dans l'ensemble du projet (e.g. conversion du noms du pays
+en son abréviation.)
+"""
 
 mapping_countries= {
     "us" : "UNITED STATES",

@@ -3,6 +3,11 @@
 # authors: T. Pineau
 # creation: 22.09.2020
 
+
+"""
+Ressource fournissant des fonctions permettant d'obtenir des informations des serveurs DNS. (inutilisées)
+"""
+
 import dns.resolver #pip install dnspython
 import dns.reversename
 from urllib.parse import urlparse

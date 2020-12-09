@@ -3,6 +3,11 @@
 # author: T. Pineau
 # creation: 13.09.2020
 
+"""
+Ressource permettant d'utiliser des requêtes HTTP via le module requests.
+"""
+
+
 import datetime, json
 import requests #pip install requests requests[socks] pysocks
 

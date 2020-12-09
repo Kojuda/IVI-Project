@@ -40,13 +40,43 @@ Ordres des scripts pour l'analyse si disponible en script :
 ~~~~~~~~~~~~~~~~~~ RESSOURCES ~~~~~~~~~~~~~~~~~~
 
     ##########      db.py     ##########
+
+        Ressource qui permet d'établir un interpréteur des tables de la base de données SQL
+        avec sqlalchemy. Les colonnes et leur contraintes, le nom des tables et les fonctions pour
+        interagir avec sont notamment définis dans la ressource.
+
     ##########      webdriver.py     ##########
+
+        Ressource permettant d'utiliser les webdrivers pour faire du crawling avec plusieurs fonctions
+        utiles.
+
     ##########      documentation.py     ##########
+
+        Ressource permettant la documentation du matériel utilisé lors de l'utilisation de script, la date,
+        les logs d'actions et les logs d'erreur. Assure la reproductibilité.
+
     ##########      http_requests.py     ##########
+
+        Ressource permettant d'utiliser des requêtes HTTP via le module requests.
+
     ##########      outil_dns.py     ##########
+
+        Ressource fournissant des fonctions permettant d'obtenir des informations des serveurs DNS. (inutilisées)
+
     ##########      outil_whois.py     ##########
+
+        Ressource fournissant des fonctions permettant d'obtenir du protocol WHOIS. (inutilisées)
+
     ##########      project_utils.py     ##########
+
+        Ressource permettant d'utiliser des fonctions courantes dans l'ensemble du projet (e.g. conversion du noms du pays
+        en son abréviation.)
+
     ##########      regex_tools.py     ##########
+
+        Ressources fournissant des functions utiles pour l'ensemble des travaux sur les expressions régulières. De plus, 
+        l'ensemble des lexiques et dictionnaires utilisés pour générer les expressions régulières pour transformer
+        des caractères dans une chaîne sont stockés dans ce module.
 
 
 
@@ -147,15 +177,28 @@ Ordres des scripts pour l'analyse si disponible en script :
 
 
 ~~~~~~~~~~~~~~~~~~ FOLDERS ~~~~~~~~~~~~~~~~~~
+
     ##########      results     ##########
+
         -_-_-   DATABASES   -_-_-
+            Contient la database SQL contenant toutes les tables. (project.db)
         -_-_-   Tableau_IVI   -_-_-
+            Contient tous les fichiers Tableau Software utilisés pour l'analyse
+            ainsi que les tables exportées au format CSV ou Excel
         -_-_-   *nom script*   -_-_-
+            Contient les résultats d'un script spécifique. Notamment la documentation
+            de son lancement, les codes des pages ou les screenshots des pages.
 
     ##########      graphes     ##########
 
+        Contient les visualisations du script "classification_1_visualisation.ipynb"
+
     ##########      webdrivers     ##########
 
+        Contient les webdrivers de Firefox et Chrome utilisés pour le crawling.
+
     ##########      ressources     ##########
+
+        Contient tous les scripts utilisés comme ressources.
 
         

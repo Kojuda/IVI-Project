@@ -3,6 +3,11 @@
 # author: T. Pineau
 # creation: 19.09.2020
 
+"""
+Ressource permettant la documentation du matériel utilisé lors de l'utilisation de script, la date,
+les logs d'actions et les logs d'erreur. Assure la reproductibilité.
+"""
+
 import os, platform, json
 from pipreqs import pipreqs # pip install pipreqs
 import requests # pip install requests requests[socks] pysocks

@@ -3,6 +3,11 @@
 # authors: T. Pineau
 # creation: 22.10.2020
 
+
+"""
+Ressource fournissant des fonctions permettant d'obtenir du protocol WHOIS. (inutilisées)
+"""
+
 import socket, re, sys
 from urllib.parse import urlparse
 

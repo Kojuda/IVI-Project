@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # creation: 06.10.2020
 
+"""Ressource qui permet d'établir un interpréteur des tables de la base de données SQL
+avec sqlalchemy. Les colonnes et leur contraintes, le nom des tables et les fonctions pour
+interagir avec sont notamment définis dans la ressource."""
 
 import datetime, json
 from sqlalchemy import create_engine #pip install sqlalchemy
@@ -17,6 +20,9 @@ Base = declarative_base()
 #~~~~~~~~~~~~~~~~~~~~~PROJET~~~~~~~~~~~~~~~~~~~~~
 
 class Country(Base) :
+    """Table containing the country related to the folders of Adpost.com
+    et the urls of these."""
+
     __tablename__ = 'countries'
     id=Column(Integer, primary_key=True, unique=True, autoincrement=True)
     name = Column(String, nullable=False)
@@ -32,6 +38,9 @@ class Country(Base) :
 
 
 class Urls_ads(Base):
+    """Table containing the extracted urls of the ads with their unique
+    identifier. Table linked to the table Country by the country value."""
+
     __tablename__ = 'urls_ads'
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     ad_id = Column(String, unique=True)
@@ -53,6 +62,9 @@ class Urls_ads(Base):
         session.commit()
 
 class Ads_Codes(Base):
+    """Table containing the name of the extracted client code file and a status
+    for the parsing. Table linked to the table Urls_Ads by the ad_id"""
+
     __tablename__='ads_codes'
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     ad_id = Column(String, ForeignKey("urls_ads.ad_id"), unique=True)
@@ -78,6 +90,9 @@ class Ads_Codes(Base):
 
 
 class Parse_ads(Base):
+     """Table containing the raw parsed field of the ads from the client code.
+     Table linked to the table Ads_Code by the ad_id"""
+
     __tablename__='parse_ads'
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String)
@@ -126,6 +141,9 @@ class Parse_ads(Base):
         session.commit()
 
 class Parsing_bird_or_no(Base):
+    """Table containing the status about the presence of birds
+    in the ads according to the classification 1."""
+
     __tablename__ = 'classification_1_parse_bird_or_no'
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String, unique=True) #ForeignKey("parse_ads.ad_id")
@@ -145,6 +163,9 @@ class Parsing_bird_or_no(Base):
         session.commit()
 
 class MentionedCage(Base):
+    """Table containing the status about the presence of cages
+    in the ads according to the classification 1."""
+
     __tablename__ = 'classification_1_cage'
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String, unique=True) #ForeignKey("parse_ads.ad_id")
@@ -165,6 +186,11 @@ class MentionedCage(Base):
         session.commit()
 
 class Parsing_Psittaciformes_or_no(Base):
+    """Table containing the status about the presence of parrots
+    in the ads according to the classification 1. Show the list of 
+    matched words according to a lexic about parrots and the CITES 
+    specices."""
+
     __tablename__ = 'classification_1_psittaciformes_or_no'
     #H: une même annonce ne match pas plus que 10 noms d'oiseaux différents
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -188,6 +214,10 @@ class Parsing_Psittaciformes_or_no(Base):
         session.commit()
 
 class Mapping(Base):
+    """The table provides the list of parrot species from CITES according
+    to their appendice. Thus a list of common names has been added manually 
+    per species to perform the classification."""
+
     __tablename__ = 'mapping_cites'
     id = Column(Integer, primary_key=True, autoincrement=True)
     scientific_name_cites = Column(String)
@@ -212,6 +242,9 @@ class Mapping(Base):
         session.commit()
 
 class Regex(Base):
+    """Table containing the regexes per word used to perform
+    the classification 1"""
+
     __tablename__ = 'classification_1_regex'
     id = Column(Integer, primary_key=True, autoincrement=True)
     reg = Column(String)
@@ -232,6 +265,9 @@ class Regex(Base):
 
 
 class Match_Regex_IdMap(Base):
+    """Table containing the link between the matched regexes of the 
+    classification 1 and the CITES species from the mapping."""
+
     __tablename__ = 'classification_1_reg_map_match'
     id = Column(Integer, primary_key=True, autoincrement=True)
     id_re = Column(Integer) #ForeignKey("classification_1_regex.id")
@@ -253,6 +289,10 @@ class Match_Regex_IdMap(Base):
         session.commit()
 
 class Classification_2_Ads(Base):
+    """Table containing the list of matched CITES species per ad according to
+    the classification 2 including mentions of eggs, parrots, cages, birds and
+    CITES registration papers. Thus the matched regexes are included in JSON format."""
+
     __tablename__ = 'classification_2_matching_ads'
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String,  unique=True)#ForeignKey("parse_ads.ad_id")
@@ -281,6 +321,10 @@ class Classification_2_Ads(Base):
         session.commit()
 
 class Classification_3_Ads(Base):
+    """Table containing the list of matched CITES species per ad according to
+    the classification 3 including mentions of eggs, parrots, cages, birds and
+    CITES registration papers. Thus the matched regexes are included in JSON format."""
+
     __tablename__ = 'classification_3_matching_ads'
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String,  unique=True)#ForeignKey("parse_ads.ad_id")
@@ -310,6 +354,9 @@ class Classification_3_Ads(Base):
 
 
 class Vendor_analyse(Base):
+    """Table containing the parsed list of vendors with their information
+    form the parse_ads table."""
+
     __tablename__='vendor_analyse'
     id = Column(Integer, primary_key=True, autoincrement=True)
     pseudo = Column(String)
@@ -346,6 +393,9 @@ class Vendor_analyse(Base):
 
 
 class Ads_clean(Base):
+    """Table containing the parsed fields of the parse_ads table to be
+    easily used by analysis tools."""
+
     __tablename__='ads_clean'
     id = Column(Integer, primary_key=True, autoincrement=True)
     ad_id = Column(String, unique=True)
@@ -381,18 +431,6 @@ class Ads_clean(Base):
 
 
 engine = create_engine('sqlite:///results/DATABASES/project.db')
-    #j'ai changé ../ pour que ça crée la DB sinon ça marchait pas car pas dans le même dossier [a faire entre Luisa&autres]
-    #engine = create_engine('sqlite:///C:\\Users\\Jasmin\\Documents\\GitHub\\IVI-Project\\DATABASES\\project.db') #, echo=True pour les log
-    #pour luisa la path est: 'sqlite:////Users/pintorodriguesanaluisa/Desktop/Docs/ESC/4.3/IVI/Projet/IVI-Project/DATABASES/project.db'
-    #engine = create_engine('sqlite:///results/DATABASES/project.db') #, echo=True pour les log
 Base.metadata.create_all(engine) #Create the database if it does not exist
 Session = sessionmaker(bind=engine)
 session = Session()
-
-#~~~~~~~~~~~~~~~Create a table~~~~~~~~~~~~~~~~
-#meta = MetaData()
-#parse_bird_or_no = Table('parse_bird_or_no', meta,
-#                         Column('id', Integer, primary_key = True, nullable=False, autoincrement=True),
-#                         Column('ad_id', String(32)),
-#                         Column('status_bird', Integer, default=0))
-#meta.create_all(engine)
