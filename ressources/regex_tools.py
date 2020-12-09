@@ -7,6 +7,7 @@
 Ressources fournissant des functions utiles pour l'ensemble des travaux sur les expressions régulières. De plus, 
 l'ensemble des lexiques et dictionnaires utilisés pour générer les expressions régulières pour transformer
 des caractères dans une chaîne sont stockés dans ce module.
+Il y a deux manières de construire des regex fournit
 """
 
 import re
@@ -60,20 +61,22 @@ def removeEmptyString(liste):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~ Project REGEX ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def word_to_regex(word: str):
-    """function used by parse_birds and parse_parrot"""
-    l = []
-    separator=''
-    for i in range(0, len(word)):
-        if i==';':
+    """function used by parse_birds and parse_parrot, basically trasforms a given word into a regular expression, needs a string in input"""
+    l = [] #create empty list
+    separator='' #space caracter in string used to seperate words
+    for i in range(0, len(word)): #for every caracter of the given word
+        if i==';': # if the caracter is an ';' sit idle
             pass
         else:
             try:
-                l.append('('+dict_alphabet[word[i].lower()]+'){1}')
+                l.append('('+dict_alphabet[word[i].lower()]+'){1}') #try to trasform a given charachter into a a group in the regular expression
             except:
-                if len(l)>4:
+                # if this didn't work (as in the character isn't in the dictionnary)
+                if len(l)>4: #if the word is long enough, we append simply \w (any word caracter)
                     l.append('(\w){0,1}')
-    res = separator.join(l)
-    return res
+                #else: sit idle
+    res = separator.join(l) #merge all groups together
+    return res #return the regular expression
 
 #Dict of letters with some possibilites of misspelling (Don't consider absence)
 mp_mit_egg ={
@@ -160,6 +163,8 @@ mp_mit_2 ={
     ")" : ""
 }
 
+#dict_alphabet is used for the first classification (parse_birdorno /parse_parrotorno)
+#in the dictionary the inside of a group is defined
 dict_alphabet = {}
 dict_alphabet['a']='à+|á+|a+|A+|4+'
 dict_alphabet['b']='b+|B+'
