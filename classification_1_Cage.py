@@ -3,32 +3,38 @@
 
 """
 Ce script fait partie de la première classification. Il cherche à établir la présence
-de cage dans les annonces qui contriburait au taux de faux-positifs. Les résultats sont 
-stockés dans la table "classification_1_cage"
+de cage dans les annonces qui contriburait au taux de faux-positifs.
+Il était constate que il y a trop de faux positifs si les mots 'cage' sont charche dans la description,
+donc uniquement le titre est cherchée.
+Les résultats sont stockés dans la table "classification_1_cage"
+cette script était pas encore finalisée au moment ou il était decidée de favoriser la classification 2 & 3$
+Mais ce script pourrait être adaptée pour aussi chercher les oefs oz des autres informations compléementaires à une annonce
 """
 
-import time, re, datetime
-from sqlalchemy.sql import exists
+import re, datetime
 from ressources.documentation import Documentation
 from ressources.db import session, Parse_ads, MentionedCage
 from spelling_error_mitigation import word_to_regex
 
-
-#Goal 1: Decide if ad contains bird
-#Strategy: Look in title for words describing birds with regular expressions
 cagenames = [" cage "] #Global variable which contains re to match
-#todo: chercher que dans titre
-#todo: enlever "with cage"
-#todo: lier avec hit bird
 alerte = ['with'] #si plus qu'un mot code doit être changé
-list_alerte = []
-list_of_cage = []
-for i in cagenames:
-    a = word_to_regex(i)
-    list_of_cage.append(a)
-for i in alerte:
-    a = word_to_regex(i)
-    list_alerte.append(a)
+
+def return_list_of_cage():
+    """returns list with regex of names describing cages"""
+    list_of_cage = []
+    for i in cagenames:
+        a = word_to_regex(i)
+        list_of_cage.append(a)
+    return list_of_cage
+
+def return_liste_alerte():
+    """returns list with regex of names describing words considered to indicate cage and bird are conjointly sold"""
+    list_alerte = []
+    for i in alerte:
+        a = word_to_regex(i)
+        list_alerte.append(a)
+    return list_alerte
+
 if __name__ == '__main__':
     path_result = './results/parse/'
     #Documentation
@@ -36,12 +42,11 @@ if __name__ == '__main__':
     date_parsing = f"{str(cT.year)}-{str(cT.month)}-{str(cT.day)}_{str(cT.hour)}-{str(cT.minute)}"
     doc = Documentation()
     #parse database
-    c = 0 #counter to trace vow many ads have status 1 = classified as bird
+    list_of_cage = return_list_of_cage()
+    list_alerte = return_liste_alerte()
     for row in session.query(Parse_ads):
-        if session.query(MentionedCage.ad_id).filter_by(ad_id=row.ad_id).scalar() == None:
-        #step 1 search in title
-            for expression in list_of_cage:
-                #For each defined regular expression
+        if session.query(MentionedCage.ad_id).filter_by(ad_id=row.ad_id).scalar() == None: #if there is no entry already for the given ad_id
+            for expression in list_of_cage: #For each defined regular expression
                 res = re.search(expression, row.title) #search in title
                 if res != None: #if there is a match, go on
                     if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar() == None: #if there isn't already an entry
@@ -57,57 +62,21 @@ if __name__ == '__main__':
                             entry = MentionedCage(ad_id=row.ad_id, status_cage=1, status_alerte=1)
                         entry.insertCage(session)
                         session.commit()
-                        c+=1
                         pass
-#decision d'omettre etape 2 car trop de FP
-        #step 2 search in description
-#            for expression in list_of_cage:
-#                if row.description != None:
-#                    try:
-#                        res = re.search(expression, row.description)
-#                    except:
-#                        print('unknown error')
-#                        print(row.ad_id)
-#                        res = None
-#                if res != None:
-#                    if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar() == None:
-#                        print('description')
-#                        entry = MentionedCage(ad_id=row.ad_id, status_cage=1)
-#                        entry.insertCage(session)
-#                        session.commit()
-#                        pass
-        #last step if no match add status 0
-        #if session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()
-            if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar() == None:
-                entry = MentionedCage(ad_id=row.ad_id, status_cage=0)
+            if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar() == None: #if there is no entry yet made there musn't be a cage detected
+                entry = MentionedCage(ad_id=row.ad_id, status_cage=0) #create non-entry
                 entry.insertCage(session)
                 session.commit()
 
         else:
-            #print(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar(), type(session.query(Parsing_bird_or_no.status_bird).filter_by(ad_id=row.ad_id).scalar()))
-            if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar()==0:
-                print('change')
-                status_change = False
-                # step 1 search in title
+            if session.query(MentionedCage.status_cage).filter_by(ad_id=row.ad_id).scalar()==0: #if there is an entry, but no cage has been detected we recheck
+                status_change = False #if the status hasn't changed yet
                 for expression in list_of_cage:
                     # For each defined regular expression
                     res = re.search(expression, row.title)  # search in title
                     if res != None:  # if there is a match, go on
-                        if status_change:
+                        if not status_change: #change status, update entry
                             MentionedCage(ad_id=row.ad_id).update(session)
                             session.commit()
-                            c += 1
                             status_change = True
                             pass
-                    try:
-                        res_des = re.search(expression, row.description)
-                    except:
-                        res_des = None
-                    if res_des != None:
-                        if status_change:
-                            MentionedCage(ad_id=row.ad_id).update(session)
-                            session.commit()
-                            c += 1
-                            status_change = True
-                            pass
-
