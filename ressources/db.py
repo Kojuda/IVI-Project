@@ -90,7 +90,6 @@ class Ads_Codes(Base):
 
 
 class Parse_ads(Base):
-<<<<<<< HEAD
      """Table containing the raw parsed field of the ads from the client code. Table linked to the table Ads_Code by the ad_id"""
      __tablename__='parse_ads'
      id = Column(Integer, primary_key=True, autoincrement=True)
@@ -374,7 +373,7 @@ class Vendor_analyse(Base):
     redirect_website= Column(String)
     website_deviate = Column(String)
     status_vendeur_taken = Column(Integer, default=0)
-    status_bird = Column(Integer)
+    status_parrot = Column(Integer)
 
     def insertVendor_analyse(self, session):
         session.add(self)

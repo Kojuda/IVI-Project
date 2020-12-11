@@ -175,4 +175,5 @@ if __name__ == '__main__':
             if session.query(Ads_clean.id).filter_by(ad_id=row.ad_id).scalar()==None:
                 entry_ad_clean(row, vendor_id, montant, currency, real_montant)
         else:
-            entry_ad_clean(row, vendor_id, montant, None, None)
+            if session.query(Ads_clean.id).filter_by(ad_id=row.ad_id).scalar() == None:
+                entry_ad_clean(row, vendor_id, montant, None, None)
